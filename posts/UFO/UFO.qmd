@@ -382,7 +382,7 @@ us_sightings %>%
   ) 
 ```
 
-The states since they aren't abreviated are very congested but the state coded California has a exorbidantly high number of reportings - lets find its value
+The states since they aren't abbreviated are very congested but the state coded California has a exorbidantly high number of reportings - lets find its value
 
 ```{r}
 us_sightings %>%
