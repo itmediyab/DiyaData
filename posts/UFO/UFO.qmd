@@ -5,7 +5,7 @@ date: "2025-09-28"
 categories: [UFO]
 ---
 
-# 2. UFO Data set
+# UFO Data set
 
 ## Setting up R Packages
 

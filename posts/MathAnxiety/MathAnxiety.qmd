@@ -5,7 +5,7 @@ date: "2025-09-28"
 categories: [Math Anxiety]
 ---
 
-# 1. Math Anxiety Data set
+# Math Anxiety Data set
 
 Math, math, math... for some a n absolute nightmare for others the holy grail of existence. Let's break it down
 
@@ -26,8 +26,6 @@ library(tinytable)
 library(ggformula)
 library(DT)
 library(ggridges)
-library(shiny)
-library(shinydashboard)
 library(corrplot)
 library(TeachHist)
 ```
