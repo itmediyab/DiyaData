@@ -29,6 +29,9 @@ janitor::clean_names(case="snake")
 Fertility
 ```
 
+### *Data dictionary*
+
+
 ## **Examine Data**
 
 ```{r}
@@ -45,6 +48,15 @@ base::dim(Fertility)
 
 ```{r}
 utils::str(Fertility)
+```
+
+Replace common NA representations with actual NA values in the dataset.
+
+```{r}
+Fertility %>%
+  naniar::replace_with_na_all(data = ., condition = ~ .x %in% common_na_numbers) %>%
+  naniar::replace_with_na_all(data = ., condition = ~ .x %in% common_na_strings)
+glimpse(Fertility)
 ```
 
 ## Viewing Missing Data
@@ -80,7 +92,7 @@ Fertility_ethnicity <- Fertility %>%
 Fertility_ethnicity
 ```
 
-## Converting Characters to Factors
+## Munging
 
 ```{r}
 Fertility_ethnicity_factor <- Fertility_ethnicity %>%

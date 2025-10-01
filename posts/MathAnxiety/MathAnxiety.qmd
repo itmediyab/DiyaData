@@ -550,7 +550,7 @@ meth_modified %>%
 ```{r}
 meth_modified %>%
   ggplot() +
-  geom_bar(aes(x = factor(arith), fill = gender), position = "dodge") +
+  geom_bar(aes(x = (arith), fill = gender), position = "dodge") +
   labs(title = "Dodged Bar Chart") +
   theme(axis.text.x = element_text(size = 6, angle = 45, hjust = 1)) +
   scale_fill_brewer(palette = "Set3")
