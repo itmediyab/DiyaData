@@ -7,6 +7,10 @@ categories: [UFO]
 
 # UFO Data set
 
+People keep spotting “UFOs” in different shapes, at random places on Earth, for weird amounts of time...and we analysed the patterns of when, where and how.
+
+![](ufo.jpg)
+
 ## Setting up R Packages
 
 ```{r}
@@ -32,6 +36,22 @@ library(dplyr)
 ufo_sightings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-06-25/ufo_sightings.csv") %>% 
   janitor::clean_names(case = "snake")
 ```
+
+## Data Dictionary
+
+| **Variable**               | **Description**                               |
+|----------------------------|-----------------------------------------------|
+| date_time                  | Date time sighting occurred                   |
+| city_area                  | City or area of sighting                      |
+| state                      | state/region of sighting                      |
+| country                    | Country of sighting                           |
+| ufo_shape                  | UFO Shape                                     |
+| encounter_length           | Encounter length in seconds                   |
+| described_encounter_length | Encounter length as described (eg 1 hour, etc |
+| description                | Description of encounter                      |
+| date_documented            | Date documented                               |
+| latitude                   | Latitude                                      |
+| longitude                  | Longitude                                     |
 
 ## Examine Data
 

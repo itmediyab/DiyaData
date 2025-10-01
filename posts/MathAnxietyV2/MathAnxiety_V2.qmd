@@ -1,6 +1,6 @@
 ---
 title: "Math Anxiety Dataset"
-author: "Diya Bijoy, Swetha KV, Abhinav, Aanya Pandith"
+author: "Diya Bijoy, Swetha KV, Abhinav R, Aanya Pandith"
 date: "2025-09-28"
 categories: [Math Anxiety]
 ---
@@ -46,19 +46,16 @@ meth <- readr::read_delim("MathAnxiety.csv",
 meth
 ```
 
-### *Data dictionary*
+## Data dictionary
 
-*Age*: The age of the child in months.
-
-*Gender*: The gender of the child (Boy or Girl).
-
-*Grade*: The educational level of the child (Primary or Secondary).
-
-*AMAS*: The score on the Abbreviated Math Anxiety Scale, where a higher score indicates greater math anxiety.
-
-*RCMAS*: The score on the Revised Children's Manifest Anxiety Scale, measuring general anxiety.
-
-*Arith*: The score on an arithmetic test.
+| Variable | Description |
+|-------------------------------|-----------------------------------------|
+| Age | The age of the child in months. |
+| Gender | The gender of the child (Boy or Girl). |
+| Grade | The educational level of the child (Primary or Secondary). |
+| AMAS | The score on the Abbreviated Math Anxiety Scale, where a higher score indicates greater math anxiety. |
+| RCMAS | The score on the Revised Children's Manifest Anxiety Scale, measuring general anxiety. |
+| Arith | The score on an arithmetic test. |
 
 ## Examine Data
 

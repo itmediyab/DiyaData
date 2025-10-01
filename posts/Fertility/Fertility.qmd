@@ -7,6 +7,10 @@ categories: [Fertility]
 
 # Fertility Data set
 
+Exploring and Analysing patterns of a dataset about fertility, demographics and weeks worked in 1979.
+
+![](Fertility.jpg)
+
 ## **Setting up R Packages**
 
 ```{r}
@@ -29,8 +33,18 @@ janitor::clean_names(case="snake")
 Fertility
 ```
 
-### *Data dictionary*
+## Data dictionary
 
+| Variable | Description |
+|------------------------------------|------------------------------------|
+| Morekids | Does the mother have more than 2 children? |
+| Gender1 | Factor indicating gender of first child |
+| Gender2 | Factor indicating gender of second child. |
+| Age | Age of mother at census. |
+| Afam factor | Is the mother African-American? |
+| Hispanic factor | Is the mother Hispanic? |
+| Other factor | Is the mother's ethnicity neither African-American nor Hispanic, nor Caucasian? |
+| Work | Number of weeks in which the mother worked in 1979. |
 
 ## **Examine Data**
 
@@ -48,15 +62,6 @@ base::dim(Fertility)
 
 ```{r}
 utils::str(Fertility)
-```
-
-Replace common NA representations with actual NA values in the dataset.
-
-```{r}
-Fertility %>%
-  naniar::replace_with_na_all(data = ., condition = ~ .x %in% common_na_numbers) %>%
-  naniar::replace_with_na_all(data = ., condition = ~ .x %in% common_na_strings)
-glimpse(Fertility)
 ```
 
 ## Viewing Missing Data
@@ -83,12 +88,15 @@ Fertility %>% filter(afam == "no", hispanic == "no", other == "no")
 ```{r}
 Fertility_ethnicity <- Fertility %>%
   mutate(ethnicity = case_when(
-    afam == "yes" ~ "African-American",
-    hispanic == "yes" ~ "Hispanic",
-    other == "yes" ~ "Other",
-    afam == "no" & hispanic == "no" & other == "no" ~ "Caucasian"
+    afam == "yes" & hispanic == "no" & other == "no" ~ "Afam",
+    afam == "no" & hispanic == "yes" & other == "no" ~ "Hispanic",
+    afam == "no" & hispanic == "no" & other == "yes" ~ "Other",
+    afam == "no" & hispanic == "no" & other == "no" ~ "Caucasian",
+    afam == "yes" & hispanic == "yes" & other == "no" ~ "AfamHispanic",
+    afam == "yes" & hispanic == "no" & other == "yes" ~ "AfamOther",
+    afam == "no" & hispanic == "yes" & other == "yes" ~ "HispanicOther"
   ))
-
+  
 Fertility_ethnicity
 ```
 
@@ -190,7 +198,23 @@ Fertility_ethnicity_factor %>%
 
     -   Families with two boys also show a high chance of having more kids.
 
-### 2. More kids vs Work Weeks
+### 2. Ethnicity vs Gender
+
+```{r}
+Fertility_ethnicity_factor %>%
+  gf_bar(~ethnicity,
+    fill = ~interaction(gender1,gender2),
+    position = "dodge"
+  ) %>%
+  gf_labs(
+    title = "Ethnicity vs Gender Composition",
+    x="Gender of First Two Children",
+    y="Count of Families"
+  ) %>%
+  gf_refine(scale_fill_brewer(palette = "Set2"))
+```
+
+### 3. More kids vs Work Weeks
 
 -   Hypothesis: Women who worked less number of weeks would have more kids.
 
@@ -290,7 +314,7 @@ Fertility_ethnicity_factor %>%
 
     -   Outliers: A few mothers who have more kids are **younger** than others (around age 22-23).
 
-### 1. More Kids vs Ethnicity
+### 4. More Kids vs Ethnicity
 
 #### Dodge Bar Graph
 
