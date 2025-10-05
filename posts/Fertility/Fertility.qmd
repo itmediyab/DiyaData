@@ -2,7 +2,7 @@
 title: "Fertility Dataset"
 author: "Diya Bijoy, Swetha KV, Abhinav, Aanya Pandith"
 date: "2025-09-28"
-categories: [Fertility]
+categories: [A1]
 ---
 
 # Fertility Data set
@@ -36,7 +36,7 @@ Fertility
 ## Data dictionary
 
 | Variable | Description |
-|------------------------------------|------------------------------------|
+|----|----|
 | Morekids | Does the mother have more than 2 children? |
 | Gender1 | Factor indicating gender of first child |
 | Gender2 | Factor indicating gender of second child. |

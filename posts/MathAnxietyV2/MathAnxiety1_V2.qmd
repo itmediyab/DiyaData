@@ -1,8 +1,9 @@
 ---
-title: "Math Anxiety Dataset"
-author: "Diya Bijoy, Swetha KV, Abhinav R, Aanya Pandith"
+title: "A1 Math Anxiety Dataset"
+author: "Swetha KV, Diya Bijoy, Abhinav R, Aanya Pandith"
 date: "2025-09-28"
 categories: [Math Anxiety]
+format: html
 ---
 
 # Math Anxiety Data set
@@ -20,41 +21,38 @@ Load necessary libraries for data manipulation, visualization, and interactive e
 ### **Setting up R Packages**
 
 ```{r}
-library(tidyverse)
-library(mosaic)
-library(skimr)
-library(visdat)
-library(naniar)
-library(janitor)
-library(tinytable)
 library(ggformula)
-library(DT)
-library(ggridges)
-library(corrplot)
-library(TeachHist)
+library(janitor)
+library(mosaic)
+library(naniar)
+library(skimr)
+library(tidyverse)
+library(tinytable)
+library(visdat)
 library(crosstable)
 library(RColorBrewer)
 ```
 
-### **Read Data**
+## Read Data
 
 ```{r}
 meth <- readr::read_delim("MathAnxiety.csv",
                           delim = ";",
                           locale = locale(decimal_mark = ",")) %>% 
-  janitor::clean_names("snake") 
+  janitor::clean_names("snake")
 meth
+
 ```
 
-## Data dictionary
+## Data Dictionary
 
 | Variable | Description |
-|-------------------------------|-----------------------------------------|
+|----|----|
 | Age | The age of the child in months. |
 | Gender | The gender of the child (Boy or Girl). |
 | Grade | The educational level of the child (Primary or Secondary). |
 | AMAS | The score on the Abbreviated Math Anxiety Scale, where a higher score indicates greater math anxiety. |
-| RCMAS | The score on the Revised Children's Manifest Anxiety Scale, measuring general anxiety. |
+| RCMAS | The score on the Revised Children's Manifest Anxiety Scale, measuring general anxiety |
 | Arith | The score on an arithmetic test. |
 
 ## Examine Data
@@ -277,18 +275,18 @@ meth_modified %>%
   gf_bar(~grade,
          fill=~gender,
          position = "dodge") +
-  labs(title = "Dodged Bar Chart", x ="Grade", y ="Count") +
+  labs(title= "Grade count for both genders", subtitle = "Dodged Bar Chart", x ="Grade", y ="Count") +
   scale_fill_brewer(palette = "Set2")
 ```
 
-Why is the count reducing in secondary grade?
+Why is the count reducing in secondary grade? Assuming lesser students have enrolled for Secondary grade compared to Primary grade.
 
 ```{r}
 meth_modified %>%
   gf_bar(~grade,
          fill=~gender,
          position = "stack") +
-  labs(title = "Stacked Bar Chart", x ="Grade", y ="Count") +
+  labs(title= "Grade count for both genders", subtitle = "Stacked Bar Chart", x ="Grade", y ="Count") +
   scale_fill_brewer(palette = "Set2")
 ```
 
@@ -299,9 +297,24 @@ meth_modified %>%
   gf_bar(~grade,
          fill=~gender,
          position = "fill") +
-  labs(title = "Filled Bar Chart", x ="Grade", y ="Count") +
+  labs(title= "Comparing count of both gender's grade", subtitle = "Filled Bar Chart", x ="Grade", y ="Count") +
   scale_fill_brewer(palette = "Set2")
 ```
+
+### Age Count for both Genders
+
+```{r}
+meth_modified %>%
+  gf_bar(~age,
+         fill=~gender,
+         position = "stack") +
+  labs(title= "Age count for both genders", subtitle = "Stacked Bar Chart", x ="Age", y ="Count") +
+  scale_fill_brewer(palette = "Set2")
+```
+
+#### Inferences:-
+
+1.  After age 150 months (12.5 years), there's a significant drop, which confirms that as students get older, fewer people enroll in math.
 
 ### AMAS Scores based on Gender & Grade
 
@@ -320,7 +333,7 @@ meth_modified %>%
 ```{r}
 meth_modified %>% 
   gf_histogram(~amas | grade,
-               fill=~grade,
+               fill=~gender,
                colour="black") %>%
   gf_labs(
     title = "AMAS by Filled and Faceted by Grade")
@@ -358,10 +371,10 @@ meth_modified %>%
 ```{r}
 meth_modified %>% 
   gf_histogram(~rcmas | grade,
-               fill=~grade,
+               fill=~gender,
                colour="black") %>%
   gf_labs(
-    title = "AMAS by Filled and Faceted by Grade")
+    title = "RCMAS by Filled and Faceted by Grade")
 ```
 
 ```{r}
@@ -465,21 +478,51 @@ meth_modified %>%
 
 #### Inferences:-
 
-1.  Scatter plots shows similar Arith trends across both genders, but girls tend to have higher AMAS.
+1.  Scatter plots shows similar Arith trends across both genders, but primary tend to have higher Arith scores.
+
+```{r}
+meth_modified %>% 
+  gf_boxplot(arith ~ grade | gender, orientation = "x", fill=~grade, color = "black") %>%
+ gf_labs(
+    x = "Grade",
+    y = "Arithmetic Score",
+    title = "Arithmetic Scores by Grade",
+    subtitle = "Faceted by Gender"
+  ) %>%
+  gf_refine(scale_fill_brewer(palette = "Set3")) %>%
+  gf_theme(theme_dark())
+
+```
+
+#### Inferences:
+
+1.  Primary grade students (both genders) have higher arithmetic scores compared to secondary grade.
+2.  Secondary grade students have wider range for arithmetic scores compared to Primary grade.
+3.  Among genders within each grade there's no difference in score .
+
+### Comparing AMAS & Arith Score
+
+-   Hypothesis: From previous visualization we think that Math Anxiety (AMAS) is affects Arithmetic scores.
 
 ```{r}
 meth_modified %>%
-  gf_boxplot(arith ~ grade | gender, fill = ~ grade, orientation = "x") %>%
+  gf_boxplot(arith ~ amas | gender ~ grade, fill = ~ gender, orientation = "x") %>%
   gf_labs(
-    title = "Boxplot of Grade vs Arithmetic Score",
-    subtitle = "Faceted by Gender, Colored by Grade",
-    x = "Grade",
-    y = "Arithmetic Score",
-    color = "Grade"
-  ) %>% 
-  gf_refine(scale_color_brewer(palette = "Set 3")) %>% 
-  gf_theme(theme_dark())
+    title = "Relationship between Math Anxiety and Arithmetic Performance",
+    subtitle = "Across Gender and Grade",
+    x = "Math Anxiety (AMAS)",
+    y = "Arithmetic Performance (Arith)"
+  ) %>%
+  gf_refine(scale_fill_brewer(palette = "Set2")) %>%
+  gf_theme(theme_light())
 ```
+
+#### Inferences:
+
+1.  As math anxiety (AMAS) increases, arithmetic performance tends to go down for both genders.
+2.  In both primary and secondary grade, Boys perform better than girls.
+3.  Primary Grade students have higher math score than Secondary.
+4.  The Secondary grade has more Math anxeity and this affects their Arithmatic scores.
 
 ### Density Plot based on Age, Gender & Grade
 
@@ -520,12 +563,12 @@ meth_modified %>%
 meth_modified %>%
   gf_boxplot(rcmas ~ amas | gender~grade, fill =~gender, orientation = "y") %>%
   gf_labs(
-    title = "Scatter Plot of Amas vs Rcmas",
+    title = "Box Plot of Amas vs Rcmas",
     subtitle = "Colored by Grade",
     x = "Amas Score",
     y = "Rcmas Score"
   ) %>%
-  gf_refine(scale_color_brewer(palette = "Set1")) %>% 
+  gf_refine(scale_color_brewer(palette = "Set2")) %>% 
   gf_theme(theme_light())
 ```
 
@@ -546,3 +589,9 @@ meth_modified %>%
     -   Boys have lesser median and narrower range for math anxiety (amas)
     -   Girls have higher median and wider range for math anxiety (amas)
     -   Boys have wider range of general anxiety compared to girls (rcmas)
+
+## Conclusion
+
+1.  Most visualizations show that girls have higher anxieties (both math and general), while boys have higher arithmetic scores. This could be due to boys possibly having a better support system.
+
+2.  Many visualizations confirm: primary grade students do better in Math,
