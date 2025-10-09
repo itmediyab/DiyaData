@@ -1,0 +1,147 @@
+---
+title: "Classwork 6"
+listings: false
+author: "Diya Bijoy"
+date: "2025-10-7"
+---
+
+```{r}
+library(tidyverse)
+library(mosaic) # Our trusted friend
+library(skimr)
+library(ggformula) # Formula interface to ggplot2
+library(vcd) # Michael Friendly's package, Visualizing Categorical
+library(vcdExtra) # Categorical Data Sets
+library(resampledata) # More datasets
+library(visStatistics) # Comprehensive all-in-one stats viz/test package
+library(ggmosaic) # Tidy Mosaic Plots
+library(ggpubr) # Colours, Themes and new geometries in ggplot
+##
+library(janitor) # Data Cleaning and Tidying
+library(visdat) # Visualize whole dataframes for missing data
+library(naniar) # Clean missing data
+library(DT) # Interactive Tables for our data
+library(tinytable) # Elegant Tables for our data
+library(ggrepel) # Repelling Text Labels in ggplot
+library(marquee) # Marquee Text in ggplot
+```
+
+```{r}
+Arthritis %>% class()
+vcd::structable(data = Arthritis, Improved ~ Treatment)
+vcd::structable(data = Arthritis, Improved ~ Treatment) %>% 
+  as.matrix() %>% # Convert to matrix; 
+  addmargins() %>% # Add margins to the table; matrix output
+  class() 
+vcd::structable(data = Arthritis, Improved ~ Treatment) %>% 
+  as.matrix() %>% # Convert to matrix;
+  addmargins() %>% # Add margins to the table; matrix output
+  as_tibble(rownames = "Treatment") # Convert to tibble; ensure row names!
+```
+
+```{r}
+arthritis_table <- vcd::structable(Improved ~ Treatment,
+                                   data = Arthritis)
+arthritis_table
+vcd::mosaic(arthritis_table)
+```
+
+```{r}
+vcd::mosaic(arthritis_table, 
+            gp = shading_max, direction = "v",
+            main = "Arthritis Treatment Dataset",
+labeling = labeling_border(
+                varnames = c("F", "F"), # Remove variable name labels
+                rot_labels = c(90,0,0,0), #t,r,b,l
+                just_labels = c("left", 
+                                "left", 
+                                "left", 
+                                "right"))) # How?
+```
+
+```{r}
+# library(ggmosaic)
+data("titanic", package = "ggmosaic")
+titanic
+```
+
+```{r}
+titanic_table <- vcd::structable(Survived ~ Sex, data = titanic)
+vcd::mosaic(titanic_table,
+            gp = shading_max, direction = "v",
+            main = "Arthritis Treatment Dataset",
+labeling = labeling_border(
+                varnames = c("F", "F"), # Remove variable name labels
+                rot_labels = c(90,0,0,0), #t,r,b,l
+                just_labels = c("left", 
+                                "left", 
+                                "left", 
+                                "right")))
+```
+
+```{r}
+titanic_table <- vcd::structable(Sex ~ Survived, data = titanic)
+vcd::mosaic(titanic_table,
+            gp = shading_max, direction = "v",
+            main = "Arthritis Treatment Dataset",
+labeling = labeling_border(
+                varnames = c("F", "F"), # Remove variable name labels
+                rot_labels = c(90,0,0,0), #t,r,b,l
+                just_labels = c("left", 
+                                "left", 
+                                "left", 
+                                "right"))) 
+```
+
+```{r}
+vcd::mosaic(Improved ~ Treatment, data = Arthritis, 
+            direction = "v", gp = shading_max)
+```
+
+```{r}
+vcd::mosaic(Improved ~ Treatment, data = Arthritis, 
+            type = "expected", direction = "v", gp = shading_max)
+```
+
+```{r}
+vcd::assoc(Improved ~ Treatment, # Note formula direction!
+           data = Arthritis, 
+           gp = shading_max, 
+           legend = FALSE) 
+```
+
+```{r}
+vcd::assoc(Treatment ~ Improved, # Note formula direction!
+           data = Arthritis, 
+           gp = shading_max, 
+           legend = FALSE) 
+```
+
+```{r}
+Fertility <- readr::read_csv("https://vincentarelbundock.github.io/Rdatasets/csv/AER/Fertility.csv") %>% 
+janitor::clean_names(case="snake")
+```
+
+```{r}
+glimpse(Fertility)
+```
+
+```{r}
+Fertility_ethnicity <- Fertility %>%
+  mutate(ethnicity = case_when(
+    afam == "yes" & hispanic == "no" & other == "no" ~ "Afam",
+    afam == "no" & hispanic == "yes" & other == "no" ~ "Hispanic",
+    afam == "no" & hispanic == "no" & other == "yes" ~ "Other",
+    afam == "no" & hispanic == "no" & other == "no" ~ "Caucasian",
+    afam == "yes" & hispanic == "yes" & other == "no" ~ "AfamHispanic",
+    afam == "yes" & hispanic == "no" & other == "yes" ~ "AfamOther",
+    afam == "no" & hispanic == "yes" & other == "yes" ~ "HispanicOther"
+  ))
+  
+Fertility_ethnicity
+```
+
+```{r}
+vcd::mosaic(morekids ~ ethnicity, data = Fertility_ethnicity, 
+            direction = "v", gp = shading_max)
+```

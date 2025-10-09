@@ -1,0 +1,119 @@
+---
+title: "Classwork 5"
+listings: false
+author: "Diya Bijoy"
+date: "2025-10-6"
+---
+
+```{r}
+library(tidyverse) # Tidy data processing and plotting
+library(ggformula)# Formula based plots
+library(ggplot2)
+library(mosaic) # Our go-to package
+library(skimr) # Another Data inspection package
+
+library(GGally) # Corr plots
+library(broom) # Clean reports from Stats / ML outputs
+
+# library(devtools)
+# devtools::install_github("rpruim/Lock5withR")
+library(Lock5withR) # Datasets
+
+library(easystats) # Easy Statistical Analysis and Charts
+library(correlation) # Different Types of Correlations
+
+library(janitor) # Data cleaning and tidying package
+library(visdat) # Visualize whole dataframes for missing data
+library(naniar) # Clean missing data
+library(DT) # Interactive Tables for our data
+library(tinytable) # Elegant Tables for our data
+library(ggrepel) # Repelled Text Labels in ggplot
+library(marquee) # Marquee Text Labels in ggplot
+library(dplyr)
+```
+
+```{r}
+data(HollywoodMovies2011, package = "Lock5withR")
+movies_modified <- HollywoodMovies2011 %>%
+  janitor::clean_names(case = "snake") %>%
+  janitor::remove_empty(which = c("rows", "cols")) %>%
+  dplyr::mutate(
+    across(where(is.character), as.factor)
+  ) %>%
+  dplyr::relocate(where(is.factor))
+```
+
+```{r}
+movies_quant <- movies_modified %>%
+  drop_na() %>%
+  select(where(is.numeric))
+movies_quant %>% names()
+```
+
+```{r}
+movies_modified %>%
+  drop_na() %>%
+  gf_point(profitability ~ budget) %>%
+  gf_smooth() %>%
+  gf_labs(
+    title = "Profitability vs budget",
+    subtitle = "Movie profitability: Does budget affect profitability?"
+  )
+```
+
+```{r}
+movies_modified %>%
+  drop_na() %>%
+  gf_point(profitability ~ budget, color = ~story) %>%
+  gf_lm() %>%
+  gf_labs(
+    title = "Profitability vs budget",
+    subtitle = "Movie profitability: Does budget affect profitability?"
+  )
+```
+
+```{r}
+movies_modified %>% count(lead_studio) %>% slice_min(n = 10, order_by = n)
+```
+
+```{r}
+movies_modified %>% count(lead_studio) %>% arrange(desc(n)) %>% head(5)
+```
+
+```{r}
+GGally::ggpairs(
+  movies_modified %>% drop_na(),
+  columns = c(
+    "profitability", "budget", "domestic_gross","theaters_open_week","opening_weekend","rotten_tomatoes"),
+  switch = "both",
+  progress = FALSE,
+  diag = list(continuous = "densityDiag"),
+  lower = list(continuous = wrap("smooth", alpha = 0.3, se = FALSE)),
+  title = "Movies Data Correlations Plot #1"
+)
+```
+
+```{r}
+GGally::ggpairs(
+  movies_modified %>% drop_na(),
+  columns = c(
+    "profitability", "budget", "domestic_gross","theaters_open_week","genre","rotten_tomatoes"),
+  switch = "both",
+  progress = FALSE,
+  diag = list(continuous = "barDiag"),
+  lower = list(continuous = wrap("smooth", alpha = 0.3, se = FALSE)),
+  title = "Movies Data Correlations Plot #1"
+)
+```
+
+```{r}
+mosaic::cor_test(domestic_gross ~ budget, data = movies_modified) %>%
+  broom::tidy() %>%
+  knitr::kable(
+    digits = 2,
+    caption = "Movie Domestic Gross vs budget"
+  )
+```
+
+```         
+```

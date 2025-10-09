@@ -1,13 +1,27 @@
 ---
 title: "Fundamentals of Statistics and Exploratory Data Analysis"
-subtitle: Diya Bijoy
-listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
+listing: 
+  - id: assignments
+    contents: "posts/*/*.qmd"
+    type: default
+    sort: "date desc"
+    sort-ui: false
+    filter-ui: false
+  - id: classwork
+    contents: "classwork/*/*.qmd"
+    type: table
+    sort: "date desc"
 page-layout: full
 title-block-banner: true
 ---
+
+## Assignments
+
+::: {#assignments}
+:::
+
+
+## Classwork
+
+::: {#classwork}
+:::
