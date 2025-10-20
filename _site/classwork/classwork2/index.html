@@ -561,8 +561,8 @@ $ calcium     &lt;dbl&gt; 20, 20, 50, 20, 20, 15, 10, 2, 15, 20, 15, 35, 35, 35,
 
     <script>
 
-      function styleCell_n1yn6n7pmy5pxb9pj0lk(i, j, css_id) {
-          var table = document.getElementById("tinytable_n1yn6n7pmy5pxb9pj0lk");
+      function styleCell_aiao8i5gi5ctkc8vf4s8(i, j, css_id) {
+          var table = document.getElementById("tinytable_aiao8i5gi5ctkc8vf4s8");
           var cell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -571,8 +571,8 @@ $ calcium     &lt;dbl&gt; 20, 20, 50, 20, 20, 15, 10, 2, 15, 20, 15, 35, 35, 35,
               console.warn(`Cell at (${i}, ${j}) not found.`);
           }
       }
-      function spanCell_n1yn6n7pmy5pxb9pj0lk(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_n1yn6n7pmy5pxb9pj0lk");
+      function spanCell_aiao8i5gi5ctkc8vf4s8(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_aiao8i5gi5ctkc8vf4s8");
         const targetCell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
         if (!targetCell) {
           console.warn(`Cell at (${i}, ${j}) not found.`);
@@ -603,14 +603,14 @@ $ calcium     &lt;dbl&gt; 20, 20, 50, 20, 20, 15, 10, 2, 15, 20, 15, 35, 35, 35,
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '10', j: 0 }, { i: '10', j: 1 }, { i: '10', j: 2 }, { i: '10', j: 3 }, { i: '10', j: 4 }, { i: '10', j: 11 }, { i: '10', j: 5 }, { i: '10', j: 12 }, { i: '10', j: 6 }, { i: '10', j: 13 }, { i: '10', j: 7 }, { i: '10', j: 14 }, { i: '10', j: 8 }, { i: '10', j: 15 }, { i: '10', j: 9 }, { i: '10', j: 16 }, { i: '10', j: 10 }, { i: '10', j: 17 },  ], css_id: 'tinytable_css_e27iggmide7bq46z5tzx',}, 
-          { positions: [ { i: '0', j: 0 }, { i: '0', j: 7 }, { i: '0', j: 1 }, { i: '0', j: 8 }, { i: '0', j: 2 }, { i: '0', j: 9 }, { i: '0', j: 3 }, { i: '0', j: 10 }, { i: '0', j: 4 }, { i: '0', j: 11 }, { i: '0', j: 5 }, { i: '0', j: 12 }, { i: '0', j: 6 }, { i: '0', j: 13 }, { i: '0', j: 14 }, { i: '0', j: 15 }, { i: '0', j: 16 }, { i: '0', j: 17 },  ], css_id: 'tinytable_css_jv3sirdvpalh6v0cxe5o',}, 
+          { positions: [ { i: '10', j: 0 }, { i: '10', j: 1 }, { i: '10', j: 2 }, { i: '10', j: 3 }, { i: '10', j: 4 }, { i: '10', j: 11 }, { i: '10', j: 5 }, { i: '10', j: 12 }, { i: '10', j: 6 }, { i: '10', j: 13 }, { i: '10', j: 7 }, { i: '10', j: 14 }, { i: '10', j: 8 }, { i: '10', j: 15 }, { i: '10', j: 9 }, { i: '10', j: 16 }, { i: '10', j: 10 }, { i: '10', j: 17 },  ], css_id: 'tinytable_css_5882m59okh6kn7fshwsj',}, 
+          { positions: [ { i: '0', j: 0 }, { i: '0', j: 7 }, { i: '0', j: 1 }, { i: '0', j: 8 }, { i: '0', j: 2 }, { i: '0', j: 9 }, { i: '0', j: 3 }, { i: '0', j: 10 }, { i: '0', j: 4 }, { i: '0', j: 11 }, { i: '0', j: 5 }, { i: '0', j: 12 }, { i: '0', j: 6 }, { i: '0', j: 13 }, { i: '0', j: 14 }, { i: '0', j: 15 }, { i: '0', j: 16 }, { i: '0', j: 17 },  ], css_id: 'tinytable_css_dawstu3kztd0s03jil7g',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_n1yn6n7pmy5pxb9pj0lk(cell.i, cell.j, group.css_id);
+                  styleCell_aiao8i5gi5ctkc8vf4s8(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -618,11 +618,11 @@ $ calcium     &lt;dbl&gt; 20, 20, 50, 20, 20, 15, 10, 2, 15, 20, 15, 35, 35, 35,
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_e27iggmide7bq46z5tzx, .table th.tinytable_css_e27iggmide7bq46z5tzx { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_jv3sirdvpalh6v0cxe5o, .table th.tinytable_css_jv3sirdvpalh6v0cxe5o { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_5882m59okh6kn7fshwsj, .table th.tinytable_css_5882m59okh6kn7fshwsj { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_dawstu3kztd0s03jil7g, .table th.tinytable_css_dawstu3kztd0s03jil7g { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_n1yn6n7pmy5pxb9pj0lk" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_aiao8i5gi5ctkc8vf4s8" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>Fast Food Dataset (Clean)</caption>
               <tbody><tr>

@@ -36,7 +36,7 @@ Fertility
 ## Data dictionary
 
 | Variable | Description |
-|----|----|
+|------------------------------------|------------------------------------|
 | Morekids | Does the mother have more than 2 children? |
 | Gender1 | Factor indicating gender of first child |
 | Gender2 | Factor indicating gender of second child. |

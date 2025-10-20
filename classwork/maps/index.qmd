@@ -1,0 +1,82 @@
+---
+title: "Classwork 7"
+format: html
+---
+
+# Map of Kadavanthra, Kochi
+
+## Setup
+
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+# Run this in your console first
+# devtools::install_github("ropensci/rnaturalearthhires")
+library(rnaturalearthhires)
+
+# Plotting Maps
+library(tidyverse) # Maps using ggplot() + geom_sf()
+library(ggformula) # Maps using gf_sf()
+library(tmap) # Thematic Maps, static and interactive
+library(tmaptools)
+library(tmap.mapgl)
+library(osmdata) # Fetch map data from osmdata.org
+library(sfheaders) # Handcrafted Map data
+## Interactive Maps
+library(leaflet) # interactive Maps
+library(leaflet)
+library(leaflet.providers)
+library(leaflet.extras)
+library(threejs) # Globe maps in R. Part of the htmlwidgets family of packages
+
+# For Spatial Data Frame Processing
+library(sf)
+```
+
+```{r}
+# https://boundingbox.klokantech.com CSV:
+# 77.574028,12.917262,77.595073,12.939895
+bbox_1 <- matrix(c(76.297617,9.945678,76.308722,9.967725), byrow = FALSE, nrow = 2,
+    ncol = 2, dimnames = list(c("x", "y"), c("min", "max")))
+bbox_1
+```
+
+```{r}
+bbox_1
+```
+
+```{r}
+buildings <- st_read("my-osm-data/buildings.gpkg")
+```
+
+```{r}
+roads <- st_read("my-osm-data/roads.gpkg")
+```
+
+```{r}
+trees <- st_read("my-osm-data/trees.gpkg")
+```
+
+```{r}
+greenery <- st_read("my-osm-data/greenery.gpkg")
+```
+
+# plotting map
+
+```{r}
+gf_sf(data = roads, geometry = ~geom, color = "grey") %>%
+  gf_sf(data = buildings, geometry = ~geom, fill = ~building) %>%
+  gf_sf(data = greenery, geometry = ~geom, fill = "palegreen3") %>%
+  gf_sf(data = trees, geometry = ~geom, color = "darkgreen") %>%
+  gf_theme(theme_light)
+
+```
+
+```{r}
+gf_sf(data = roads, geometry = ~geom, color = "grey") %>%
+  gf_sf(data = buildings %>%  filter(building=="apartments"), geometry = ~geom, fill = "purple") %>%
+  gf_sf(data = greenery, geometry = ~geom, fill = "palegreen3") %>%
+  gf_sf(data = trees, geometry = ~geom, color = "darkgreen") %>%
+  gf_theme(theme_light)
+```

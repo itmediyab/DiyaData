@@ -1,8 +1,14 @@
 ---
 title: "Fundamentals of Statistics and Exploratory Data Analysis"
 listing: 
-  - id: assignments
+  - id: assignment1
     contents: "posts/*/*.qmd"
+    type: default
+    sort: "date desc"
+    sort-ui: false
+    filter-ui: false
+  - id: assignment2
+    contents: "A2/*/*.qmd"
     type: default
     sort: "date desc"
     sort-ui: false
@@ -15,11 +21,15 @@ page-layout: full
 title-block-banner: true
 ---
 
-## Assignments
+## A1: Basics of EDA #1
 
-::: {#assignments}
+::: {#assignment1}
 :::
 
+## A2: Basics of EDA #2
+
+::: {#assignment2}
+:::
 
 ## Classwork
 

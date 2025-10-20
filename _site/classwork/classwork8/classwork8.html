@@ -1,0 +1,5170 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>classwork8 – DiyaData</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">DiyaData</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">classwork8</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Data Processing in R</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   4.0.0     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mosaic) <span class="co"># Our workhorse for stats, sampling</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'mosaic':
+  method                           from   
+  fortify.SpatialPolygonsDataFrame ggplot2
+
+The 'mosaic' package masks several functions from core packages in order to add 
+additional features.  The original behavior of these functions should not be affected by this.
+
+Attaching package: 'mosaic'
+
+The following object is masked from 'package:Matrix':
+
+    mean
+
+The following objects are masked from 'package:dplyr':
+
+    count, do, tally
+
+The following object is masked from 'package:purrr':
+
+    cross
+
+The following object is masked from 'package:ggplot2':
+
+    stat
+
+The following objects are masked from 'package:stats':
+
+    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
+    quantile, sd, t.test, var
+
+The following objects are masked from 'package:base':
+
+    max, mean, min, prod, range, sample, sum</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor) <span class="co"># Data Cleaning</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'janitor'
+
+The following objects are masked from 'package:stats':
+
+    chisq.test, fisher.test</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr) <span class="co"># Good to Examine data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'skimr'
+
+The following object is masked from 'package:mosaic':
+
+    n_missing</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggformula) <span class="co"># Formula interface for graphs</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># load the NHANES data library</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'infer'
+
+The following objects are masked from 'package:mosaic':
+
+    prop_test, t_test</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"NHANES"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>NHANES_adult <span class="ot">&lt;-</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  NHANES <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(ID, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Age <span class="sc">&gt;=</span> <span class="dv">18</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Height) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(Height)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>NHANES_adult <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 4,790
+Columns: 1
+$ Height &lt;dbl&gt; 164.7, 168.4, 166.7, 169.5, 181.9, 169.4, 148.1, 177.8, 181.3, …</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># NHANES_adult is assumed population</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pop_mean <span class="ot">&lt;-</span> mosaic<span class="sc">::</span><span class="fu">mean</span>(<span class="sc">~</span>Height, <span class="at">data =</span> NHANES_adult)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>pop_sd <span class="ot">&lt;-</span> mosaic<span class="sc">::</span><span class="fu">sd</span>(<span class="sc">~</span>Height, <span class="at">data =</span> NHANES_adult)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>pop_mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 168.3497</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pop_sd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.15705</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>) <span class="co"># for reproducibility</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>sample_50 <span class="ot">&lt;-</span> mosaic<span class="sc">::</span><span class="fu">sample</span>(NHANES_adult, <span class="at">size =</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Height)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>sample_50</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 50 × 1
+   Height
+    &lt;dbl&gt;
+ 1   155.
+ 2   154.
+ 3   173.
+ 4   179.
+ 5   170.
+ 6   186.
+ 7   159.
+ 8   173.
+ 9   175.
+10   170.
+# ℹ 40 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>sample_mean_50 <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="sc">~</span>Height, <span class="at">data =</span> sample_50)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>sample_mean_50</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 170.094</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the histogram of this sample</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>sample_50 <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_histogram</span>(<span class="sc">~</span>Height, <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="sc">~</span>sample_mean_50,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"purple"</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="sc">~</span>pop_mean,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"black"</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_annotate</span>(<span class="st">"label"</span>,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="dv">7</span>, <span class="at">x =</span> pop_mean <span class="sc">-</span> <span class="dv">8</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_annotate</span>(<span class="st">"label"</span>,</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="dv">7</span>, <span class="at">x =</span> sample_mean_50 <span class="sc">+</span> <span class="dv">8</span>,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Sample Mean"</span>, <span class="at">color =</span> <span class="st">"purple"</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_annotate</span>(<span class="st">"curve"</span>,</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> sample_mean_50 <span class="sc">+</span> <span class="dv">8</span>, <span class="at">y =</span> <span class="fl">6.5</span>,</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">xend =</span> sample_mean_50 <span class="sc">+</span> <span class="dv">1</span>, <span class="at">yend =</span> <span class="dv">2</span>,</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="sc">-</span><span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"purple"</span>,</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"cm"</span>))</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_annotate</span>(<span class="st">"curve"</span>,</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> pop_mean <span class="sc">-</span> <span class="dv">8</span>, <span class="at">y =</span> <span class="fl">6.5</span>,</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">xend =</span> pop_mean <span class="sc">-</span> <span class="dv">1</span>, <span class="at">yend =</span> <span class="dv">2</span>,</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">curvature =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"cm"</span>))</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution and Mean of a Single Sample"</span>,</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Sample Size = 50"</span></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sample_50_500 <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">500</span>) <span class="sc">*</span> {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(NHANES_adult, <span class="at">size =</span> <span class="dv">50</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(Height) <span class="sc">%&gt;%</span> <span class="co"># drop sampling related column "orig.id"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">sample_mean =</span> <span class="fu">mean</span>(Height),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">sample_sd =</span> <span class="fu">sd</span>(Height),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">sample_min =</span> <span class="fu">min</span>(Height),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">sample_max =</span> <span class="fu">max</span>(Height)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>sample_50_500 <span class="ot">&lt;-</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  sample_50_500 <span class="sc">%&gt;%</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(.index, sample_mean, sample_sd, sample_min, sample_max)</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>sample_50_500</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 500 × 5
+   .index sample_mean sample_sd sample_min sample_max
+    &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+ 1      1        167.     11.2        147.       189.
+ 2      2        168.      8.30       152.       187 
+ 3      3        166.     10.3        148.       191.
+ 4      4        169.     10.0        144.       188.
+ 5      5        166.     10.6        148.       191.
+ 6      6        169.      9.67       147.       185.
+ 7      7        167.      9.90       148.       188.
+ 8      8        170.     10.9        150.       187.
+ 9      9        169.      8.23       155.       184.
+10     10        165.      9.64       142.       185.
+# ℹ 490 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sample_50_500)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 500   5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sample_50_500 <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_point</span>(.index <span class="sc">~</span> sample_mean,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"purple"</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sample Means are close to the Population Mean"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Sample Means are Random!"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Grey lines represent our 500 samples"</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_segment</span>(</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    .index <span class="sc">+</span> .index <span class="sc">~</span> sample_min <span class="sc">+</span> sample_max,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey"</span>,</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.3</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.3</span>,</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">"Sample Index (1-500)"</span>,</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"Sample Means"</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="sc">~</span>pop_mean,</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_annotate</span>(<span class="st">"label"</span>,</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="sc">-</span><span class="dv">25</span>, <span class="at">x =</span> pop_mean,</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>,</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sample_50_500 <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_point</span>(.index <span class="sc">~</span> sample_sd,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"purple"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sample SDs are close to the Population SD"</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Sample SDs are Random!"</span>,</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> <span class="sc">~</span>pop_sd,</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_annotate</span>(<span class="st">"label"</span>,</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="sc">-</span><span class="dv">25</span>, <span class="at">x =</span> pop_sd,</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population SD"</span>,</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"black"</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_refine</span>(<span class="fu">lims</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">16</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(<span class="at">x =</span> <span class="st">"Sample SDs"</span>, <span class="at">y =</span> <span class="st">"Sample Index (1-500)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sample_50_500 <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_dhistogram</span>(<span class="sc">~</span>sample_mean, <span class="at">bins =</span> <span class="dv">30</span>, <span class="at">xlab =</span> <span class="st">"Sample Means only"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> pop_mean,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_label</span>(<span class="fl">0.01</span> <span class="sc">~</span> pop_mean,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sampling Mean Distribution"</span>,</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"500 means"</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (mapping = NULL, data = NULL, stat = "identity", position = "nudge", : All aesthetics have length 1, but the data has 500 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># How does this **distribution of sample-means** compare with the</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># overall distribution of the population?</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>sample_50_500 <span class="sc">%&gt;%</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_dhistogram</span>(<span class="sc">~</span>sample_mean, <span class="at">bins =</span> <span class="dv">30</span>, <span class="at">xlab =</span> <span class="st">"Sample Means, and the Height variable"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> pop_mean,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_label</span>(<span class="fl">0.01</span> <span class="sc">~</span> pop_mean,</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>,</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Add the population histogram</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_histogram</span>(<span class="sc">~</span>Height,</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> NHANES_adult,</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.2</span>, <span class="at">fill =</span> <span class="st">"blue"</span>,</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">bins =</span> <span class="dv">30</span></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_label</span>(<span class="fl">0.025</span> <span class="sc">~</span> (pop_mean <span class="sc">+</span> <span class="dv">20</span>),</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Distribution of Height"</span>,</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_labs</span>(</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sampling Mean Distribution"</span>,</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Original Population overlay"</span></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (mapping = NULL, data = NULL, stat = "identity", position = "nudge", : All aesthetics have length 1, but the data has 500 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (mapping = NULL, data = NULL, stat = "identity", position = "nudge", : All aesthetics have length 1, but the data has 500 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>samples_08_1000 <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>) <span class="sc">*</span> <span class="fu">resample</span>(NHANES_adult<span class="sc">$</span>Height,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">08</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>samples_08_1000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       result
+1    169.1500
+2    174.1125
+3    171.2250
+4    166.3625
+5    170.2000
+6    165.1125
+7    170.9875
+8    168.6625
+9    166.5250
+10   164.9000
+11   167.3000
+12   162.7000
+13   171.9375
+14   168.1875
+15   162.8875
+16   162.0125
+17   173.2625
+18   169.4875
+19   165.6375
+20   164.4250
+21   171.8000
+22   170.3375
+23   160.1375
+24   172.2875
+25   167.0125
+26   172.7125
+27   165.3375
+28   164.2250
+29   162.7250
+30   161.9500
+31   170.8125
+32   169.5250
+33   166.1875
+34   173.1750
+35   166.0625
+36   167.9750
+37   166.1625
+38   169.6250
+39   171.8375
+40   166.2250
+41   164.6500
+42   163.9000
+43   165.3125
+44   174.0750
+45   173.1375
+46   169.7125
+47   168.6000
+48   162.6125
+49   161.5625
+50   163.3500
+51   159.9875
+52   166.4875
+53   172.7125
+54   174.6125
+55   162.2000
+56   168.1625
+57   170.0000
+58   175.6750
+59   166.8375
+60   169.8750
+61   170.4500
+62   174.2125
+63   162.1000
+64   166.1875
+65   166.1500
+66   174.6000
+67   169.8625
+68   170.6875
+69   164.4125
+70   158.6875
+71   165.6500
+72   164.0750
+73   170.0875
+74   171.8625
+75   165.5000
+76   169.0250
+77   161.8375
+78   167.7625
+79   167.5500
+80   167.6500
+81   171.9000
+82   164.3500
+83   173.5750
+84   174.7875
+85   165.1500
+86   170.2875
+87   163.1500
+88   171.1625
+89   168.8000
+90   166.4625
+91   172.2125
+92   163.4625
+93   166.8000
+94   171.5625
+95   160.7375
+96   169.4000
+97   168.9375
+98   168.7000
+99   164.9500
+100  166.1750
+101  168.6750
+102  175.1750
+103  175.0125
+104  162.9250
+105  165.7750
+106  170.2125
+107  163.2500
+108  166.4250
+109  167.1500
+110  174.6750
+111  167.7000
+112  163.7625
+113  173.0500
+114  166.0125
+115  170.6000
+116  160.6750
+117  162.1625
+118  165.8625
+119  165.4125
+120  171.2000
+121  169.5500
+122  167.8250
+123  166.4750
+124  169.3250
+125  166.4500
+126  177.2875
+127  174.0500
+128  165.9875
+129  165.7375
+130  169.0875
+131  168.6875
+132  170.2500
+133  158.9250
+134  171.3625
+135  161.4125
+136  167.7375
+137  162.8000
+138  170.9500
+139  174.4500
+140  169.4500
+141  162.8750
+142  166.0625
+143  169.1875
+144  163.5500
+145  175.7250
+146  165.5750
+147  167.5875
+148  171.3375
+149  171.7750
+150  166.5250
+151  168.8250
+152  172.3375
+153  169.2875
+154  170.1000
+155  169.3125
+156  171.2750
+157  167.8875
+158  170.5125
+159  162.9250
+160  168.0500
+161  166.9375
+162  169.9250
+163  168.9500
+164  175.6375
+165  166.2125
+166  176.4875
+167  169.8750
+168  173.1375
+169  162.5750
+170  166.0500
+171  171.5625
+172  170.9375
+173  169.3000
+174  166.7250
+175  171.5625
+176  166.1500
+177  168.4875
+178  168.8375
+179  166.7875
+180  173.1625
+181  171.6500
+182  168.8750
+183  166.2500
+184  165.5250
+185  160.4500
+186  170.9500
+187  170.3875
+188  164.2000
+189  163.8375
+190  163.8875
+191  164.6875
+192  169.3000
+193  172.1875
+194  168.7250
+195  166.1750
+196  170.9250
+197  159.8250
+198  166.2625
+199  164.6125
+200  166.6750
+201  169.3750
+202  167.6875
+203  165.3875
+204  169.1750
+205  169.7750
+206  168.4000
+207  167.3500
+208  170.4625
+209  169.1375
+210  171.3875
+211  167.0875
+212  170.4250
+213  166.3375
+214  169.0250
+215  167.1750
+216  167.4250
+217  163.0000
+218  168.0500
+219  167.2000
+220  166.4750
+221  171.0875
+222  169.8125
+223  165.1500
+224  166.6625
+225  166.7750
+226  169.6500
+227  168.3125
+228  172.7500
+229  163.9750
+230  165.9125
+231  168.8750
+232  170.6750
+233  166.6000
+234  171.4375
+235  171.1625
+236  168.8000
+237  167.1500
+238  168.9125
+239  168.1000
+240  166.5000
+241  169.7250
+242  169.2500
+243  166.2875
+244  167.8375
+245  171.6875
+246  165.8375
+247  168.8750
+248  169.6375
+249  174.6750
+250  168.3625
+251  171.2625
+252  170.4375
+253  165.9250
+254  169.3250
+255  169.9375
+256  174.0250
+257  168.1000
+258  172.4625
+259  167.5750
+260  167.2625
+261  165.6250
+262  171.7750
+263  164.3125
+264  166.8500
+265  164.4875
+266  165.2125
+267  166.2000
+268  165.4000
+269  168.8375
+270  167.3125
+271  169.1500
+272  169.3250
+273  164.8875
+274  165.3375
+275  169.2750
+276  177.1000
+277  161.4625
+278  169.6000
+279  166.8625
+280  171.5625
+281  162.1625
+282  167.5250
+283  169.8500
+284  164.1500
+285  168.3125
+286  165.7625
+287  160.0625
+288  171.4000
+289  176.1625
+290  170.2125
+291  173.4875
+292  166.6375
+293  175.2250
+294  163.9125
+295  169.2375
+296  169.5500
+297  167.7625
+298  170.4500
+299  165.9000
+300  169.4500
+301  174.9750
+302  175.0500
+303  175.2625
+304  163.7500
+305  171.6875
+306  169.8125
+307  168.1125
+308  169.9500
+309  160.8500
+310  168.0750
+311  168.5125
+312  162.3125
+313  168.1875
+314  173.7750
+315  162.1500
+316  168.8750
+317  170.3125
+318  172.4375
+319  168.9250
+320  167.1250
+321  165.6375
+322  164.6625
+323  169.7000
+324  167.4500
+325  171.8625
+326  171.9500
+327  165.7000
+328  174.7125
+329  170.4500
+330  168.5875
+331  165.3875
+332  170.4625
+333  168.4750
+334  167.1500
+335  163.9500
+336  168.1500
+337  169.2375
+338  162.6625
+339  164.7500
+340  166.7000
+341  166.4375
+342  162.7500
+343  166.9000
+344  166.9625
+345  169.7375
+346  166.1250
+347  167.9250
+348  170.5750
+349  163.4250
+350  171.5375
+351  163.5125
+352  174.1375
+353  168.0750
+354  168.3125
+355  165.6375
+356  163.6875
+357  166.5500
+358  175.6250
+359  169.0875
+360  174.9500
+361  163.1125
+362  173.0625
+363  169.1625
+364  169.9500
+365  172.6375
+366  168.3250
+367  164.2250
+368  164.1000
+369  175.0250
+370  175.8875
+371  167.8375
+372  174.1750
+373  167.4000
+374  165.8625
+375  164.8125
+376  167.6250
+377  171.4875
+378  170.3125
+379  167.5875
+380  164.7000
+381  170.1625
+382  169.2625
+383  165.8250
+384  167.9750
+385  162.6250
+386  168.0500
+387  168.8375
+388  167.1625
+389  161.6750
+390  170.4250
+391  174.2625
+392  168.5000
+393  163.5875
+394  169.5000
+395  167.9125
+396  164.4500
+397  161.2125
+398  167.3125
+399  162.2375
+400  165.3375
+401  169.8125
+402  168.5500
+403  171.6125
+404  170.0750
+405  171.0000
+406  167.2000
+407  162.4625
+408  175.3750
+409  160.5375
+410  175.0375
+411  166.7625
+412  170.3875
+413  168.3125
+414  163.8375
+415  164.1875
+416  171.0750
+417  170.5625
+418  172.5750
+419  167.7500
+420  177.3125
+421  169.6250
+422  176.5875
+423  169.9625
+424  167.8500
+425  169.5250
+426  166.6000
+427  171.8500
+428  169.8375
+429  163.4375
+430  170.9375
+431  163.3125
+432  167.1125
+433  163.4625
+434  165.8750
+435  163.2750
+436  168.0875
+437  164.2375
+438  164.2375
+439  176.6500
+440  169.9000
+441  171.0000
+442  160.5875
+443  174.8250
+444  169.8500
+445  170.8500
+446  174.9875
+447  166.0375
+448  169.8125
+449  163.0125
+450  173.0625
+451  172.9875
+452  172.5625
+453  169.7500
+454  174.0125
+455  168.7875
+456  165.6250
+457  166.9500
+458  176.7125
+459  169.2375
+460  178.2500
+461  170.9250
+462  174.7125
+463  166.4625
+464  163.4875
+465  167.1375
+466  164.4250
+467  165.6125
+468  174.9000
+469  162.7250
+470  167.4750
+471  168.7625
+472  169.3500
+473  162.9375
+474  165.8375
+475  174.3875
+476  168.9250
+477  162.0125
+478  170.0750
+479  163.3250
+480  171.7250
+481  170.5000
+482  170.3625
+483  170.8375
+484  167.5750
+485  164.4125
+486  174.9125
+487  165.9375
+488  171.6125
+489  166.3875
+490  163.7000
+491  168.5250
+492  171.4250
+493  172.3625
+494  160.7375
+495  164.7375
+496  165.1625
+497  168.9750
+498  168.1000
+499  165.4625
+500  166.8375
+501  169.0625
+502  169.2375
+503  166.2500
+504  170.6500
+505  172.6875
+506  171.5750
+507  167.8750
+508  168.6000
+509  168.9875
+510  167.8375
+511  168.9625
+512  169.5375
+513  169.9750
+514  169.5750
+515  168.6625
+516  166.2625
+517  169.9500
+518  163.8125
+519  168.1500
+520  169.8750
+521  170.2125
+522  170.1625
+523  167.4875
+524  162.2625
+525  170.9750
+526  174.4250
+527  167.5000
+528  168.0250
+529  167.5625
+530  167.6125
+531  160.4375
+532  168.4750
+533  167.0750
+534  171.9875
+535  169.3375
+536  172.7250
+537  168.5750
+538  166.6500
+539  164.7125
+540  164.4625
+541  167.3625
+542  163.7125
+543  163.1625
+544  166.4375
+545  164.8625
+546  167.6375
+547  172.3875
+548  170.4625
+549  160.9000
+550  169.7125
+551  171.5375
+552  170.2250
+553  165.7625
+554  166.8250
+555  167.2375
+556  165.5375
+557  160.4875
+558  170.4750
+559  163.3625
+560  158.6750
+561  172.1875
+562  164.8250
+563  170.4750
+564  167.1750
+565  165.7500
+566  163.6875
+567  164.3250
+568  158.6375
+569  168.8000
+570  166.9625
+571  170.7875
+572  172.9625
+573  167.2750
+574  170.7500
+575  168.9375
+576  165.4750
+577  166.4875
+578  169.2375
+579  178.9875
+580  164.9750
+581  168.0125
+582  165.4750
+583  169.3125
+584  164.0375
+585  168.7625
+586  169.9125
+587  167.7375
+588  163.7000
+589  167.9125
+590  170.8500
+591  171.4125
+592  166.6250
+593  169.2250
+594  174.6750
+595  171.9250
+596  170.8250
+597  169.8625
+598  166.4875
+599  172.1125
+600  164.5125
+601  174.3250
+602  178.1625
+603  165.4000
+604  165.7375
+605  168.1875
+606  166.4000
+607  169.1500
+608  167.2375
+609  169.7375
+610  170.4125
+611  174.9250
+612  168.9500
+613  171.4375
+614  170.8625
+615  166.8125
+616  174.3500
+617  168.9125
+618  167.4625
+619  171.4125
+620  165.6625
+621  168.9250
+622  166.5000
+623  163.9625
+624  172.0875
+625  164.5750
+626  164.4375
+627  171.6125
+628  171.5875
+629  168.0000
+630  170.8875
+631  167.5250
+632  171.9125
+633  173.4750
+634  172.7500
+635  165.5750
+636  167.5625
+637  176.8125
+638  164.5250
+639  168.8375
+640  167.9625
+641  164.5250
+642  174.8375
+643  166.5375
+644  168.2375
+645  177.0000
+646  169.9000
+647  171.2750
+648  166.8750
+649  174.7625
+650  163.5500
+651  171.2625
+652  169.8875
+653  169.2500
+654  172.8750
+655  170.2250
+656  170.1375
+657  166.6125
+658  174.6125
+659  166.7875
+660  169.0250
+661  170.8875
+662  167.2500
+663  172.4500
+664  163.4250
+665  167.8750
+666  166.9250
+667  164.6500
+668  171.7500
+669  164.5750
+670  162.7750
+671  167.2000
+672  173.5375
+673  169.3875
+674  164.6375
+675  161.6750
+676  162.9125
+677  165.7875
+678  164.1375
+679  174.0125
+680  162.6875
+681  166.3625
+682  170.0125
+683  170.8125
+684  167.4750
+685  161.4500
+686  159.4375
+687  166.1250
+688  170.9125
+689  163.8500
+690  168.0250
+691  167.4000
+692  164.5500
+693  170.2000
+694  170.3500
+695  171.5500
+696  170.6375
+697  173.0250
+698  170.1375
+699  171.9000
+700  169.8125
+701  171.1375
+702  170.8625
+703  166.4375
+704  163.9750
+705  162.6625
+706  164.2625
+707  166.6375
+708  165.5750
+709  171.7250
+710  168.8750
+711  165.6000
+712  164.8750
+713  167.2125
+714  166.5500
+715  170.8250
+716  168.6125
+717  170.1000
+718  164.9625
+719  160.3500
+720  159.8250
+721  170.0625
+722  163.7375
+723  165.7000
+724  169.6250
+725  180.7000
+726  169.2375
+727  169.7875
+728  170.2375
+729  171.1750
+730  170.5500
+731  167.4875
+732  165.5250
+733  166.2875
+734  163.8625
+735  166.3500
+736  166.8125
+737  165.9375
+738  170.8625
+739  168.3875
+740  160.6375
+741  164.1125
+742  162.3500
+743  170.9500
+744  161.9875
+745  163.9000
+746  173.9875
+747  164.5875
+748  164.8125
+749  168.0250
+750  166.2625
+751  170.5250
+752  166.1625
+753  168.2750
+754  170.8875
+755  171.7000
+756  169.0750
+757  170.1250
+758  174.8375
+759  165.5000
+760  160.6625
+761  165.1250
+762  171.4500
+763  171.2125
+764  165.8750
+765  169.6750
+766  169.9625
+767  162.9125
+768  167.5000
+769  165.1000
+770  166.9500
+771  172.7625
+772  168.2500
+773  172.0375
+774  168.2000
+775  162.4625
+776  163.4375
+777  167.8500
+778  166.0000
+779  169.8500
+780  162.7500
+781  161.4875
+782  164.2250
+783  169.6125
+784  165.9750
+785  164.2500
+786  170.0750
+787  167.8125
+788  171.0375
+789  167.7000
+790  173.7250
+791  169.6375
+792  166.9500
+793  175.0000
+794  168.6250
+795  172.4625
+796  166.0500
+797  166.9125
+798  167.7250
+799  166.3875
+800  167.4500
+801  169.2375
+802  175.0625
+803  174.7750
+804  171.9000
+805  166.3875
+806  171.5875
+807  173.6125
+808  171.9250
+809  169.8250
+810  169.1875
+811  172.3875
+812  164.9375
+813  164.7625
+814  174.7625
+815  173.5375
+816  164.2875
+817  172.6250
+818  171.1250
+819  174.8375
+820  169.7875
+821  176.2750
+822  168.0125
+823  167.7375
+824  168.0750
+825  171.6750
+826  169.0750
+827  161.4125
+828  167.6250
+829  170.2500
+830  159.5000
+831  169.3250
+832  168.2125
+833  169.5250
+834  169.5250
+835  171.7125
+836  164.9875
+837  168.6125
+838  162.4375
+839  166.9625
+840  167.6875
+841  169.7875
+842  165.4500
+843  167.2375
+844  170.5625
+845  172.1750
+846  165.3500
+847  172.8500
+848  165.7000
+849  165.4250
+850  165.8250
+851  176.3625
+852  166.3375
+853  174.1750
+854  165.9125
+855  177.9125
+856  164.3500
+857  167.8250
+858  172.9750
+859  167.5750
+860  166.3000
+861  165.9375
+862  164.6625
+863  169.2125
+864  166.8625
+865  168.0750
+866  164.7625
+867  170.3375
+868  163.8125
+869  176.2125
+870  160.6125
+871  172.5500
+872  165.7500
+873  166.8875
+874  171.7125
+875  165.8500
+876  169.2500
+877  165.1125
+878  168.9750
+879  166.9875
+880  167.4500
+881  172.3250
+882  164.3375
+883  172.9750
+884  172.5875
+885  161.5750
+886  172.7625
+887  171.4125
+888  167.0875
+889  167.6875
+890  168.0000
+891  168.5250
+892  167.2125
+893  162.0000
+894  162.6875
+895  166.7250
+896  169.4375
+897  171.5125
+898  170.9875
+899  171.8375
+900  175.2875
+901  167.8375
+902  166.1500
+903  170.4000
+904  172.9625
+905  168.5375
+906  168.1500
+907  167.2375
+908  162.2125
+909  166.0125
+910  172.0750
+911  172.0500
+912  169.9875
+913  165.6375
+914  165.3125
+915  174.0125
+916  167.9875
+917  173.9375
+918  166.5375
+919  162.8375
+920  174.8125
+921  167.1000
+922  164.7625
+923  172.6125
+924  171.0375
+925  164.0125
+926  169.1250
+927  169.7625
+928  163.6250
+929  173.4000
+930  164.0875
+931  167.5375
+932  172.9375
+933  167.6125
+934  165.5875
+935  166.7875
+936  172.7875
+937  168.9000
+938  166.8375
+939  167.4500
+940  171.4125
+941  162.4500
+942  167.7500
+943  165.4250
+944  167.5500
+945  173.5250
+946  170.7750
+947  167.5500
+948  170.8375
+949  168.8625
+950  170.0625
+951  167.4250
+952  175.3875
+953  168.9875
+954  168.8750
+955  174.7250
+956  176.0250
+957  170.6375
+958  165.9125
+959  169.3375
+960  172.7000
+961  166.7125
+962  157.7125
+963  171.7875
+964  162.4250
+965  167.5000
+966  168.5125
+967  167.5875
+968  161.5625
+969  173.2125
+970  175.1125
+971  168.5625
+972  168.0625
+973  170.3375
+974  164.5500
+975  165.1000
+976  166.1375
+977  162.6375
+978  168.1625
+979  170.3250
+980  168.2000
+981  170.8625
+982  164.4500
+983  165.7625
+984  171.4250
+985  163.8000
+986  166.2625
+987  169.3625
+988  161.2625
+989  165.8375
+990  164.7375
+991  163.1625
+992  169.2500
+993  164.4125
+994  165.1750
+995  173.1375
+996  165.9500
+997  166.8625
+998  170.0125
+999  165.1250
+1000 167.7375</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>samples_16_1000 <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>) <span class="sc">*</span> <span class="fu">resample</span>(NHANES_adult<span class="sc">$</span>Height,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">16</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>samples_16_1000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       result
+1    172.6687
+2    168.2812
+3    168.0500
+4    167.5938
+5    166.1000
+6    167.3187
+7    165.5375
+8    167.6375
+9    167.5625
+10   168.1125
+11   165.2375
+12   169.6500
+13   169.0250
+14   163.4750
+15   166.3812
+16   167.8562
+17   169.6188
+18   167.0687
+19   170.7312
+20   165.4375
+21   164.6063
+22   173.6062
+23   169.1562
+24   162.0875
+25   161.6687
+26   169.6000
+27   168.4062
+28   169.0813
+29   171.2562
+30   170.1625
+31   168.1562
+32   166.1687
+33   172.2312
+34   167.5500
+35   162.1687
+36   167.0813
+37   168.6813
+38   165.4313
+39   167.6562
+40   169.7750
+41   168.9625
+42   169.9688
+43   166.7188
+44   169.9813
+45   169.3375
+46   165.1312
+47   166.1500
+48   169.1687
+49   166.8250
+50   167.4250
+51   175.0938
+52   164.3500
+53   166.7312
+54   166.7875
+55   171.1875
+56   168.4062
+57   168.3063
+58   161.4187
+59   165.6375
+60   170.3750
+61   167.1500
+62   167.8875
+63   175.6687
+64   165.8625
+65   168.8875
+66   164.5875
+67   166.3875
+68   165.2688
+69   172.7000
+70   166.1625
+71   167.6250
+72   169.6375
+73   166.5813
+74   171.5563
+75   167.6750
+76   170.8125
+77   169.7063
+78   169.5813
+79   166.7188
+80   167.4938
+81   169.4375
+82   170.9250
+83   173.1813
+84   167.8562
+85   168.8063
+86   170.1188
+87   169.1438
+88   167.3187
+89   167.8125
+90   172.4062
+91   167.5625
+92   162.9875
+93   170.6687
+94   164.0188
+95   164.2875
+96   170.7438
+97   167.4500
+98   165.3750
+99   165.4375
+100  168.0250
+101  166.5375
+102  169.4750
+103  167.8750
+104  169.8000
+105  169.2375
+106  168.3812
+107  168.1000
+108  165.2125
+109  167.6250
+110  168.7812
+111  167.4812
+112  166.7188
+113  168.9812
+114  168.3625
+115  167.3938
+116  168.6375
+117  171.3000
+118  167.9750
+119  168.5062
+120  168.1125
+121  167.7688
+122  169.7625
+123  167.3562
+124  172.1562
+125  169.8125
+126  168.1813
+127  169.6312
+128  171.0625
+129  170.0188
+130  166.4437
+131  168.0437
+132  165.6687
+133  165.7063
+134  167.1188
+135  168.2312
+136  167.1062
+137  167.3063
+138  169.2812
+139  168.2312
+140  166.8625
+141  168.6875
+142  166.2312
+143  162.9125
+144  173.7812
+145  171.8500
+146  170.9313
+147  166.5750
+148  168.6562
+149  168.1750
+150  172.2125
+151  175.1562
+152  167.7188
+153  168.9625
+154  165.4000
+155  168.2937
+156  165.2500
+157  167.9625
+158  169.5938
+159  170.6813
+160  166.3812
+161  167.1813
+162  169.6562
+163  168.8250
+164  172.5813
+165  166.9875
+166  169.4688
+167  165.5500
+168  168.6937
+169  163.7063
+170  166.5687
+171  164.8250
+172  168.3500
+173  167.0250
+174  167.0000
+175  167.5250
+176  171.1062
+177  166.9750
+178  165.1188
+179  172.3562
+180  169.0312
+181  171.1125
+182  171.2937
+183  166.2750
+184  169.5625
+185  171.8625
+186  170.7875
+187  165.3375
+188  169.5563
+189  168.9500
+190  167.4313
+191  167.5437
+192  165.3000
+193  168.4437
+194  164.4187
+195  172.3438
+196  166.0437
+197  168.7063
+198  162.8313
+199  164.7750
+200  167.5750
+201  170.0813
+202  170.5375
+203  164.8313
+204  167.9563
+205  170.9000
+206  169.3500
+207  164.0125
+208  170.8187
+209  170.1625
+210  173.4688
+211  173.2750
+212  168.6875
+213  169.2250
+214  166.6375
+215  167.1250
+216  165.2875
+217  164.5750
+218  166.1625
+219  170.4437
+220  170.4500
+221  167.7063
+222  170.3500
+223  170.5125
+224  166.4125
+225  173.0250
+226  171.1562
+227  171.4000
+228  166.2875
+229  172.9750
+230  174.5875
+231  170.5875
+232  165.3125
+233  165.0188
+234  168.8125
+235  168.1188
+236  166.1438
+237  170.1125
+238  165.4688
+239  166.7000
+240  171.1125
+241  170.6000
+242  165.9938
+243  170.4250
+244  169.0000
+245  166.1125
+246  171.8938
+247  162.7375
+248  167.0687
+249  166.7812
+250  167.9500
+251  167.7438
+252  171.6687
+253  169.7250
+254  168.7937
+255  168.4000
+256  169.7562
+257  169.1188
+258  168.1062
+259  165.9812
+260  170.0438
+261  168.8250
+262  166.6188
+263  170.9625
+264  167.7937
+265  164.0250
+266  167.7750
+267  170.6625
+268  170.6500
+269  165.6813
+270  165.9125
+271  163.4375
+272  165.6500
+273  170.0125
+274  165.6813
+275  170.6250
+276  167.9938
+277  167.0312
+278  163.0125
+279  166.9187
+280  165.4313
+281  167.6500
+282  166.4625
+283  164.0062
+284  163.7188
+285  168.8750
+286  170.1188
+287  169.8438
+288  165.9812
+289  174.1125
+290  166.4938
+291  167.3938
+292  166.4000
+293  168.8250
+294  165.8063
+295  171.1312
+296  167.9250
+297  173.3000
+298  170.3438
+299  169.3000
+300  169.4187
+301  171.7812
+302  166.9625
+303  167.7750
+304  168.4875
+305  172.6687
+306  170.1937
+307  168.8375
+308  171.6312
+309  169.4375
+310  167.2937
+311  165.2312
+312  168.3313
+313  168.0250
+314  169.7937
+315  169.2063
+316  172.6937
+317  169.1625
+318  172.1875
+319  166.6813
+320  166.2438
+321  170.6875
+322  172.6188
+323  170.5875
+324  170.8187
+325  167.4062
+326  169.5687
+327  171.5500
+328  168.3750
+329  170.7000
+330  169.9563
+331  169.8500
+332  165.6500
+333  165.7875
+334  168.1625
+335  164.9875
+336  171.4625
+337  163.1562
+338  164.3500
+339  169.0750
+340  164.5250
+341  170.4125
+342  164.4625
+343  162.7812
+344  167.3812
+345  167.7125
+346  167.3750
+347  170.9500
+348  171.8313
+349  171.0188
+350  170.4750
+351  168.6500
+352  163.3187
+353  165.4500
+354  168.6500
+355  167.2375
+356  166.0437
+357  168.6875
+358  169.3562
+359  162.6562
+360  164.9437
+361  164.7188
+362  175.1625
+363  169.5125
+364  170.7063
+365  169.0188
+366  165.9062
+367  165.1062
+368  166.3750
+369  169.6250
+370  162.3750
+371  166.6500
+372  162.9437
+373  169.2875
+374  166.4187
+375  168.3938
+376  167.2188
+377  171.2937
+378  169.6000
+379  170.1687
+380  162.8938
+381  171.3313
+382  167.7750
+383  166.4375
+384  166.3000
+385  169.8562
+386  170.1438
+387  165.3313
+388  165.6438
+389  167.9250
+390  162.1188
+391  166.9187
+392  165.1125
+393  168.9437
+394  169.3688
+395  171.6813
+396  170.9750
+397  170.5437
+398  166.4812
+399  167.0563
+400  168.3438
+401  174.9187
+402  169.1438
+403  172.6000
+404  170.8750
+405  170.7875
+406  164.8500
+407  174.1500
+408  168.4563
+409  172.9812
+410  173.0312
+411  167.8750
+412  169.8750
+413  165.2438
+414  168.9375
+415  164.4125
+416  168.8688
+417  170.6188
+418  166.8000
+419  164.7000
+420  168.7375
+421  166.3438
+422  171.3688
+423  169.1000
+424  165.5625
+425  171.0938
+426  170.2562
+427  171.9125
+428  166.0875
+429  170.2750
+430  166.1188
+431  166.9375
+432  167.4688
+433  167.5500
+434  170.0125
+435  166.5813
+436  166.3187
+437  168.7812
+438  167.1813
+439  167.9812
+440  169.8875
+441  168.6562
+442  167.0813
+443  172.0875
+444  167.3875
+445  168.2625
+446  164.6062
+447  164.7063
+448  170.4750
+449  171.4125
+450  171.5625
+451  168.2750
+452  170.7500
+453  167.6937
+454  164.1125
+455  172.0625
+456  167.8125
+457  169.6625
+458  170.9625
+459  164.6875
+460  170.9563
+461  168.6875
+462  167.5250
+463  169.4437
+464  168.5125
+465  165.8125
+466  170.2750
+467  166.1875
+468  170.8438
+469  167.1438
+470  166.9313
+471  166.5875
+472  170.5375
+473  169.1625
+474  169.8500
+475  168.7438
+476  172.1875
+477  171.8000
+478  173.3313
+479  167.6250
+480  169.7063
+481  164.7500
+482  164.9625
+483  168.0500
+484  167.3875
+485  171.8375
+486  169.2000
+487  164.8250
+488  164.3875
+489  169.2438
+490  169.5312
+491  165.1062
+492  167.6125
+493  167.8125
+494  163.5500
+495  163.9500
+496  166.8313
+497  169.1562
+498  166.4062
+499  167.5687
+500  162.2812
+501  172.2375
+502  170.7250
+503  170.1125
+504  166.9062
+505  170.9000
+506  169.3000
+507  168.3875
+508  167.8313
+509  166.7375
+510  168.6813
+511  165.7500
+512  168.0375
+513  169.4250
+514  166.7562
+515  169.1875
+516  168.5312
+517  163.5250
+518  165.2250
+519  168.7312
+520  165.6750
+521  163.0500
+522  163.9375
+523  166.7188
+524  162.9250
+525  166.2250
+526  168.4000
+527  162.7750
+528  167.8750
+529  169.6125
+530  167.6312
+531  170.6625
+532  163.6687
+533  166.7875
+534  170.3500
+535  172.4750
+536  167.9062
+537  167.2063
+538  168.5188
+539  168.2063
+540  167.0813
+541  166.6937
+542  172.0625
+543  171.7188
+544  170.7688
+545  167.0813
+546  167.6250
+547  165.3500
+548  171.1625
+549  169.8562
+550  170.8187
+551  167.3438
+552  165.7312
+553  172.7000
+554  169.0500
+555  164.9750
+556  171.5563
+557  168.0500
+558  169.0437
+559  166.2812
+560  169.2125
+561  170.5437
+562  174.5563
+563  167.4437
+564  166.5375
+565  166.1875
+566  168.7312
+567  165.9437
+568  168.1312
+569  166.7500
+570  167.0625
+571  164.9250
+572  168.2063
+573  169.9875
+574  165.4000
+575  164.1188
+576  171.1125
+577  169.1438
+578  162.6062
+579  163.3438
+580  166.9125
+581  163.6062
+582  170.6125
+583  170.7562
+584  171.3812
+585  166.4750
+586  169.0687
+587  166.1250
+588  167.7312
+589  165.7688
+590  169.8500
+591  165.4375
+592  163.4000
+593  168.3688
+594  170.2250
+595  166.6562
+596  168.9437
+597  168.2562
+598  171.9062
+599  169.0188
+600  168.4688
+601  169.2562
+602  164.7250
+603  170.0625
+604  170.7875
+605  166.1562
+606  167.8375
+607  165.7688
+608  163.1188
+609  167.6438
+610  164.3125
+611  168.5375
+612  171.4187
+613  169.4062
+614  167.6875
+615  168.7562
+616  164.3500
+617  163.8688
+618  171.0188
+619  163.4250
+620  167.1375
+621  169.6875
+622  169.6438
+623  169.7500
+624  168.7375
+625  173.8812
+626  168.2500
+627  169.8250
+628  168.8250
+629  166.9750
+630  174.2000
+631  168.4313
+632  172.7500
+633  168.7938
+634  162.9375
+635  168.0875
+636  166.3500
+637  168.9375
+638  169.8938
+639  167.7562
+640  168.3000
+641  168.8438
+642  165.9125
+643  168.7125
+644  170.4625
+645  167.1687
+646  171.4938
+647  171.0563
+648  165.0250
+649  165.5875
+650  165.2438
+651  170.4250
+652  167.6750
+653  162.8562
+654  164.1438
+655  169.6625
+656  165.0938
+657  167.0750
+658  169.4375
+659  171.9125
+660  170.0750
+661  164.1250
+662  168.1312
+663  168.6062
+664  170.1438
+665  166.0062
+666  163.5250
+667  170.0188
+668  168.8750
+669  163.9812
+670  170.8187
+671  167.1125
+672  164.5188
+673  168.8750
+674  170.2937
+675  166.8750
+676  167.5813
+677  166.0938
+678  166.9875
+679  165.4875
+680  169.9000
+681  162.6750
+682  169.8812
+683  170.5687
+684  164.6500
+685  166.9000
+686  168.0500
+687  166.1375
+688  169.5188
+689  172.1562
+690  168.3187
+691  166.0875
+692  167.8500
+693  170.0062
+694  168.7688
+695  171.2875
+696  169.6250
+697  170.7562
+698  166.2750
+699  169.7063
+700  166.0750
+701  171.1062
+702  171.3500
+703  166.1000
+704  172.3562
+705  166.7375
+706  171.8438
+707  170.7562
+708  167.8313
+709  172.0687
+710  167.6875
+711  169.6562
+712  168.8438
+713  166.3125
+714  168.7688
+715  172.9500
+716  167.0188
+717  169.0312
+718  170.2312
+719  165.8125
+720  172.3438
+721  171.2125
+722  168.6062
+723  168.3375
+724  175.2812
+725  176.6250
+726  167.0938
+727  169.8937
+728  172.0125
+729  168.8438
+730  161.9125
+731  169.8562
+732  168.2375
+733  169.2000
+734  167.5625
+735  172.8625
+736  167.9000
+737  167.2188
+738  166.0813
+739  173.0563
+740  163.2188
+741  169.1813
+742  173.4187
+743  170.2312
+744  166.6062
+745  167.1125
+746  175.7250
+747  167.8000
+748  168.4500
+749  167.9625
+750  170.3562
+751  166.9750
+752  169.3688
+753  166.7625
+754  170.1625
+755  168.8625
+756  167.9375
+757  168.8938
+758  166.4313
+759  168.6438
+760  168.8125
+761  167.4375
+762  169.2312
+763  167.2937
+764  170.5500
+765  167.9250
+766  170.1125
+767  170.1687
+768  168.6687
+769  170.9625
+770  167.7188
+771  165.3875
+772  167.1438
+773  169.4563
+774  169.0062
+775  162.0563
+776  166.6188
+777  170.0375
+778  170.8562
+779  168.1562
+780  169.6438
+781  167.3562
+782  166.5188
+783  167.5062
+784  167.5625
+785  169.4688
+786  169.8875
+787  167.4062
+788  166.4000
+789  172.4625
+790  167.5250
+791  168.3750
+792  166.4688
+793  171.1750
+794  168.6000
+795  167.8500
+796  169.1312
+797  173.9062
+798  166.9563
+799  168.3625
+800  165.0437
+801  169.6687
+802  166.2063
+803  165.8812
+804  165.1875
+805  171.8313
+806  170.0563
+807  165.7063
+808  168.9688
+809  168.7250
+810  167.5188
+811  165.8313
+812  169.5625
+813  167.4688
+814  170.3000
+815  169.1375
+816  169.5062
+817  168.5188
+818  169.2750
+819  169.9437
+820  164.8938
+821  170.2625
+822  159.2812
+823  170.5875
+824  167.5375
+825  164.0625
+826  167.4500
+827  168.6250
+828  170.3125
+829  169.9000
+830  168.2562
+831  167.0125
+832  167.9875
+833  167.0938
+834  169.5375
+835  168.3000
+836  165.0938
+837  165.5625
+838  167.7562
+839  165.6625
+840  165.3125
+841  166.9688
+842  167.1562
+843  165.7625
+844  168.5625
+845  163.3000
+846  166.0000
+847  169.8750
+848  168.7312
+849  172.5250
+850  169.9375
+851  164.1625
+852  167.6813
+853  167.3812
+854  173.7125
+855  169.2875
+856  172.5687
+857  163.0437
+858  169.8812
+859  167.1000
+860  167.7937
+861  168.6438
+862  170.6500
+863  169.2000
+864  166.0188
+865  165.8500
+866  165.0875
+867  165.3063
+868  169.8562
+869  163.4500
+870  169.3500
+871  168.6750
+872  167.9500
+873  162.4563
+874  166.9125
+875  172.5312
+876  168.6625
+877  170.0813
+878  161.3125
+879  171.4875
+880  168.5250
+881  170.6000
+882  169.4688
+883  167.8812
+884  172.9250
+885  169.1250
+886  173.1687
+887  171.3312
+888  163.8562
+889  169.4750
+890  173.3562
+891  163.0312
+892  166.3375
+893  163.3125
+894  163.2063
+895  171.1188
+896  170.2188
+897  170.7875
+898  168.9875
+899  171.1062
+900  168.4750
+901  163.6375
+902  165.2375
+903  170.3250
+904  165.1687
+905  166.6125
+906  165.3313
+907  167.9250
+908  168.7375
+909  167.0312
+910  169.8250
+911  171.1000
+912  166.5375
+913  172.6875
+914  172.0687
+915  169.2250
+916  172.0437
+917  172.1312
+918  167.4437
+919  164.8625
+920  166.8125
+921  173.3438
+922  167.2125
+923  163.7188
+924  166.3063
+925  169.0938
+926  167.0625
+927  165.8875
+928  165.9125
+929  171.7250
+930  166.9563
+931  165.5188
+932  173.4688
+933  167.7063
+934  170.6813
+935  172.1687
+936  167.2937
+937  167.1438
+938  168.1312
+939  167.0563
+940  173.9375
+941  171.1125
+942  172.2125
+943  169.6125
+944  165.5812
+945  170.2562
+946  166.2875
+947  170.8125
+948  164.3125
+949  166.7188
+950  165.3000
+951  164.5938
+952  169.3438
+953  173.0563
+954  176.3875
+955  168.0938
+956  168.7812
+957  166.7250
+958  163.7500
+959  164.8688
+960  163.3187
+961  167.9187
+962  166.7687
+963  166.8812
+964  166.8250
+965  167.8250
+966  169.3125
+967  168.2063
+968  170.7063
+969  168.4187
+970  172.3313
+971  172.1500
+972  169.2250
+973  167.6500
+974  168.5125
+975  164.5188
+976  166.5000
+977  170.1312
+978  170.5938
+979  168.9688
+980  168.5750
+981  169.8063
+982  163.1562
+983  167.7687
+984  169.7562
+985  166.1750
+986  171.8375
+987  167.7125
+988  168.5250
+989  170.6250
+990  167.7125
+991  169.5188
+992  164.7375
+993  165.2375
+994  167.3562
+995  166.0938
+996  167.6312
+997  172.2812
+998  166.2438
+999  164.8750
+1000 173.0375</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>samples_32_1000 <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>) <span class="sc">*</span> <span class="fu">resample</span>(NHANES_adult<span class="sc">$</span>Height,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">32</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>samples_32_1000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       result
+1    168.1656
+2    166.8469
+3    166.4281
+4    167.6000
+5    166.6750
+6    169.3375
+7    164.9281
+8    168.7375
+9    168.9000
+10   165.0219
+11   171.3812
+12   161.8781
+13   169.0031
+14   170.1687
+15   169.1594
+16   169.2000
+17   164.8594
+18   167.8812
+19   166.5437
+20   169.3688
+21   168.3438
+22   169.6594
+23   165.6406
+24   167.9969
+25   171.2594
+26   165.5406
+27   168.9875
+28   168.3562
+29   163.5281
+30   168.7625
+31   171.7781
+32   167.3750
+33   165.4875
+34   168.9844
+35   166.8938
+36   168.1094
+37   169.6156
+38   170.2594
+39   168.1500
+40   168.4656
+41   172.0531
+42   168.3313
+43   169.6312
+44   167.5656
+45   169.9844
+46   166.8281
+47   164.1531
+48   169.0969
+49   165.4062
+50   167.2812
+51   168.6750
+52   169.5188
+53   168.2406
+54   166.4187
+55   168.1312
+56   167.8500
+57   167.8781
+58   169.9688
+59   168.2406
+60   167.9406
+61   168.5594
+62   170.9844
+63   168.9062
+64   170.5406
+65   167.2438
+66   165.6875
+67   167.6750
+68   167.2063
+69   168.7562
+70   167.7750
+71   164.5719
+72   172.8156
+73   168.7531
+74   168.4156
+75   173.6844
+76   168.3406
+77   166.8469
+78   166.6062
+79   170.1375
+80   166.7812
+81   169.2406
+82   169.7844
+83   167.5094
+84   166.2000
+85   165.6969
+86   167.6875
+87   167.2625
+88   169.0406
+89   168.7375
+90   170.0719
+91   168.7844
+92   170.7125
+93   168.0625
+94   169.2531
+95   167.4875
+96   166.8719
+97   168.3812
+98   167.3750
+99   163.8031
+100  168.8281
+101  167.6844
+102  169.4281
+103  166.6813
+104  170.4906
+105  173.3719
+106  168.9563
+107  166.8812
+108  164.9313
+109  168.3031
+110  169.0781
+111  170.4313
+112  169.7188
+113  171.2781
+114  169.6312
+115  172.5875
+116  165.1656
+117  168.4656
+118  168.1281
+119  166.0844
+120  170.8562
+121  168.2094
+122  167.5563
+123  167.3156
+124  166.9250
+125  167.8469
+126  170.6969
+127  168.5969
+128  169.4375
+129  167.0437
+130  169.4344
+131  168.7906
+132  165.9094
+133  169.2188
+134  168.1656
+135  164.6750
+136  167.8313
+137  168.1531
+138  167.5125
+139  164.9656
+140  166.5406
+141  165.2344
+142  166.2969
+143  169.9812
+144  170.0469
+145  166.9437
+146  167.6125
+147  168.4688
+148  170.6125
+149  169.8219
+150  170.6000
+151  167.3688
+152  170.5781
+153  169.5156
+154  170.5344
+155  166.2625
+156  168.1781
+157  169.5000
+158  170.9281
+159  169.4344
+160  168.4656
+161  171.6031
+162  169.1125
+163  170.5594
+164  169.5375
+165  169.9031
+166  165.7188
+167  166.5750
+168  167.3094
+169  166.7125
+170  167.4688
+171  163.6219
+172  167.5469
+173  169.1625
+174  171.4250
+175  169.5625
+176  164.3844
+177  167.9437
+178  167.3656
+179  166.0062
+180  164.8313
+181  172.3375
+182  169.8625
+183  165.5062
+184  168.0000
+185  164.5125
+186  166.1156
+187  167.4062
+188  169.2562
+189  169.8844
+190  167.1125
+191  167.1062
+192  168.0781
+193  167.7375
+194  166.7844
+195  164.5188
+196  167.0281
+197  170.5250
+198  170.7594
+199  166.7688
+200  171.6312
+201  170.8719
+202  170.8313
+203  169.5000
+204  170.7188
+205  170.4531
+206  167.5594
+207  166.6750
+208  169.7438
+209  165.7500
+210  167.5406
+211  170.2344
+212  168.3281
+213  171.0844
+214  168.1813
+215  166.5281
+216  167.5094
+217  168.2969
+218  167.5500
+219  167.5813
+220  169.2719
+221  169.5844
+222  167.8250
+223  164.6562
+224  170.9437
+225  169.9187
+226  169.2219
+227  168.0875
+228  168.7375
+229  167.8250
+230  169.8219
+231  168.4844
+232  167.1625
+233  168.2312
+234  168.9938
+235  166.7594
+236  169.8500
+237  169.2969
+238  171.9938
+239  170.4781
+240  167.2281
+241  166.5062
+242  169.6125
+243  167.0125
+244  166.8156
+245  167.3187
+246  167.7125
+247  163.7500
+248  167.9938
+249  166.9875
+250  167.2594
+251  170.4187
+252  168.9031
+253  168.8438
+254  167.2844
+255  167.2156
+256  168.7312
+257  167.9719
+258  166.0281
+259  166.9781
+260  164.3625
+261  165.3281
+262  164.5750
+263  165.5875
+264  168.7438
+265  169.1469
+266  165.2281
+267  171.4125
+268  167.5563
+269  168.3625
+270  166.8875
+271  171.8906
+272  168.9250
+273  166.4875
+274  170.5094
+275  169.0813
+276  169.2156
+277  167.0125
+278  169.8031
+279  167.6625
+280  169.8781
+281  171.0000
+282  166.3625
+283  167.3375
+284  167.4406
+285  165.9938
+286  169.0969
+287  164.7594
+288  170.1281
+289  162.9750
+290  165.2594
+291  170.6844
+292  168.9281
+293  167.5969
+294  166.7500
+295  167.6438
+296  165.8844
+297  168.4406
+298  168.6000
+299  170.4625
+300  168.8625
+301  167.3938
+302  168.4719
+303  166.8031
+304  165.3812
+305  166.4250
+306  170.4125
+307  168.2219
+308  164.1094
+309  167.2219
+310  168.4125
+311  169.6969
+312  171.3094
+313  169.0375
+314  167.9000
+315  171.3156
+316  170.7719
+317  165.5125
+318  167.6438
+319  168.8250
+320  168.5719
+321  167.3125
+322  168.8156
+323  171.2750
+324  165.3063
+325  167.8344
+326  165.2656
+327  166.9031
+328  166.0844
+329  170.6750
+330  167.1000
+331  168.3688
+332  168.0750
+333  166.7719
+334  166.4281
+335  168.9656
+336  166.6969
+337  168.5844
+338  166.8375
+339  166.2375
+340  166.2875
+341  170.2250
+342  165.7750
+343  167.0938
+344  170.8375
+345  167.2031
+346  168.9281
+347  170.0281
+348  170.1906
+349  167.9906
+350  168.5906
+351  168.7250
+352  169.5469
+353  171.3000
+354  169.9500
+355  168.6719
+356  167.5781
+357  170.8594
+358  168.0250
+359  168.0219
+360  171.7781
+361  168.4719
+362  175.9531
+363  168.4938
+364  170.4281
+365  165.8844
+366  168.7188
+367  170.2125
+368  167.5594
+369  169.5687
+370  166.2000
+371  171.8250
+372  166.8594
+373  171.7625
+374  168.2063
+375  168.6656
+376  168.0656
+377  169.5125
+378  168.4156
+379  167.5375
+380  168.1250
+381  168.2625
+382  169.2375
+383  170.1406
+384  169.8156
+385  166.5531
+386  168.3000
+387  165.5312
+388  168.3281
+389  169.5062
+390  168.5000
+391  167.0125
+392  168.5156
+393  168.6469
+394  169.4313
+395  167.9500
+396  168.8219
+397  168.2250
+398  171.5188
+399  167.6594
+400  167.3562
+401  166.0437
+402  168.5094
+403  167.8812
+404  168.8469
+405  166.6750
+406  168.5156
+407  169.7188
+408  169.0125
+409  169.6094
+410  167.5781
+411  164.9344
+412  165.8000
+413  168.0375
+414  170.1062
+415  167.6344
+416  167.5406
+417  168.9187
+418  165.3281
+419  166.7094
+420  166.1406
+421  166.4594
+422  165.9313
+423  167.9375
+424  170.6281
+425  167.0500
+426  167.5312
+427  171.5000
+428  167.8063
+429  168.4906
+430  168.2188
+431  169.9250
+432  165.9344
+433  165.1969
+434  166.6531
+435  169.0125
+436  165.2031
+437  169.7219
+438  169.3719
+439  166.4000
+440  169.5625
+441  168.6750
+442  171.0250
+443  172.2500
+444  166.6656
+445  168.1937
+446  164.8250
+447  167.1625
+448  170.5031
+449  170.0469
+450  166.0563
+451  167.7812
+452  165.8906
+453  166.6281
+454  167.8844
+455  170.4625
+456  169.6125
+457  170.6469
+458  172.0875
+459  166.1531
+460  170.0781
+461  165.4656
+462  167.7000
+463  166.4750
+464  168.8187
+465  166.2375
+466  170.5875
+467  171.4250
+468  167.2188
+469  167.5938
+470  172.5250
+471  170.9125
+472  167.9187
+473  168.5500
+474  165.5156
+475  164.9469
+476  171.2000
+477  172.2406
+478  167.7531
+479  164.3094
+480  165.6188
+481  166.8250
+482  167.3250
+483  168.7594
+484  169.5625
+485  172.2406
+486  168.4375
+487  166.5156
+488  168.3156
+489  169.7812
+490  169.1906
+491  165.4625
+492  167.9656
+493  169.7750
+494  169.5750
+495  168.6156
+496  164.9875
+497  166.7250
+498  169.9563
+499  165.5594
+500  169.4156
+501  167.8875
+502  164.0875
+503  167.7625
+504  167.5531
+505  169.3656
+506  169.6813
+507  165.7156
+508  168.2375
+509  170.4437
+510  170.1562
+511  167.0344
+512  169.7969
+513  167.9469
+514  169.1188
+515  166.1719
+516  167.5813
+517  170.4375
+518  169.1406
+519  173.6406
+520  167.8969
+521  167.9688
+522  169.2094
+523  167.7312
+524  171.5344
+525  166.1781
+526  166.6687
+527  168.8063
+528  167.7094
+529  165.8625
+530  165.4594
+531  169.6781
+532  168.0156
+533  170.4125
+534  170.0437
+535  167.7594
+536  167.3063
+537  167.3938
+538  168.2750
+539  166.7531
+540  167.2750
+541  171.3969
+542  171.2156
+543  169.1281
+544  168.1125
+545  167.6719
+546  168.2375
+547  168.9938
+548  169.1281
+549  167.3219
+550  167.3344
+551  170.2219
+552  169.0563
+553  170.5781
+554  168.9906
+555  166.5219
+556  168.1312
+557  167.4094
+558  166.3812
+559  169.3562
+560  169.0875
+561  169.7406
+562  166.3688
+563  165.7969
+564  168.7406
+565  169.5219
+566  168.8000
+567  165.8187
+568  165.9125
+569  168.2125
+570  170.1781
+571  171.4156
+572  169.2469
+573  167.0781
+574  167.9500
+575  171.5250
+576  167.7781
+577  166.9000
+578  166.9625
+579  169.8000
+580  166.0656
+581  167.2500
+582  169.5969
+583  167.9781
+584  169.7937
+585  168.8656
+586  169.6469
+587  167.1656
+588  166.9563
+589  164.0938
+590  169.6906
+591  173.1781
+592  169.8688
+593  165.4344
+594  167.1531
+595  169.1375
+596  166.4313
+597  168.7594
+598  167.4938
+599  168.4250
+600  167.8469
+601  168.0125
+602  169.3875
+603  169.1844
+604  167.1937
+605  165.6438
+606  170.7625
+607  167.9125
+608  164.6687
+609  167.4875
+610  168.5125
+611  170.0469
+612  166.2594
+613  166.3875
+614  165.9719
+615  167.3438
+616  166.6531
+617  167.5813
+618  170.3281
+619  168.2250
+620  167.3875
+621  168.8094
+622  166.1438
+623  169.2906
+624  169.0250
+625  168.6062
+626  165.6656
+627  168.8656
+628  171.5250
+629  167.7125
+630  166.0563
+631  168.6406
+632  166.6250
+633  168.4781
+634  168.6937
+635  170.5906
+636  169.2438
+637  167.0094
+638  165.6750
+639  166.6969
+640  168.0906
+641  166.0938
+642  169.1500
+643  168.4469
+644  168.6250
+645  170.6000
+646  166.4219
+647  169.1813
+648  168.5094
+649  170.9719
+650  166.7781
+651  167.8562
+652  167.9156
+653  168.2531
+654  168.1219
+655  169.4531
+656  165.9844
+657  164.0250
+658  168.8469
+659  168.9375
+660  168.7469
+661  168.7812
+662  171.0219
+663  167.4969
+664  169.4156
+665  168.3812
+666  171.2656
+667  169.4563
+668  169.9625
+669  170.0750
+670  167.7406
+671  166.5156
+672  167.7969
+673  168.8063
+674  167.5687
+675  169.6781
+676  167.4094
+677  169.8344
+678  169.1625
+679  167.5312
+680  166.8969
+681  168.1156
+682  169.4906
+683  169.5875
+684  165.2875
+685  171.9719
+686  166.9313
+687  169.3938
+688  167.7750
+689  169.0281
+690  166.7125
+691  167.8656
+692  166.5875
+693  169.7562
+694  165.2125
+695  171.2250
+696  166.3063
+697  167.0625
+698  168.9062
+699  167.8000
+700  169.1469
+701  167.8500
+702  168.1844
+703  166.2250
+704  167.6125
+705  167.2031
+706  166.4187
+707  167.9531
+708  165.5062
+709  166.8812
+710  164.9281
+711  168.7719
+712  166.5719
+713  169.2344
+714  165.7750
+715  167.7906
+716  167.8125
+717  165.9125
+718  166.4844
+719  168.2688
+720  167.4344
+721  169.6719
+722  170.2531
+723  171.0625
+724  166.2500
+725  166.9594
+726  168.4219
+727  170.8344
+728  171.3250
+729  167.3375
+730  169.4187
+731  166.1906
+732  170.5250
+733  169.5125
+734  167.3688
+735  168.2406
+736  169.2562
+737  173.1344
+738  166.6469
+739  170.2312
+740  169.3375
+741  168.5031
+742  170.0969
+743  168.0844
+744  168.1969
+745  168.8375
+746  167.9375
+747  168.9437
+748  170.5344
+749  168.8281
+750  167.9187
+751  168.9719
+752  168.1156
+753  165.6406
+754  168.6125
+755  168.6281
+756  163.3313
+757  169.8562
+758  167.5094
+759  168.5750
+760  167.6625
+761  165.7094
+762  166.5125
+763  166.3406
+764  169.7344
+765  172.9375
+766  168.5813
+767  169.0406
+768  165.8625
+769  167.8156
+770  169.0406
+771  169.4750
+772  168.6312
+773  167.6062
+774  167.3844
+775  170.1312
+776  169.2156
+777  168.7406
+778  170.1469
+779  168.4062
+780  165.6906
+781  166.7406
+782  168.6438
+783  167.9563
+784  167.2844
+785  165.0437
+786  169.0500
+787  170.9375
+788  170.9906
+789  172.4187
+790  168.5469
+791  168.2594
+792  169.2656
+793  167.4062
+794  169.2031
+795  170.0500
+796  170.0750
+797  171.1531
+798  168.5594
+799  169.6594
+800  169.5312
+801  168.8219
+802  171.0000
+803  164.4469
+804  168.5312
+805  166.7937
+806  170.4000
+807  166.0563
+808  167.7094
+809  166.9750
+810  169.4688
+811  169.3000
+812  171.8125
+813  172.0250
+814  171.4250
+815  169.2063
+816  172.1375
+817  165.7500
+818  166.8812
+819  169.4375
+820  171.4406
+821  170.4094
+822  172.4156
+823  172.7719
+824  166.3500
+825  169.3469
+826  170.5906
+827  172.2906
+828  167.6813
+829  166.5781
+830  166.6813
+831  171.3250
+832  167.7281
+833  165.6375
+834  166.5813
+835  165.0437
+836  164.5219
+837  164.6469
+838  168.9531
+839  167.7969
+840  171.2281
+841  167.7594
+842  167.8719
+843  168.8719
+844  170.7219
+845  172.4125
+846  168.1094
+847  168.6687
+848  168.7937
+849  167.7875
+850  168.1969
+851  169.3719
+852  168.1406
+853  169.6312
+854  168.5312
+855  167.3406
+856  171.6375
+857  166.7375
+858  170.5000
+859  166.2375
+860  168.0031
+861  166.5687
+862  168.7156
+863  166.6719
+864  166.1656
+865  170.2750
+866  169.5250
+867  170.6125
+868  166.3531
+869  166.1031
+870  170.1406
+871  169.6469
+872  167.1375
+873  167.2656
+874  167.2438
+875  167.7062
+876  166.2781
+877  169.0625
+878  172.1469
+879  169.9781
+880  167.5062
+881  170.1594
+882  167.3906
+883  166.3406
+884  168.8187
+885  168.3406
+886  168.3125
+887  167.5312
+888  166.4500
+889  168.1844
+890  170.9938
+891  170.2125
+892  170.6094
+893  169.1937
+894  165.5469
+895  169.1281
+896  166.5344
+897  167.2438
+898  169.1844
+899  167.8469
+900  168.4969
+901  167.5687
+902  170.7719
+903  168.2844
+904  168.0406
+905  169.0156
+906  169.7438
+907  169.0500
+908  168.1937
+909  167.3781
+910  166.7344
+911  169.7344
+912  167.6406
+913  166.4844
+914  170.0156
+915  168.7438
+916  168.0125
+917  164.2375
+918  171.0281
+919  165.4719
+920  168.8063
+921  168.1562
+922  167.9594
+923  167.8812
+924  167.0031
+925  171.7531
+926  168.9469
+927  165.9563
+928  170.2438
+929  170.4406
+930  165.6219
+931  172.1562
+932  171.9000
+933  169.0625
+934  169.4000
+935  169.1594
+936  167.8031
+937  172.0094
+938  171.2156
+939  167.4031
+940  168.1062
+941  168.7031
+942  168.1344
+943  169.7219
+944  164.4031
+945  168.1781
+946  168.0906
+947  170.4344
+948  169.6906
+949  168.6188
+950  168.1250
+951  166.0344
+952  169.9156
+953  169.0656
+954  171.3063
+955  167.5344
+956  169.5969
+957  170.6656
+958  166.4406
+959  165.8500
+960  165.0531
+961  168.6813
+962  170.4437
+963  169.6000
+964  168.0781
+965  169.3094
+966  171.2250
+967  167.5469
+968  170.7656
+969  170.3875
+970  169.7344
+971  167.2094
+972  166.1344
+973  172.1719
+974  169.7781
+975  167.9094
+976  168.8344
+977  166.7844
+978  171.7906
+979  166.4281
+980  170.5437
+981  168.7500
+982  168.3500
+983  171.3094
+984  166.3187
+985  167.3688
+986  169.3750
+987  164.9844
+988  167.8094
+989  167.6750
+990  167.2719
+991  166.2562
+992  169.9781
+993  167.5563
+994  170.1750
+995  169.6937
+996  168.4437
+997  172.1781
+998  167.3187
+999  167.0875
+1000 168.0563</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">12345</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>samples_64_1000 <span class="ot">&lt;-</span> <span class="fu">do</span>(<span class="dv">1000</span>) <span class="sc">*</span> <span class="fu">resample</span>(NHANES_adult<span class="sc">$</span>Height,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">64</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span> <span class="fu">mean</span>()</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>samples_64_1000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       result
+1    166.6375
+2    167.1375
+3    167.1328
+4    168.8187
+5    168.2016
+6    165.4406
+7    169.6641
+8    167.0297
+9    167.2125
+10   168.8562
+11   167.6500
+12   169.6281
+13   167.2641
+14   165.9422
+15   170.2703
+16   166.4313
+17   167.9391
+18   168.8625
+19   169.2047
+20   170.2594
+21   168.9812
+22   168.7750
+23   165.4906
+24   167.2516
+25   167.9781
+26   168.8797
+27   167.2750
+28   167.8641
+29   169.1047
+30   168.2500
+31   169.9453
+32   168.8922
+33   166.6813
+34   167.9812
+35   166.1734
+36   170.7844
+37   171.0500
+38   167.5938
+39   168.3719
+40   168.0109
+41   168.6469
+42   165.9484
+43   167.4750
+44   168.8891
+45   169.4281
+46   169.3875
+47   168.3703
+48   167.6266
+49   165.5891
+50   168.2562
+51   168.0547
+52   171.9313
+53   167.9187
+54   166.6172
+55   169.7547
+56   170.4984
+57   171.1094
+58   166.8156
+59   167.1062
+60   169.5328
+61   167.4359
+62   167.3859
+63   169.6469
+64   168.2406
+65   169.1125
+66   167.5641
+67   166.4203
+68   167.9922
+69   166.2391
+70   165.8875
+71   168.1391
+72   168.4953
+73   168.0406
+74   170.2172
+75   168.9844
+76   170.0469
+77   168.3984
+78   168.8391
+79   170.1813
+80   170.0344
+81   169.8359
+82   169.7203
+83   166.1469
+84   167.0109
+85   165.5453
+86   168.3547
+87   170.4938
+88   166.1641
+89   166.6859
+90   168.5844
+91   167.6844
+92   166.2562
+93   166.7609
+94   169.5703
+95   167.1094
+96   167.9078
+97   165.6516
+98   168.7766
+99   168.7641
+100  171.2516
+101  170.1656
+102  170.5859
+103  167.1172
+104  167.7469
+105  168.8875
+106  169.7063
+107  167.3547
+108  167.9031
+109  167.5656
+110  169.4281
+111  166.2406
+112  170.4313
+113  168.6547
+114  168.2812
+115  169.1531
+116  167.6969
+117  167.8766
+118  169.5734
+119  171.2359
+120  166.8672
+121  168.3125
+122  167.0672
+123  165.7312
+124  167.4906
+125  168.8391
+126  168.8734
+127  167.2500
+128  168.3516
+129  166.5031
+130  164.8453
+131  165.0813
+132  168.9453
+133  168.3203
+134  167.9594
+135  169.3891
+136  167.7063
+137  169.7953
+138  168.1141
+139  168.7328
+140  170.4391
+141  166.8500
+142  166.7172
+143  166.9281
+144  166.5516
+145  167.9719
+146  168.2625
+147  167.1969
+148  167.1625
+149  169.5312
+150  168.1281
+151  167.6375
+152  165.9031
+153  169.3172
+154  165.6656
+155  169.0547
+156  170.1734
+157  169.6078
+158  168.1422
+159  168.2344
+160  167.9422
+161  170.0453
+162  166.5703
+163  166.0844
+164  168.3797
+165  167.7344
+166  167.4234
+167  167.6969
+168  167.6406
+169  166.5375
+170  168.2562
+171  166.4344
+172  169.0203
+173  169.4781
+174  169.0906
+175  168.6578
+176  170.4234
+177  169.3109
+178  169.2188
+179  168.0234
+180  170.1250
+181  172.2234
+182  168.1562
+183  169.4656
+184  168.5641
+185  169.0125
+186  169.3109
+187  168.4359
+188  168.7891
+189  167.9766
+190  168.1937
+191  169.6891
+192  168.1844
+193  166.9156
+194  168.9172
+195  167.7562
+196  168.5813
+197  168.6906
+198  168.5234
+199  169.5891
+200  166.7000
+201  168.1953
+202  167.7609
+203  169.1172
+204  169.3109
+205  166.2562
+206  166.9187
+207  168.8703
+208  168.2297
+209  166.0188
+210  166.3000
+211  166.9344
+212  168.8391
+213  169.5156
+214  168.1484
+215  169.0719
+216  165.5656
+217  167.8328
+218  167.4625
+219  167.8859
+220  169.1188
+221  171.6375
+222  167.4297
+223  165.9938
+224  170.2750
+225  166.9187
+226  166.2594
+227  169.1734
+228  170.1297
+229  169.1203
+230  167.7719
+231  167.0875
+232  167.5281
+233  171.0062
+234  167.4062
+235  171.7188
+236  168.2344
+237  165.2312
+238  171.7203
+239  166.0312
+240  166.2219
+241  168.0422
+242  170.9016
+243  167.4766
+244  169.0484
+245  167.3266
+246  168.8703
+247  169.0953
+248  165.8562
+249  167.7578
+250  168.6516
+251  165.9250
+252  168.4594
+253  167.6984
+254  169.3406
+255  168.5953
+256  168.8719
+257  167.6453
+258  169.0094
+259  171.3906
+260  167.9328
+261  168.4703
+262  168.8562
+263  167.7375
+264  166.7859
+265  167.5687
+266  169.2141
+267  168.9016
+268  167.3500
+269  167.5141
+270  169.3359
+271  170.1719
+272  167.8922
+273  168.6156
+274  168.2250
+275  168.7781
+276  169.8172
+277  167.7562
+278  167.7703
+279  167.8688
+280  169.4141
+281  166.0828
+282  169.1312
+283  167.3094
+284  167.0625
+285  170.7969
+286  168.1625
+287  169.7375
+288  167.3391
+289  168.3812
+290  166.6578
+291  168.7875
+292  169.3297
+293  168.4062
+294  165.5250
+295  171.4344
+296  167.6516
+297  168.1453
+298  167.5953
+299  167.9594
+300  167.9297
+301  169.2859
+302  166.4187
+303  169.3375
+304  166.0781
+305  169.2797
+306  166.3234
+307  166.6578
+308  167.1172
+309  169.2766
+310  168.0984
+311  167.7172
+312  168.8156
+313  167.2656
+314  169.6188
+315  167.3484
+316  167.5516
+317  169.6422
+318  168.1266
+319  166.1859
+320  167.0922
+321  168.7984
+322  169.6125
+323  167.8016
+324  169.7406
+325  167.3172
+326  168.0844
+327  168.7875
+328  165.0047
+329  168.8922
+330  168.7641
+331  169.2594
+332  168.8984
+333  170.3609
+334  170.0188
+335  167.1281
+336  168.3016
+337  168.6234
+338  168.6219
+339  168.3469
+340  167.5062
+341  169.5391
+342  168.6297
+343  168.1625
+344  168.4016
+345  167.2891
+346  168.1719
+347  168.2188
+348  166.6844
+349  168.3531
+350  168.4984
+351  167.2047
+352  167.4078
+353  167.1859
+354  166.1937
+355  166.8500
+356  167.9031
+357  166.7828
+358  166.8625
+359  167.3766
+360  168.5531
+361  170.6578
+362  166.6047
+363  169.6281
+364  169.3313
+365  167.8047
+366  170.0188
+367  167.8047
+368  171.1953
+369  168.4391
+370  168.9203
+371  169.0906
+372  168.5172
+373  168.4406
+374  169.6813
+375  168.4453
+376  166.8781
+377  168.6203
+378  166.5938
+379  168.0422
+380  166.6859
+381  166.4266
+382  171.3359
+383  168.8109
+384  166.8391
+385  169.2578
+386  168.1188
+387  168.7578
+388  168.9781
+389  169.2766
+390  166.2156
+391  168.3000
+392  166.1641
+393  169.9938
+394  171.7047
+395  168.4031
+396  168.3359
+397  169.6266
+398  170.6141
+399  169.1094
+400  169.1766
+401  167.7234
+402  167.6625
+403  168.2281
+404  167.3422
+405  169.3844
+406  171.9187
+407  170.3156
+408  168.9437
+409  168.1594
+410  170.9250
+411  172.5938
+412  167.8484
+413  171.4406
+414  167.1297
+415  169.0031
+416  166.6828
+417  165.8125
+418  164.5844
+419  168.3750
+420  169.4938
+421  168.3719
+422  171.5672
+423  168.3891
+424  168.2906
+425  168.7844
+426  168.8859
+427  167.9359
+428  169.1875
+429  168.3688
+430  167.2859
+431  167.6937
+432  168.2203
+433  170.0687
+434  166.2281
+435  169.8938
+436  167.2016
+437  167.4750
+438  167.6703
+439  171.0625
+440  168.8328
+441  166.8656
+442  168.5797
+443  167.9219
+444  167.3172
+445  170.6031
+446  169.9016
+447  167.3375
+448  166.8891
+449  168.5156
+450  168.0328
+451  169.5281
+452  168.5281
+453  169.3969
+454  167.7859
+455  168.2344
+456  167.0625
+457  169.3797
+458  166.1250
+459  168.2500
+460  168.4812
+461  167.9203
+462  169.3781
+463  167.4516
+464  170.3422
+465  168.8891
+466  170.4812
+467  169.2797
+468  169.9062
+469  169.3094
+470  168.4047
+471  168.9281
+472  166.2906
+473  169.2625
+474  169.1547
+475  167.0797
+476  169.4906
+477  169.4203
+478  170.1312
+479  166.1453
+480  166.8672
+481  170.0219
+482  168.6937
+483  169.3859
+484  170.5766
+485  168.4719
+486  169.1531
+487  168.8438
+488  167.8094
+489  169.1094
+490  169.6469
+491  169.8297
+492  166.8438
+493  167.1797
+494  167.7422
+495  166.7641
+496  168.7672
+497  169.9344
+498  170.3109
+499  167.2031
+500  169.5766
+501  169.0656
+502  166.5938
+503  168.9922
+504  167.2547
+505  165.6828
+506  166.6797
+507  166.8984
+508  168.0516
+509  167.4719
+510  169.0969
+511  169.8578
+512  166.5922
+513  167.4812
+514  170.9125
+515  167.9703
+516  168.7188
+517  168.9000
+518  169.6813
+519  169.1750
+520  166.6297
+521  168.5797
+522  168.0938
+523  167.8375
+524  168.3906
+525  168.7656
+526  169.8750
+527  169.4656
+528  169.3078
+529  168.3516
+530  170.4953
+531  168.8969
+532  169.1469
+533  168.4688
+534  169.9672
+535  168.6734
+536  168.4313
+537  168.3672
+538  171.2141
+539  168.3281
+540  168.9609
+541  168.7453
+542  166.8625
+543  167.4891
+544  167.2891
+545  168.1219
+546  168.5531
+547  168.4391
+548  167.6109
+549  169.5625
+550  168.0234
+551  168.2734
+552  169.1687
+553  169.3938
+554  167.7875
+555  168.2750
+556  167.0922
+557  168.4797
+558  167.2984
+559  167.3469
+560  166.5016
+561  167.9547
+562  169.9844
+563  166.6984
+564  167.6922
+565  169.9391
+566  167.1281
+567  169.2922
+568  169.8547
+569  168.0016
+570  168.9500
+571  170.0203
+572  167.0328
+573  167.5406
+574  166.9750
+575  166.3641
+576  167.5766
+577  167.0266
+578  168.5250
+579  168.6000
+580  170.4031
+581  166.8438
+582  167.6484
+583  169.5453
+584  167.8344
+585  169.1594
+586  169.3031
+587  167.8719
+588  169.9547
+589  167.2078
+590  169.9812
+591  166.1188
+592  169.7250
+593  169.2641
+594  167.6250
+595  170.3875
+596  164.9531
+597  169.2609
+598  169.4234
+599  169.7750
+600  171.4469
+601  168.3781
+602  170.1328
+603  168.3203
+604  166.4406
+605  167.7609
+606  169.1687
+607  170.0500
+608  170.0719
+609  168.3016
+610  165.9203
+611  168.1734
+612  167.8812
+613  171.0125
+614  167.7219
+615  168.7750
+616  167.1828
+617  167.4906
+618  167.6047
+619  169.7125
+620  167.4703
+621  167.6969
+622  167.1875
+623  168.1297
+624  170.0531
+625  169.0734
+626  168.1031
+627  169.7562
+628  169.4375
+629  167.2188
+630  168.8375
+631  168.5516
+632  166.4641
+633  165.7516
+634  169.1906
+635  168.7531
+636  166.1000
+637  168.8094
+638  168.9203
+639  170.1266
+640  169.2094
+641  166.8984
+642  169.3484
+643  168.1609
+644  167.9234
+645  170.0844
+646  166.8812
+647  168.6047
+648  168.6500
+649  170.3469
+650  167.1562
+651  167.5609
+652  168.6000
+653  169.7937
+654  169.2172
+655  167.8750
+656  167.4172
+657  164.8172
+658  168.2078
+659  168.7672
+660  169.1656
+661  165.8688
+662  168.8484
+663  168.4219
+664  167.0078
+665  169.9141
+666  167.9719
+667  169.3031
+668  169.4891
+669  167.3750
+670  169.8703
+671  166.4000
+672  169.6969
+673  167.4172
+674  166.9062
+675  166.7562
+676  165.9156
+677  168.4938
+678  168.7063
+679  168.7937
+680  168.1641
+681  169.5437
+682  167.3703
+683  167.4781
+684  168.0875
+685  167.6578
+686  168.3328
+687  166.4141
+688  169.6359
+689  167.3938
+690  169.8328
+691  169.3391
+692  168.4797
+693  168.2016
+694  169.6969
+695  169.3203
+696  169.3109
+697  169.9453
+698  169.3016
+699  167.9906
+700  168.1344
+701  167.7969
+702  166.0531
+703  168.6047
+704  168.0344
+705  169.6297
+706  169.3391
+707  167.8906
+708  168.8422
+709  166.4172
+710  168.2156
+711  169.0859
+712  168.2641
+713  166.5703
+714  167.0859
+715  166.1297
+716  168.3172
+717  169.9203
+718  167.9938
+719  167.9375
+720  168.4688
+721  166.1687
+722  171.1141
+723  167.9391
+724  167.7953
+725  170.5547
+726  167.4938
+727  167.5922
+728  167.6312
+729  169.0625
+730  169.8422
+731  167.2031
+732  168.7922
+733  168.7031
+734  168.7344
+735  169.8234
+736  165.8313
+737  166.8172
+738  166.9734
+739  169.7547
+740  166.7031
+741  168.4516
+742  169.3719
+743  169.4672
+744  168.5547
+745  167.6594
+746  168.3906
+747  170.0453
+748  168.6203
+749  168.6906
+750  166.5594
+751  168.9500
+752  167.1547
+753  168.0078
+754  169.8828
+755  171.1234
+756  169.8438
+757  169.1734
+758  167.2969
+759  167.3266
+760  167.2547
+761  169.3703
+762  167.8281
+763  168.8797
+764  167.5516
+765  169.5359
+766  169.9641
+767  169.1672
+768  168.7891
+769  166.6922
+770  171.2469
+771  167.1562
+772  169.2594
+773  171.1469
+774  168.2562
+775  169.3000
+776  166.0656
+777  170.8500
+778  167.6141
+779  167.9016
+780  167.5469
+781  166.0016
+782  165.8016
+783  168.4609
+784  165.9781
+785  167.6953
+786  167.8922
+787  167.4203
+788  167.4125
+789  169.9891
+790  168.2375
+791  169.5547
+792  169.8281
+793  168.4906
+794  169.9078
+795  167.2859
+796  170.4875
+797  167.5875
+798  169.2844
+799  167.6281
+800  169.7578
+801  167.9281
+802  168.0484
+803  167.2891
+804  168.0609
+805  168.9578
+806  167.9437
+807  169.5172
+808  168.4984
+809  170.3797
+810  168.1547
+811  170.1094
+812  169.4125
+813  168.6375
+814  167.9156
+815  170.5703
+816  167.5125
+817  168.1687
+818  170.7344
+819  169.5359
+820  168.9625
+821  169.2828
+822  170.1156
+823  169.6719
+824  168.6687
+825  168.3281
+826  167.0016
+827  168.3547
+828  167.9391
+829  166.5922
+830  167.4906
+831  167.6172
+832  170.8625
+833  167.9844
+834  165.8812
+835  168.8516
+836  169.2516
+837  168.4250
+838  168.9375
+839  168.7672
+840  169.8938
+841  167.5922
+842  168.6937
+843  168.8547
+844  167.2297
+845  170.1906
+846  168.6797
+847  167.9766
+848  168.3812
+849  168.3672
+850  169.9000
+851  168.4859
+852  167.6797
+853  168.2234
+854  166.1125
+855  169.1188
+856  168.2656
+857  168.8734
+858  166.9688
+859  170.8953
+860  167.7937
+861  171.0359
+862  167.3500
+863  167.2359
+864  169.4078
+865  169.5219
+866  167.0203
+867  167.2609
+868  171.4516
+869  170.8969
+870  168.3391
+871  169.2328
+872  167.7625
+873  166.1125
+874  169.4781
+875  168.9516
+876  167.4875
+877  169.8594
+878  168.8438
+879  168.8422
+880  168.3688
+881  169.3781
+882  167.3406
+883  168.9641
+884  169.2688
+885  164.1094
+886  168.9031
+887  169.4078
+888  167.7734
+889  168.7875
+890  167.2406
+891  168.8281
+892  168.6781
+893  168.0188
+894  171.1797
+895  167.9500
+896  165.6266
+897  168.5641
+898  167.5250
+899  166.8891
+900  166.7047
+901  167.0484
+902  168.5172
+903  167.6047
+904  167.8016
+905  167.8156
+906  168.8328
+907  166.7422
+908  168.1156
+909  168.7516
+910  167.1266
+911  167.3109
+912  169.5953
+913  166.0188
+914  168.3828
+915  169.3016
+916  167.2937
+917  166.5766
+918  169.4719
+919  170.1312
+920  169.0000
+921  167.3219
+922  168.6141
+923  167.3969
+924  169.8391
+925  170.7984
+926  168.4594
+927  168.3688
+928  167.6531
+929  167.1047
+930  167.3578
+931  168.8906
+932  169.3500
+933  169.2156
+934  169.8156
+935  167.9828
+936  169.3547
+937  170.0984
+938  168.9672
+939  168.7891
+940  169.2719
+941  169.8734
+942  170.3719
+943  166.7781
+944  169.2391
+945  167.4156
+946  169.1531
+947  168.5000
+948  169.4500
+949  168.7016
+950  168.4313
+951  164.6438
+952  167.9078
+953  169.8688
+954  170.8703
+955  167.2625
+956  167.1453
+957  170.0375
+958  169.6219
+959  168.4938
+960  168.6188
+961  168.0875
+962  169.8984
+963  171.1500
+964  168.4531
+965  169.7156
+966  168.7031
+967  169.6172
+968  168.4766
+969  166.7812
+970  170.9469
+971  169.4750
+972  169.0141
+973  169.5359
+974  167.0453
+975  167.8750
+976  167.5172
+977  169.8734
+978  168.1953
+979  168.7188
+980  168.3219
+981  169.7063
+982  168.2500
+983  168.5750
+984  168.2375
+985  167.7609
+986  166.7891
+987  170.2781
+988  166.2734
+989  170.0906
+990  169.5859
+991  169.4422
+992  167.5578
+993  169.8656
+994  169.2625
+995  167.9484
+996  168.1078
+997  169.0625
+998  165.8516
+999  166.7203
+1000 167.7000</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let us overlay their individual histograms to compare them:</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> <span class="fu">gf_dhistogram</span>(<span class="sc">~</span>result,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> samples_08_1000,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"grey"</span>,</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"dodgerblue"</span>, <span class="at">title =</span> <span class="st">"N = 8"</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_fitdistr</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> pop_mean, <span class="at">inherit =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_label</span>(<span class="sc">-</span><span class="fl">0.025</span> <span class="sc">~</span> pop_mean,</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>,</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.08</span>, <span class="fl">0.02</span>))))</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>p6 <span class="ot">&lt;-</span> <span class="fu">gf_dhistogram</span>(<span class="sc">~</span>result,</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> samples_16_1000,</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"grey"</span>,</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"sienna"</span>, <span class="at">title =</span> <span class="st">"N = 16"</span></span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_fitdistr</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> pop_mean,</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_label</span>(<span class="sc">-</span>.<span class="dv">025</span> <span class="sc">~</span> pop_mean,</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>,</span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.08</span>, <span class="fl">0.02</span>))))</span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a><span class="do">##</span></span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>p7 <span class="ot">&lt;-</span> <span class="fu">gf_dhistogram</span>(<span class="sc">~</span>result,</span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> samples_32_1000,</span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"grey"</span>,</span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"palegreen"</span>, <span class="at">title =</span> <span class="st">"N = 32"</span></span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_fitdistr</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> pop_mean,</span>
+<span id="cb42-43"><a href="#cb42-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb42-44"><a href="#cb42-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb42-45"><a href="#cb42-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_label</span>(<span class="sc">-</span>.<span class="dv">025</span> <span class="sc">~</span> pop_mean,</span>
+<span id="cb42-46"><a href="#cb42-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>, <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb42-47"><a href="#cb42-47" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb42-48"><a href="#cb42-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.08</span>, <span class="fl">0.02</span>))))</span>
+<span id="cb42-49"><a href="#cb42-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-50"><a href="#cb42-50" aria-hidden="true" tabindex="-1"></a>p8 <span class="ot">&lt;-</span> <span class="fu">gf_dhistogram</span>(<span class="sc">~</span>result,</span>
+<span id="cb42-51"><a href="#cb42-51" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> samples_64_1000,</span>
+<span id="cb42-52"><a href="#cb42-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb42-53"><a href="#cb42-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"grey"</span>,</span>
+<span id="cb42-54"><a href="#cb42-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"violetred"</span>, <span class="at">title =</span> <span class="st">"N = 64"</span></span>
+<span id="cb42-55"><a href="#cb42-55" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-56"><a href="#cb42-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_fitdistr</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-57"><a href="#cb42-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb42-58"><a href="#cb42-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> pop_mean,</span>
+<span id="cb42-59"><a href="#cb42-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb42-60"><a href="#cb42-60" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb42-61"><a href="#cb42-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_label</span>(<span class="sc">-</span>.<span class="dv">025</span> <span class="sc">~</span> pop_mean,</span>
+<span id="cb42-62"><a href="#cb42-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>, <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb42-63"><a href="#cb42-63" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb42-64"><a href="#cb42-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_theme</span>(<span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="fl">0.08</span>, <span class="fl">0.02</span>))))</span>
+<span id="cb42-65"><a href="#cb42-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-66"><a href="#cb42-66" aria-hidden="true" tabindex="-1"></a><span class="co"># patchwork::wrap_plots(p5,p6,p7,p8)</span></span>
+<span id="cb42-67"><a href="#cb42-67" aria-hidden="true" tabindex="-1"></a>p5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (mapping = NULL, data = NULL, stat = "identity", position = "nudge", : All aesthetics have length 1, but the data has 1000 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>p6</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (mapping = NULL, data = NULL, stat = "identity", position = "nudge", : All aesthetics have length 1, but the data has 1000 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>p7</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (mapping = NULL, data = NULL, stat = "identity", position = "nudge", : All aesthetics have length 1, but the data has 1000 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>p8</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (mapping = NULL, data = NULL, stat = "identity", position = "nudge", : All aesthetics have length 1, but the data has 1000 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-11-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dhistogram</span>(<span class="sc">~</span>result,</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> samples_32_1000,</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.rm =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"grey"</span>,</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"palegreen"</span>, <span class="at">title =</span> <span class="st">"N = 32"</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_fitdistr</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> pop_mean,</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_label</span>(<span class="sc">-</span>.<span class="dv">025</span> <span class="sc">~</span> pop_mean,</span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>, <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_dhistogram</span>(<span class="sc">~</span>result,</span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> samples_16_1000,</span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"grey"</span>,</span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">fill =</span> <span class="st">"sienna"</span>, <span class="at">title =</span> <span class="st">"N = 16"</span></span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_fitdistr</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_vline</span>(</span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">xintercept =</span> pop_mean,</span>
+<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gf_label</span>(<span class="sc">-</span>.<span class="dv">025</span> <span class="sc">~</span> pop_mean,</span>
+<span id="cb54-26"><a href="#cb54-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Population Mean"</span>,</span>
+<span id="cb54-27"><a href="#cb54-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"blue"</span></span>
+<span id="cb54-28"><a href="#cb54-28" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (mapping = NULL, data = NULL, stat = "identity", position = "nudge", : All aesthetics have length 1, but the data has 1000 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in (function (mapping = NULL, data = NULL, stat = "identity", position = "nudge", : All aesthetics have length 1, but the data has 1000 rows.
+ℹ Please consider using `annotate()` or provide this layer with data containing
+  a single row.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="classwork8_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

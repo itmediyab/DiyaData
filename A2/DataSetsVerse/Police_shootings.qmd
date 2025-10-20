@@ -1,0 +1,769 @@
+---
+title: "Police Shootings Dataset"
+author: "Ashmita, Diya, Krithika, Arnav"
+date: "2025-10-20"
+format: html
+---
+
+# Police Shootings
+
+It's a real-world data set that compiles incidents of fatal police shootings in the US, originally sourced from The Washington Post’s “Fatal Force” database.
+
+![](img1.png)
+
+## Viewing the Dataset
+
+```{r}
+library(DataSetsVerse)
+DataSetsVerse()
+```
+
+```{r}
+library(crimedatasets)
+library(tidyverse)
+glimpse(police_shootings_tbl_df)
+```
+
+## Data Dictionary
+
+**date:** Date when the shooting occurred
+
+**manner_of_death:** How the person died
+
+**armed:** What the victim was reportedly armed with
+
+**age**: Age of the victim
+
+**gender**: Gender of the victim ( M = Male, F = Female)
+
+**race**: Race / ethnicity of the victim (W = White, B = Black, H = Hispanic, A = Asian, N = Native, O = Other)
+
+**city:** City where the shooting took place
+
+**state**: U.S. state abbreviation
+
+**threat_level**: The perceived threat level
+
+**flee**: Whether the person was fleeing
+
+**body_camera**: Whether a body camera was in use during the shooting
+
+**signs_of_mental_illness:** Whether there were reported signs of mental illness
+
+## Setting up packages
+
+```{r}
+#| label: setup
+#| echo: false
+
+library(DataSetsVerse)
+library(tidyverse)
+library(timeSeriesDataSets)
+library(mosaic)
+library(skimr)
+library(visdat)
+library(janitor)
+library(naniar)
+library(ggformula)
+library(tinytable)
+library(DT)
+library(crosstable)
+library(vcd) 
+library(vcdExtra)
+library(resampledata)
+library(ggmosaic)
+library(ggpubr)
+library(crimedatasets)
+```
+
+### Our Goal
+
+To analyze patterns in police shootings in the US, including demographic, situational and geographic factors.
+
+Our analyses might explore:
+
+-   Variation by **race**, **gender**, **age**
+-   Whether victims were **armed**
+-   The role of **mental health** indicators
+-   The effect of **fleeing** behavior and perceived **threat levels**
+-   **Geographic** & **state**‐level patterns
+-   **Yearly** and **monthly** trends
+
+```{r}
+police_shootings <- police_shootings_tbl_df
+glimpse(police_shootings)
+janitor::clean_names(police_shootings)
+```
+
+## Checking for Missing Values
+
+```{r}
+visdat::vis_dat(police_shootings)
+```
+
+**There are many missing entries; hence dropping the NA's**
+
+```{r}
+police_shootings_mod1 <- police_shootings %>% 
+  naniar::replace_with_na_all(condition = ~ .x %in% common_na_strings) %>%
+  naniar::replace_with_na_all(condition = ~ .x %in% common_na_numbers) %>% 
+drop_na()
+police_shootings_mod1
+```
+
+## Data Munging
+
+```{r}
+police_shootings_mod1 %>%  
+mutate(
+    manner_of_death = as_factor(manner_of_death),
+    armed = as_factor(armed),
+    gender = as_factor(gender),
+    race = as_factor(race),
+    city = as_factor(city),
+    state = as_factor(state),
+    signs_of_mental_illness = as_factor(signs_of_mental_illness),
+    threat_level = as_factor(threat_level),
+    flee = as_factor(flee),
+    body_camera = as_factor(body_camera)
+ )
+```
+
+## Examining the Data
+
+### Counting the Race, Gender and Age
+
+```{r}
+# Race
+police_shootings_mod1 %>%
+  dplyr::count(race) %>%
+  arrange(desc(n)) %>% 
+  tt()
+
+# Gender
+police_shootings_mod1 %>%
+  dplyr::count(gender) %>%
+  tt()
+
+# Age
+police_shootings_mod1 %>%
+  dplyr::count(age) %>%
+  tt()
+```
+
+### **Visualizing Race distribution**
+
+```{r}
+police_shootings_mod1 %>% 
+gf_bar(~ fct_infreq(race), fill = "skyblue") %>%
+  gf_labs(
+     x = "Race",
+    y = "Number of victims",
+    title = "Race distribution of victims")
+
+```
+
+#### Observation
+
+-   **White** individuals represent the majority (about half) of police shooting victims
+
+-   **Black** individuals are the second largest group (about 1/4th), approximately half the frequency of White victims, followed by **Hispanics**
+
+-   **Asian**, **Native**, and **Other** racial groups collectively represent only 4% of total incidents
+
+#### **Inference**
+
+-   The data suggests potential **racial disparities** in police shooting incidents
+
+-   The **2:1 ratio** between White and Black victims may indicate either population distribution patterns or systemic factors
+
+-   When adjusted for population demographics, Black individuals may experience higher per-capita rates of police shootings
+
+### **Visualizing Gender distribution**
+
+```{r}
+police_shootings_mod1 %>% 
+gf_bar(~ gender, fill = "steelblue") %>%
+  gf_labs(
+     x = "Gender",
+    y = "Number of victims",
+    title = "Gender distribution of victims")
+
+```
+
+#### Observation
+
+-   The gender disparity is extreme, with males being **about** **20 time more** to be involved in police shootings than females
+
+#### **Inference**
+
+Males are disproportionately involved in situations that are critical and need the use of deadly force, potentially due to:
+
+-   Higher rates of violent crime commission
+
+-   Different patterns of resistance or confrontation with law enforcement
+
+-   Occupational exposure (certain professions with police interaction)
+
+### **Visualizing Age distribution**
+
+```{r}
+police_shootings_mod1 %>% 
+  count(age) %>% 
+gf_line(n ~ age, colour = "navyblue") %>%
+  gf_labs(
+     x = "Age",
+    y = "Number of victims",
+    title = "Age distribution of victims") %>% 
+  gf_refine(
+    scale_x_continuous(breaks = seq(0, 100, 5)) 
+  )
+
+```
+
+### **Observation**
+
+-   There is a strongconcentrationofage between **20-40 years old,** with peak incidence at **ages 25-35**
+
+-   There is a sharpincrease from teenage years, peaking in mid-to-late 20s, then a gradual **decline after age 35**
+
+-   **Elderly victims** are rare but present, with incidents documented **up to age 91**
+
+### **Inference**
+
+-   The peak in late 20s and 30s aligns with ages of highest criminal offense rates and police encounters
+
+-   This suggests that most incidents occur during police responses to criminal activity
+
+### Examining the Situational & Psychological Factors
+
+```{r}
+# Manner of Death
+police_shootings_mod1 %>%
+  dplyr::count(manner_of_death) %>%
+  tt()
+
+# Armed status
+police_shootings_mod1 %>%
+  dplyr::count(armed) %>%
+  arrange(desc(n)) %>% 
+  tt()
+
+# Flee Status
+police_shootings_mod1 %>%
+  dplyr::count(flee) %>%
+  arrange(desc(n)) %>% 
+  tt()
+
+# Threat Level
+police_shootings_mod1 %>%
+  dplyr::count(threat_level) %>%
+  tt()
+
+# Mental Health
+police_shootings_mod1 %>%
+  dplyr::count(signs_of_mental_illness) %>%
+  tt()
+
+# Body Camera
+police_shootings_mod1 %>%
+  dplyr::count(body_camera) %>%
+  tt()
+```
+
+#### Observation
+
+-   **Manner of death**: Most victims are shot. Some had to be tasered, is there a specific reason (like weapon type, threat level or mental illness which led to the outcome?)
+
+-   **Armed**: Most victims were armed with guns, which explains the critical situation leading to being shot. This is followed by knifes and then unarmed
+
+-   **Flee**: The majority of victims were not fleeing when shot
+
+-   **Threat level**: About 2/3 of victims were perceived as attacking when shot
+
+-   **Signs of mental illness**: About 1/4th of the victims have the signs of mental illness
+
+-   **Body camera**: More than 75% of the victims don't have body cameras.
+
+### Summarizing Full Table
+
+```{r}
+summary(police_shootings_mod1)
+```
+
+### Observation
+
+-   The data is logged from the year 2015 to 2021
+
+-   The youngest victim is 6 years and goes up to the age of 91. Average age is 34 years
+
+## Building Hypothesis
+
+### Is there any association between Race and Gender?
+
+```{r}
+police_shootings_mod1 %>% 
+    count(across(c("gender", "race"))) %>%
+  tt()
+```
+
+```{r}
+police_shootings_mod1 %>% 
+gf_bar(~ fct_infreq(race), 
+       fill = ~gender, 
+       position = "dodge") %>%
+  gf_labs(
+     x = "Race",
+    y = "Number of vicyims",
+    title = "Race distribution of victims by Gender")
+
+```
+
+### Observation
+
+-   The proportion of females are distinctly less, hence there is not much association between the two
+
+-   The data supports sociological patterns where males tend towards confrontational behaviors and are overrepresented in situations likely to escalate to lethal force
+
+### What is the Age Distribution across different Races?
+
+```{r}
+police_shootings_mod1 %>% 
+  gf_density(~age, color = ~race, fill = ~race, alpha = 0.2) %>%
+  gf_labs(
+    title = "Age Distribution by Race",
+    x = "Age",
+    y = "Density"
+  )%>%
+  gf_refine(
+    scale_x_continuous(breaks = seq(0, 100, 5))
+  )
+```
+
+```{r}
+police_shootings_mod1 %>% 
+    count(across(c("age", "race"))) %>%
+  tt()
+```
+
+```{r}
+police_shootings_mod1 %>% 
+gf_boxplot(age ~ race, fill = ~race, orientation = "x") %>%
+  gf_labs(
+    x = "Race",
+    y = "Age",
+    title = "Age distribution across Races"
+  )
+```
+
+#### Observation
+
+-   Black and Others are usually younger in age
+
+-   White and Asian victims are more spread out and Whites have higher median age
+
+-   Hispanics have 2 peaks in their age - around 25s and 40s
+
+-   Blacks and Natives show a distinct peak at around 25 and 30 respectively
+
+#### Inference
+
+-   **Black & Natives**: Young adulthood is the highest danger period, likely linked to street policing and urban violence exposure
+
+    **White & Asian Pattern**: Risk spreads across all adult ages, suggesting more varied incidents like mental health crises, domestic disputes, and elderly situations
+
+    **Hispanics**: Two different risk groups are seen in younger and older people
+
+### What is the association between different situational factors
+
+```{r}
+# Race vs. Manner of Death
+vcd::structable(race ~ manner_of_death, data = police_shootings_mod1) %>%
+  as.matrix() %>%
+  addmargins() %>%
+  as_tibble(rownames = "Race")
+
+vcd::structable(race ~ manner_of_death, data = police_shootings_mod1) %>%
+  vcd::mosaic(shade = TRUE, legend = TRUE,
+              main = "Race vs. Manner of Death",
+              gp = shading_max)
+
+# Gender vs. Manner of Death
+vcd::structable(gender ~ manner_of_death, data = police_shootings_mod1) %>%
+  as.matrix() %>%
+  addmargins() %>%
+  as_tibble(rownames = "Gender")
+
+vcd::structable(gender ~ manner_of_death, data = police_shootings_mod1) %>%
+  vcd::mosaic(shade = TRUE, legend = TRUE,
+              main = "Gender vs. Manner of Death",
+              gp = shading_max)
+
+# Manner of Death vs. Weapon type
+police_shootings_mod1 %>%
+  mutate(armed_top5 = fct_lump_n(armed, 5)) %>%
+  vcd::structable(manner_of_death ~ armed_top5, data = .) %>%
+  as.matrix() %>%
+  addmargins() %>%
+  as_tibble(rownames = "Manner of Death")
+
+police_shootings_mod1 %>%
+  mutate(armed_top5 = fct_lump_n(armed, 5)) %>%
+  vcd::structable(manner_of_death ~ armed_top5, data = .) %>%
+  vcd::mosaic(shade = TRUE, legend = TRUE,
+              main = "Manner of Death vs. Top 5 Weapon Types",
+              gp = shading_max)
+
+# Manner of Death vs. Threat level
+vcd::structable(manner_of_death ~ threat_level, data = police_shootings_mod1) %>%
+  vcd::mosaic(shade = TRUE, legend = TRUE,
+              main = "Manner of Death vs. Threat Level",
+              gp = shading_max)
+
+# Manner of Death vs. Mental Illness
+vcd::structable(manner_of_death ~ signs_of_mental_illness, data = police_shootings_mod1) %>%
+  vcd::mosaic(shade = TRUE, legend = TRUE,
+              main = "Manner of Death vs. Mental Illness Signs",
+              gp = shading_max)
+```
+
+### **Observation**
+
+-   Race and Gender don't have any distinct association with the manner of death
+
+-   Victims having gun and those perceived as threatening, show a distinct negative correlation with being shot and tasered meaning some distance had to be maintained
+
+-   Those who are armed with knife, show positive correlation being shot and tasered
+
+-   Victims showing signs of mental illness shows have a positive correlation with being shot and tasered
+
+### Inference
+
+-   Weapon type and mental state determine police tactics. Guns trigger immediate lethal response, while other weapons/conditions allow for attempted intermediate options.
+
+### **Are there any yearly or monthly trends in the shootings?**
+
+```{r}
+police_shootings_dates <- police_shootings_mod1 %>%
+  mutate(
+    year = as.numeric(format(date, "%Y")),
+    month = as.numeric(format(date, "%m"))
+  )
+```
+
+
+```{r}
+# Yearly trend
+police_shootings_dates %>%
+  count(year) %>%
+  gf_line(n ~ year, color = "steelblue", size = 1) %>%
+  gf_point(color = "steelblue", size = 2) %>%
+  gf_labs(
+    title = "Yearly Trend in Police Shootings",
+    x = "Year", 
+    y = "Number of Shootings"
+  ) %>%
+  gf_refine(
+    scale_x_continuous(breaks = unique(police_shootings_dates$year))
+  )
+```
+
+```{r}
+# Monthly trend
+police_shootings_dates %>%
+     mutate(
+    month = format(as.Date(date), "%b"),
+    month = factor(month, levels = month.abb)
+  ) %>%
+  count(month) %>%
+  gf_line(n ~ month, group = 1, color = "dodgerblue", size = 1) %>%
+  gf_point(color = "dodgerblue", size = 2) %>%
+  gf_labs(
+    title = "Monthly Trend in Police Shootings",
+    x = "Month",
+    y = "Number of Shootings"
+  ) %>%
+  gf_theme(axis.text.x = element_text(angle = 0, hjust = 1))
+```
+
+```{r}
+police_shootings_mod1 %>%
+  mutate(year = as.numeric(format(date, "%Y"))) %>%
+  count(year, race) %>%
+  gf_line(n ~ year, color = ~race) %>%
+  gf_point(n ~ year, color = ~race) %>%
+  gf_labs(title = "Yearly Shooting Trends by Race")
+```
+
+### **Observation**
+
+-   ksjeh
+
+-   ksejrh
+
+-   ksj
+
+### **Inference**
+
+-   sldfkj
+
+-   sldkfj
+
+-   sjdfh
+
+### **How does Age influence other factors?**
+
+**Association of age with fleeing and weapon type**
+
+```{r}
+police_shootings_mod1 %>%
+  mutate(
+    flee = fct_infreq(flee),      
+    armed = fct_lump_n(armed, 5)
+  ) %>%
+  gf_boxplot(age ~ flee,
+             fill = ~armed,
+             orientation = "x" ) %>%
+  gf_labs(
+    title = "Age Distribution by Flee type and Weapon status",
+    x = "Flee Type",
+    y = "Age of Victim",
+    fill = "Weapon Type"
+  )
+```
+
+**Age distribution by Flee status**
+
+```{r}
+police_shootings_mod1 %>%
+  gf_density(~age, color = ~flee, fill = ~flee, alpha = 0.3) %>%
+  gf_labs(title = "Age Distribution by Flee Status") %>%
+  gf_refine(
+    scale_color_brewer(palette = "Set1"),
+    scale_x_continuous(breaks = seq(0, 100, 5))
+  )
+```
+
+### Observation
+
+-   Those **“Not fleeing”** or fleeing by **car** appear slightly older on average than those fleeing **on foot**.
+
+-   Median ages for “Not fleeing” and “Car” are higher, while “Foot” and “Other” categories have lower medians.
+
+-   **Guns** and **knives** dominate across all flee types.
+
+-   **Unarmed** individuals appear in every flee category, often with similar or slightly lower median ages compared to armed groups.
+
+-   The **variation** is generally higher for armed individuals, indicating broader age diversity among armed victims.
+
+-   A few older individuals (60+) appear across all flee types, particularly in the **“Not fleeing”** group.
+
+### Inference
+
+-   There is **no strong age-flee interaction**, but the slightly higher median ages among “Not fleeing” cases could indicate that older victims are **less likely to attempt escape**.
+
+-   The consistent presence of **unarmed victims** across flee types highlights that **weapon possession is not always tied to fleeing behavior**.
+
+-   The broad age spread, especially in “Not fleeing” cases, suggests **police encounters affect a wide demographic**, not limited to younger populations.
+
+#### **Age distribution over the years for different Races**
+
+```{r}
+police_shootings_mod1 %>%
+  mutate(year = as.numeric(format(date, "%Y"))) %>%
+  gf_point(age ~ year, alpha = 0.5) %>%
+  gf_lm(age ~ year) %>%
+  gf_facet_wrap(~ race) %>%
+  gf_labs(
+    title = "Age Distribution Over Years by Race",
+    x = "Year",
+    y = "Age"
+  )
+```
+
+### Observation
+
+-   Across all racial groups , most victims fall in the **25–45 age range**, with only slight variations.
+
+-   The median age remains relatively stable over time (2015–2020) with no significant increase or decrease in any group.
+
+-   **White** and **Black** individuals have the **highest representation** and wider spread in age distribution.
+
+-   Other races (Asian, Native, Hispanic, etc.) show **smaller sample sizes** and thus more variability.
+
+```{r}
+police_shootings_mod1 %>%
+  count(city, state) %>%
+  arrange(desc(n)) %>%
+  head(15) %>%  # Top 15 locations
+  unite(location, city, state, sep = ", ") %>%
+  select(location) %>%
+  inner_join(police_shootings_mod1 %>% 
+              unite(location, city, state, sep = ", "), 
+            by = "location") %>%
+  gf_boxplot(age ~ fct_reorder(location, age), fill = "forestgreen", orientation = "x") %>%
+  gf_labs(
+    title = "Age Distribution by Location (Top 15 Cities)",
+    x = "City, State",
+    y = "Age"
+  ) %>%
+  gf_theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+### Observation
+
+-   Some cities like **Chicago, Columbus, and St. Louis** have younger victims, while **Miami and Las Vegas** show slightly higher medians.
+
+-   The **spread** varies, larger in cities like Los Angeles and Jacksonville, suggesting more diverse victim age groups there.
+
+### How does location of a State and city determine the shootings?
+
+```{r}
+police_shootings_mod1 %>%
+  count(city, state) %>%
+  arrange(desc(n)) %>%
+  head(30) %>%  # Taking top 30 locations
+  unite(location, city, state, sep = ", ") %>%
+  gf_point(n ~ fct_reorder(location, n), size = ~n, color = "red") %>%
+  gf_labs(
+    title = "Police Shootings by Location",
+    x = "City, State",
+    y = "Number of Shootings"
+  ) %>%
+  gf_theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+### Observation
+
+-   **Los Angeles, CA** reports the **highest number of police shootings**, followed by **Phoenix, AZ**, **Houston, TX**, and **Las Vegas, NV**.
+
+-   The distribution is **right-skewed** where a few major cities account for a **disproportionately large share** of total shootings.
+
+-   Many smaller or mid-size cities (e.g., Colorado Springs, Charlotte) have fewer than 20 recorded incidents.
+
+### Inference
+
+-   Police shootings predominantly involve **young to middle-aged individuals (25–40 years old)** across most races and cities, with no major age trend changes over time. However, **incidents are geographically concentrated**, a small number of large urban centers (like Los Angeles and Phoenix) account for the **bulk of cases**, indicating regional disparities that may be tied to **population density, policing intensity, or systemic factors**.
+
+### How does perceived threat level influence the shootings
+
+```{r}
+police_shootings_mod1 %>%
+  count(city, state, threat_level) %>%
+  group_by(city, state) %>%
+  mutate(total = sum(n)) %>%
+  filter(total >= 10) %>%  # Cities with 10+ incidents
+  ungroup() %>%
+  arrange(desc(total)) %>%
+  head(50) %>%
+  unite(location, city, state, sep = ", ") %>%
+  gf_col(n ~ location, fill = ~threat_level, position = "fill") %>%
+  gf_theme(axis.text.x = element_text(angle = 90, hjust = 1)) %>%
+  gf_labs(title = "Threat Level Distribution by City")
+```
+
+### Observation
+
+-   Across most cities, the **attack threat level dominates**, with smaller proportions of other and undetermined cases.
+
+-   Cities like Los Angeles, Phoenix, and San Antonio show particularly high instances of attack classified incidents, while places like Columbus and Jacksonville have slightly higher variation across categories.
+
+### Inference
+
+-   This suggests that police encounters in many **urban centers** are predominantly categorized as threats requiring lethal or aggressive response levels.
+
+-   The consistency across locations might indicate **uniform policy interpretation** rather than contextual variations in local threat assessment.
+
+### **Influence of Weapons on different factors**
+
+```{r}
+police_shootings_mod1 %>%
+  mutate(weapon_cat = fct_lump_n(armed, 6)) %>%
+  count(race, weapon_cat) %>%
+  group_by(race) %>%
+  mutate(prop = n / sum(n)) %>%
+  gf_tile(prop ~ race + weapon_cat) %>%
+  gf_labs(
+    title = "Weapon Type Distribution by Race",
+    x = "Race",
+    y = "Weapon Type",
+    fill = "Proportion"
+  )
+```
+
+### Observation
+
+-   The heatmap shows that guns are the most common weapon type across all racial groups, particularly pronounced among Black and White victims.
+
+-   Non-firearm weapons (like knives and toy weapons) appear far less frequently, with a few variations among racial groups.
+
+### Inference
+
+-   This pattern could indicate both a systemic emphasis on firearm-related encounters and possible disparities in perceived weapon possession across racial groups.
+
+-   The high prevalence of gun-related cases may also reflect broader accessibility and cultural factors related to weapon ownership.
+
+```{r}
+police_shootings_mod1 %>%
+  mutate(weapon_cat = fct_lump_n(armed, 5)) %>%
+  count(weapon_cat, threat_level) %>%
+  gf_col(n ~ weapon_cat, fill = ~threat_level, position = "dodge") %>%
+  gf_labs(
+    title = "Weapon Type vs Threat Level",
+    x = "Weapon Type",
+    y = "Count",
+    fill = "Threat Level"
+  ) %>%
+  gf_theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### Observation
+
+-   Individuals categorized as notfleeing form the largest proportion across all weapon types, especially for guns, knives, and unarmed cases.
+
+-   Vehicle-related cases show relatively more instances of fleeing by car, while foot fleeing is modestly present across some categories.
+
+### Influence
+
+-   This could suggest that most encounters leading to recorded incidents occur when suspects are stationary or restrained rather than actively escaping. However, the relatively higher “car fleeing” in vehicle-related incidents might point to situational factors influencing pursuit and response dynamics.
+
+```{r}
+police_shootings_mod1 %>%
+  mutate(weapon_cat = fct_lump_n(armed, 8)) %>%
+  count(weapon_cat, flee) %>%
+  group_by(weapon_cat) %>%
+  mutate(prop = n / sum(n)) %>%
+  gf_col(prop ~ weapon_cat, fill = ~flee, position = "fill") %>%
+  gf_labs(
+    title = "Flee Behavior by Weapon Type",
+    subtitle = "Proportion of flee status for each weapon category",
+    x = "Weapon Type",
+    y = "Proportion",
+    fill = "Flee Status"
+  ) %>%
+  gf_theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+### Observation
+
+-   Gun-related incidents overwhelmingly fall under the attack threat level, followed by knives and unarmed cases at much lower frequencies.
+
+-   Toy weapons and vehicles have very few attack classifications, and undetermined cases remain minimal overall.
+
+### Inference
+
+-   Weapons perceived as more dangerous (like firearms) are strongly associated with escalated threat responses. This pattern could imply that the presence of a gun, regardless of situation, significantly biases threat assessment, leading to higher rates of lethal force justification.
+
+## Conclusion
+
+-   **Demographic Trends:** Majority of victims are **male (25–40 years)**; **Black individuals** face disproportionately higher risk relative to population size.
+
+-   **Situational Insights:** Most victims were **armed**, often with **guns**, but a notable share were **unarmed or mentally ill**, raising questions about threat assessment and escalation.
+
+-   **Behavioral Patterns:** Many were **not fleeing**, showing that fatal shootings often occur in static encounters, not active chases.
+
+-   **Threat Perception:** “**Attack**” is the most frequent threat label, especially when firearms are involved — suggesting strong bias toward perceiving high threat.
+
+-   **Geographic Trends:** Incidents cluster in **urban hubs** like Los Angeles, Houston, and Phoenix, showing concentration in large metro areas.
+
+    The data suggests that **systemic patterns**, not isolated incidents, underlie police shootings in the U.S. While armed confrontations explain part of the trend, **biases in threat perception, inadequate handling of mental health crises, and regional concentration of incidents** all point to the need for deeper structural reform.

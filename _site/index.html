@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-assignments .list');
+    const listingTargetEl = window.document.querySelector('#listing-assignment1 .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
@@ -84,7 +84,35 @@ ul.task-list li input[type="checkbox"] {
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-assignments'] = new List('listing-assignments', options);
+    window['quarto-listings']['listing-assignment1'] = new List('listing-assignment1', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-assignment2 .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-assignment2'] = new List('listing-assignment2', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -225,11 +253,11 @@ window.Quarto = {
 
 
 
-<section id="assignments" class="level2">
-<h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
-<div id="listing-assignments" class="quarto-listing quarto-listing-container-default">
+<section id="a1-basics-of-eda-1" class="level2">
+<h2 class="anchored" data-anchor-id="a1-basics-of-eda-1">A1: Basics of EDA #1</h2>
+<div id="listing-assignment1" class="quarto-listing quarto-listing-container-default">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="A1" data-listing-date-sort="1758997800000" data-listing-file-modified-sort="1759642712896" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1648">
+<div class="quarto-post image-right" data-index="0" data-categories="A1" data-listing-date-sort="1758997800000" data-listing-file-modified-sort="1760275212921" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1648">
 <div class="thumbnail">
 <p><a href="./posts/Fertility/Fertility.html" class="no-external"></a></p><a href="./posts/Fertility/Fertility.html" class="no-external">
 <p class="card-img-top"><img src="posts\Fertility\Fertility.jpg"  class="thumbnail-image card-img"/></p>
@@ -319,6 +347,128 @@ No matching items
 </div>
 </div>
 </section>
+<section id="a2-basics-of-eda-2" class="level2">
+<h2 class="anchored" data-anchor-id="a2-basics-of-eda-2">A2: Basics of EDA #2</h2>
+<div id="listing-assignment2" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1760898600000" data-listing-file-modified-sort="1760981972441" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="15" data-listing-word-count-sort="2868">
+<div class="thumbnail">
+<p><a href="./A2/Cardio/Cardio.html" class="no-external"></a></p><a href="./A2/Cardio/Cardio.html" class="no-external">
+<p class="card-img-top"><img src="A2\Cardio\images\clipboard-2410009920.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./A2/Cardio/Cardio.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./A2/Cardio/Cardio.html" class="no-external">CardioDataSets HeartDisease</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./A2/Cardio/Cardio.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./A2/Cardio/Cardio.html" class="no-external">Exploring and Analysing patterns of a Heart Disease Dataset</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./A2/Cardio/Cardio.html" class="no-external">
+<div class="listing-date">
+Oct 20, 2025
+</div>
+<div class="listing-author">
+Krithika, Ashmita, Krithika, Arnav
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1760898600000" data-listing-file-modified-sort="1760980246746" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3617">
+<div class="thumbnail">
+<p><a href="./A2/DataSetsVerse/Police_shootings.html" class="no-external"></a></p><a href="./A2/DataSetsVerse/Police_shootings.html" class="no-external">
+<p class="card-img-top"><img src="A2\DataSetsVerse\img1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./A2/DataSetsVerse/Police_shootings.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./A2/DataSetsVerse/Police_shootings.html" class="no-external">Police Shootings Dataset</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./A2/DataSetsVerse/Police_shootings.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./A2/DataSetsVerse/Police_shootings.html" class="no-external">It’s a real-world data set that compiles incidents of fatal police shootings in the US, originally sourced from The Washington Post’s “Fatal Force” database.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./A2/DataSetsVerse/Police_shootings.html" class="no-external">
+<div class="listing-date">
+Oct 20, 2025
+</div>
+<div class="listing-author">
+Ashmita, Diya, Krithika, Arnav
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="A2" data-listing-date-sort="1760898600000" data-listing-file-modified-sort="1760981933452" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="556">
+<div class="thumbnail">
+<p><a href="./A2/Mongolia-Demoiselle-cranes/final.html" class="no-external"></a></p><a href="./A2/Mongolia-Demoiselle-cranes/final.html" class="no-external">
+<p class="card-img-top"><img src="A2\Mongolia-Demoiselle-cranes\images\clipboard-187020098.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./A2/Mongolia-Demoiselle-cranes/final.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./A2/Mongolia-Demoiselle-cranes/final.html" class="no-external">Demoiselle Crane Migration Route</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./A2/Mongolia-Demoiselle-cranes/final.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./A2/Mongolia-Demoiselle-cranes/final.html" class="no-external">Mapping out the migration route of the Demoiselle Crane</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./A2/Mongolia-Demoiselle-cranes/final.html" class="no-external">
+<div class="listing-date">
+Oct 20, 2025
+</div>
+<div class="listing-author">
+Diya, Ashmita, Krithika, Arnav
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="A2" data-listing-date-sort="1760898600000" data-listing-file-modified-sort="1760979506630" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3951">
+<div class="thumbnail">
+<p><a href="./A2/tastyR/cuisines.html" class="no-external"></a></p><a href="./A2/tastyR/cuisines.html" class="no-external">
+<p class="card-img-top"><img src="A2\tastyR\cuisine.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./A2/tastyR/cuisines.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./A2/tastyR/cuisines.html" class="no-external">Cuisines Dataset</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./A2/tastyR/cuisines.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./A2/tastyR/cuisines.html" class="no-external">Exploring and Analysing patterns of an Allrecipes Cuisines Dataset</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./A2/tastyR/cuisines.html" class="no-external">
+<div class="listing-date">
+Oct 20, 2025
+</div>
+<div class="listing-author">
+Diya, Ashmita, Krithika, Arnav
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
 <section id="classwork" class="level2">
 <h2 class="anchored" data-anchor-id="classwork">Classwork</h2>
 <div id="listing-classwork" class="quarto-listing quarto-listing-container-table">
@@ -362,7 +512,29 @@ No matching items
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-listing-date-sort="1759775400000" data-listing-file-modified-sort="1760022727775" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1094" data-listing-title-sort="Classwork 6" data-listing-filename-sort="index.qmd">
+<tr data-index="0" data-listing-file-modified-sort="1760422997234" data-listing-reading-time-sort="7" data-listing-word-count-sort="1267" data-listing-title-sort="classwork8" data-listing-filename-sort="classwork8.qmd">
+<td>
+<span class="listing-date">&nbsp;</span>
+</td>
+<td>
+<a href="./classwork/classwork8/classwork8.html" class="title listing-title">classwork8</a>
+</td>
+<td>
+<span class="listing-author">&nbsp;</span>
+</td>
+</tr>
+<tr data-index="1" data-listing-file-modified-sort="1760947462488" data-listing-reading-time-sort="1" data-listing-word-count-sort="183" data-listing-title-sort="Classwork 7" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">&nbsp;</span>
+</td>
+<td>
+<a href="./classwork/maps/index.html" class="title listing-title">Classwork 7</a>
+</td>
+<td>
+<span class="listing-author">&nbsp;</span>
+</td>
+</tr>
+<tr data-index="2" data-listing-date-sort="1759775400000" data-listing-file-modified-sort="1760022727775" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1094" data-listing-title-sort="Classwork 6" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Oct 7, 2025</span>
 </td>
@@ -373,7 +545,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="1" data-listing-date-sort="1759689000000" data-listing-file-modified-sort="1760024100820" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="346" data-listing-title-sort="Classwork 5" data-listing-filename-sort="classwork5.qmd">
+<tr data-index="3" data-listing-date-sort="1759689000000" data-listing-file-modified-sort="1760024100820" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="346" data-listing-title-sort="Classwork 5" data-listing-filename-sort="classwork5.qmd">
 <td>
 <span class="listing-date">Oct 6, 2025</span>
 </td>
@@ -384,7 +556,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="2" data-listing-date-sort="1758565800000" data-listing-file-modified-sort="1760025643584" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="726" data-listing-title-sort="Classwork 4" data-listing-filename-sort="index.qmd">
+<tr data-index="4" data-listing-date-sort="1758565800000" data-listing-file-modified-sort="1760025643584" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="726" data-listing-title-sort="Classwork 4" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Sep 23, 2025</span>
 </td>
@@ -395,7 +567,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="3" data-listing-date-sort="1758479400000" data-listing-file-modified-sort="1760025631644" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="867" data-listing-title-sort="Classwork 3" data-listing-filename-sort="index.qmd">
+<tr data-index="5" data-listing-date-sort="1758479400000" data-listing-file-modified-sort="1760025631644" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="867" data-listing-title-sort="Classwork 3" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Sep 22, 2025</span>
 </td>
@@ -406,7 +578,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="4" data-categories="Cleaning" data-listing-date-sort="1757961000000" data-listing-file-modified-sort="1760021512623" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="191" data-listing-title-sort="Classwork 2" data-listing-filename-sort="index.qmd">
+<tr data-index="6" data-categories="Cleaning" data-listing-date-sort="1757961000000" data-listing-file-modified-sort="1760021512623" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="191" data-listing-title-sort="Classwork 2" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Sep 16, 2025</span>
 </td>
@@ -417,7 +589,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="5" data-categories="Babynames,Filtering" data-listing-date-sort="1757874600000" data-listing-file-modified-sort="1760021481362" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="281" data-listing-title-sort="Classwork 1" data-listing-filename-sort="index.qmd">
+<tr data-index="7" data-categories="Babynames,Filtering" data-listing-date-sort="1757874600000" data-listing-file-modified-sort="1760021481362" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="281" data-listing-title-sort="Classwork 1" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Sep 15, 2025</span>
 </td>

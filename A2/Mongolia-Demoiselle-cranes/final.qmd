@@ -1,0 +1,96 @@
+---
+title: "Demoiselle Crane Migration Route"
+author: "Diya, Ashmita, Krithika, Arnav"
+date: "2025-10-20"
+categories: [A2]
+---
+
+Mapping out the migration route of the Demoiselle Crane
+
+![](images/clipboard-187020098.png)
+
+The Demoiselle Crane (aka Anthropoides virgo) has the most remarkable migration pattern. Every year, it travels around thousands of kilometers between its breeding grounds in Central Eurasia (from Ukraine and Mongolia to China) and its wintering areas in India and Africa. It's known for its elegance and graceful movements among the crane species. (Fun fact: Its also the smallest among the crane species!)
+
+### Migration patterns
+
+During migration, the birds fly in large flocks and often cross the Himalayas. Crossing the Himalayas is an insane thing to do - that too without oxygen tanks, in freezing -20-degree Celsius winds! They use thermal air currents and favorable winds to conserve their energy. They fly in V shaped formations for better aerodynamics. In spring they take a longer route around the cold Tibetan Plateau which saves them time and in Autumn they choose a shorter and higher route which is directly above it which saves them a lot of energy. They migrate in families with adults guiding their young ones, which shows the strong social bond among them which is crucial for such long journeys.
+
+### Why do they come to India?
+
+They mainly come to India to avoid the harsh winters of central Asia and Mongolia; India gives them a warm welcome (literally) during the cold northern winters. They easily find leftover grains and seeds from post-harvest farmlands. Open fields, wetlands, shallow are safe and comfortable habitats for them for resting and feeding. Localities in Khichan, Rajasthan feed these birds daily which makes them feel safe. Over generations, cranes have learned and passed down this traditional migratory route and hence they return to the same areas every year. The Bishnoi communities in Rajasthan and Gujarat respect and protect these cranes reflecting India's tradition of coexistence with nature. Their arrival marks a time for celebration in some local communities. As spring approaches, they begin their return journey towards the north to breed again in the vast Eurasian steppes.
+
+## Setup
+
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+# Run this in your console first
+# devtools::install_github("ropensci/rnaturalearthhires")
+library(rnaturalearthhires)
+
+# Plotting Maps
+library(tidyverse) # Maps using ggplot() + geom_sf()
+library(ggformula) # Maps using gf_sf()
+library(tmap) # Thematic Maps, static and interactive
+library(tmaptools)
+library(tmap.mapgl)
+library(osmdata) # Fetch map data from osmdata.org
+library(sfheaders) # Handcrafted Map data
+## Interactive Maps
+library(leaflet) # interactive Maps
+library(leaflet)
+library(leaflet.providers)
+library(leaflet.extras)
+library(threejs) # Globe maps in R. Part of the htmlwidgets family of packages
+
+# For Spatial Data Frame Processing
+library(sf)
+```
+
+## Loading World
+
+```{r}
+data(World, package = "tmap")
+World %>% filter(name == "India" | name =="Siberia" | name =="Pakistan" | name =="Kazakhstan" | name == "Mongolia" | name == "Uzbekistan" | name == "Kyrgyzstan" | name == "China" | name == "Afghanistan") -> bird_route
+bird_route
+st_crs(bird_route) -> crs_bird_route
+crs_bird_route
+```
+
+## Reading the shape files
+
+```{r}
+lines <- st_read("C:/Users/diyab/OneDrive/Documents/DiyaData/A2/Mongolia-Demoiselle-cranes/files/lines.shp")
+```
+
+```{r}
+points <- st_read("C:/Users/diyab/OneDrive/Documents/DiyaData/A2/Mongolia-Demoiselle-cranes/files/points.shp")
+```
+
+## Plotting
+
+### Points
+
+```{r}
+gf_sf(data = bird_route, geometry = ~geometry, fill = "white", color = "grey") %>%
+  gf_sf(data = points, geometry = ~geometry, size = 0.01, color = "pink") %>% 
+  gf_labs(title = "Demoiselle Crane Migration Routes")
+```
+
+### Lines
+
+```{r}
+gf_sf(data = bird_route, geometry = ~geometry, fill = "white", color = "grey") %>%
+  gf_sf(data = lines, geometry = ~geometry, size = 0.25, color = "darkblue") %>%
+  gf_labs(title = "Demoiselle Crane Migration Routes")
+```
+
+### Final Plot
+
+```{r}
+gf_sf(data = bird_route, geometry = ~geometry, fill = "white", color = "grey") %>%
+  gf_sf(data = lines, geometry = ~geometry, size = 0.25, color = "darkblue") %>%
+  gf_sf(data = points, geometry = ~geometry, size = 0.01, color = "pink") %>% 
+  gf_labs(title = "Demoiselle Crane Migration Routes")
+```

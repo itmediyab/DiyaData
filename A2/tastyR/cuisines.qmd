@@ -1,0 +1,824 @@
+---
+title: "Cuisines Dataset"
+author: "Diya, Ashmita, Krithika, Arnav"
+date: "2025-10-20"
+categories: [A2]
+---
+
+# Allrecipes Cuisine Dataset
+
+Exploring and Analysing patterns of an Allrecipes Cuisines Dataset
+
+## ![](cuisine.jpg)
+
+Data Dictionary
+
+A data frame with 2218 rows and 17 variables:
+
+| Variable       | Description                            |
+|----------------|----------------------------------------|
+| name           | Name of the recipe                     |
+| country        | The country/region the cuisine is from |
+| url            | Link to the recipe                     |
+| author         | Author of the recipe                   |
+| date_published | When the recipe was published/updated  |
+| ingredients    | The ingredients of the recipe          |
+| calories       | Calories per serving                   |
+| fat            | Fat per serving                        |
+| carbs          | Carbs per serving                      |
+| protein        | Proteins per serving                   |
+| avg_rating     | Average rating out of 5 stars          |
+| total_ratings  | Number of ratings received             |
+| reviews        | Number of written reviews              |
+| prep_time      | Preparation time in minutes            |
+| cook_time      | Cooking time in minutes                |
+| total_time     | Prep + cook time in minutes            |
+| servings       | Number of servings                     |
+
+## Setting up R Packages
+
+```{r}
+library(ggformula)
+library(janitor)
+library(mosaic)
+library(naniar)
+library(skimr)
+library(tidyverse)
+library(tinytable)
+library(visdat)
+library(crosstable)
+library(RColorBrewer)
+library(naniar)
+library(GGally)
+library(ggplot2)
+library(correlation)
+library(dplyr)
+library(RColorBrewer)
+library(DT)
+```
+
+## Viewing the dataset
+
+```{r}
+data("cuisines", package = "tastyR")
+glimpse(cuisines)   
+```
+
+## Replacing common NA representations with actual NA values in the dataset.
+
+```{r}
+cuisines_modified <- cuisines %>%
+  naniar::replace_with_na_all(data = ., condition = ~ .x %in% common_na_numbers) %>%
+  naniar::replace_with_na_all(data = ., condition = ~ .x %in% common_na_strings)
+glimpse(cuisines_modified)
+```
+
+## Viewing Missing Data
+
+```{r}
+visdat::vis_miss(cuisines_modified)
+visdat::vis_dat(cuisines_modified)
+```
+
+## Removing Missing Data
+
+```{r}
+cuisines_modified_new <- cuisines_modified %>% drop_na()
+glimpse(cuisines_modified_new)
+```
+
+## Examining Data
+
+```{r}
+summary(cuisines_modified_new)
+```
+
+```{r}
+dim(cuisines_modified_new)
+```
+
+```{r}
+skim(cuisines_modified_new)
+```
+
+```{r}
+names(cuisines_modified_new)
+```
+
+```{r}
+glimpse(cuisines_modified_new)
+```
+
+## Munging
+
+```{r}
+cuisines_factor <- cuisines_modified_new %>%
+  mutate(across(where(is.character), as.factor))%>%
+  dplyr::relocate(where(is.factor), .before = name)
+glimpse(cuisines_factor)
+```
+
+## Summaries: Examining the Data
+
+```{r}
+cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    count = n()
+  ) %>%
+  arrange(desc(count)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_calories = mean(calories, na.rm = TRUE),
+  ) %>%
+  arrange(desc(avg_calories)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_fat = mean(fat, na.rm = TRUE),
+  ) %>%
+  arrange(desc(avg_fat)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_carbs = mean(carbs, na.rm = TRUE),
+  ) %>%
+  arrange(desc(avg_carbs)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_protien = mean(protein, na.rm = TRUE),
+  ) %>%
+  arrange(desc(avg_protien)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country, name) %>%
+  summarise(
+    avg_calories = mean(calories, na.rm = TRUE),
+    average_fat = mean(fat, na.rm = TRUE),
+    avg_carbs = mean(carbs, na.rm = TRUE),
+    avg_protein = mean(protein, na.rm = TRUE)
+  ) %>%
+  arrange(desc(avg_calories)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country, name) %>%
+  summarise(
+    avg_calories = mean(calories, na.rm = TRUE),
+    avg_rating = mean(avg_rating, narm = TRUE)
+  ) %>%
+  arrange(desc(avg_calories)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country, name) %>%
+  summarise(
+    avg_calories = mean(calories, na.rm = TRUE),
+    avg_fat = mean(fat, na.rm = TRUE),
+    avg_carbs = mean(carbs, na.rm = TRUE),
+    avg_protein = mean(protein, na.rm = TRUE)
+  ) %>%
+  arrange(desc(avg_fat)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country, name) %>%
+  summarise(
+    avg_calories = mean(calories, na.rm = TRUE),
+    avg_fat = mean(fat, na.rm = TRUE),
+    avg_carbs = mean(carbs, na.rm = TRUE),
+    avg_protein = mean(protein, na.rm = TRUE)
+  ) %>%
+  arrange(desc(avg_carbs)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country, name) %>%
+  summarise(
+    avg_calories = mean(calories, na.rm = TRUE),
+    avg_fat = mean(fat, na.rm = TRUE),
+    avg_carbs = mean(carbs, na.rm = TRUE),
+    avg_protein = mean(protein, na.rm = TRUE)
+  ) %>%
+  arrange(desc(avg_protein)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_prep_time = mean(prep_time, na.rm = TRUE),
+    avg_cook_time = mean(cook_time, na.rm = TRUE),
+    avg_total_time = mean(total_time, na.rm = TRUE),
+    avg_rating = mean(avg_rating, na.rm = TRUE),
+    avg_total_ratings = mean(total_ratings, na.rm = TRUE),
+    avg_reviews = mean(reviews, na.rm = TRUE),
+    avg_servings = mean(servings, na.rm = TRUE),
+  ) %>%
+  arrange(desc(avg_total_time)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_prep_time = mean(prep_time, na.rm = TRUE),
+    avg_cook_time = mean(cook_time, na.rm = TRUE),
+    avg_total_time = mean(total_time, na.rm = TRUE),
+    avg_rating = mean(avg_rating, na.rm = TRUE),
+    avg_total_ratings = mean(total_ratings, na.rm = TRUE),
+    avg_reviews = mean(reviews, na.rm = TRUE),
+    avg_servings = mean(servings, na.rm = TRUE),
+  ) %>%
+  arrange(desc(avg_total_ratings)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(name, country) %>%
+  summarise(
+    max_prep_time = mean(prep_time, na.rm = TRUE),
+    max_cook_time = mean(cook_time, na.rm = TRUE),
+    max_total_time = mean(total_time, na.rm = TRUE),
+    max_servings = mean(servings, na.rm = TRUE)
+  ) %>%
+  arrange(desc(max_total_time)) %>% 
+  datatable(cuisines_factor)
+```
+
+-   Here we see that for certain dishes, **the prep time, cook time & total time is 0** - which is inaccurate.
+-   The **prep_time + cook_time doesn't add up to the total_time** as mentioned in the data dictionary.
+
+### **Filtering out 0 values in Prep, Cook & Total Time:**
+
+```{r}
+cuisines_clean <- cuisines_factor %>%
+  filter(prep_time > 0, cook_time > 0, total_time > 0)
+cuisines_clean %>% arrange(desc(total_time)) %>% select(name, country, prep_time,cook_time, total_time) %>% 
+  datatable(cuisines_clean)
+```
+
+```{r}
+cuisine_correct_time <- cuisines_clean %>%
+  mutate(sum_time = prep_time + cook_time)
+cuisine_correct_time %>% 
+  select(name, country, prep_time,cook_time, total_time, sum_time) %>% 
+  datatable(cuisine_correct_time)
+```
+
+```{r}
+cuisine_correct_time %>% filter(total_time!=sum_time) %>% 
+  select(name, country, prep_time,cook_time, total_time, sum_time) %>% 
+  datatable(cuisine_correct_time)
+```
+
+From the data dictionary, cook_time does not account for fermentation, marination, waiting periods which is done in dishes like breads, chicken etc.
+
+-   **prep_time = before heat (chopping, mixing)**
+-   **cook_time = with heat (boil, bake, fry etc)**
+-   **total_time = prep + cook (but not fermentation/marination)**
+
+We also observed that the **total_time values do not match the sum of prep_time and cook_time, even when excluding processes like fermentation or marination.** This shows inconsistencies in the dataset due to missing or incorrectly recorded values from the original sources.
+
+```{r}
+cuisines_factor %>%
+  group_by(country) %>%
+  summarise(avg_rating = mean(avg_rating, na.rm = TRUE),
+            total_reviews = sum(reviews, na.rm = TRUE)) %>% arrange(desc(avg_rating)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(name) %>%
+  summarise(max_rating = max(avg_rating, na.rm = TRUE),
+            total_reviews = sum(reviews, na.rm = TRUE)) %>% arrange(desc(max_rating)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_factor %>%
+  group_by(name,servings) %>%
+  summarise(prep_time_avg = mean(prep_time)) %>% arrange(desc(servings)) %>% 
+  datatable(cuisines_factor)
+```
+
+```{r}
+cuisines_continent <- cuisines_factor %>%
+  mutate(
+    continent = case_when(
+      country %in% c("Tex-Mex", "Amish and Mennonite", "Southern Recipes", 
+                     "Cajun and Creole", "Canadian", "Soul Food") ~ "North America",
+      
+      country %in% c("Greek", "Polish", "Danish", "Belgian", "Spanish", "Portuguese", 
+                     "Norwegian", "Austrian", "Swiss", "Russian", "Dutch", "German", 
+                     "Swedish", "Finnish", "French", "Italian", "Scandinavian") ~ "Europe",
+      
+      country %in% c("Peruvian", "Argentinian", "Colombian", 
+                     "Brazilian", "Chilean") ~ "South America",
+      
+      country %in% c("Vietnamese", "Japanese", "Israeli", "Thai", "Chinese", "Turkish", 
+                     "Korean", "Lebanese", "Jewish", "Malaysian", "Bangladeshi", 
+                     "Persian", "Indonesian", "Indian", "Pakistani", "Filipino") ~ "Asia",
+      
+      country %in% c("Australian and New Zealander") ~ "Oceania",
+      
+      country %in% c("Puerto Rican", "Jamaican", "South African", "Cuban") ~ "Caribbean/Africa",
+      
+      TRUE ~ "Other"
+    )
+  )
+
+cuisines_continent %>% 
+  select(name, country, continent) %>% 
+  datatable(cuisines_continent) 
+```
+
+## Visualising Information
+
+### Total Number of recipes (country wise) in allrecipes website
+
+```{r}
+top_dishes <- cuisines_factor %>%
+  group_by(country) %>%
+  summarise(count = n()) %>%
+  slice_max(n = 15, order_by = count) %>%    
+  arrange(desc(count))
+top_dishes %>% 
+  gf_col(count~reorder(country,count), fill = "orchid4") %>%
+  gf_labs(x = "Country", y = "Number of Dishes", title = "Top 10 Countries by Recipe Count") %>% 
+  gf_theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+-   Russian, Fillipino, Chinese and Canadian (63 recipes each) are the highest number of recipes present on the website.
+
+### Total Number of recipes (continent wise) in allrecipes website
+
+```{r}
+top_continents <- cuisines_continent %>%
+  group_by(continent) %>%
+  summarise(count = n()) %>%
+  arrange(desc(count))
+
+top_continents %>% 
+  gf_col(count ~ reorder(continent, count), fill = "blue4") %>%
+  gf_labs(
+    x = "Continent",
+    y = "Number of Dishes",
+    title = "Number of Dishes by Continent"
+  ) %>%
+  gf_theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+-   Asian Recipes are found maximum on the Allrepices website where as Oceania recipes are least found on the website.
+
+### 1. Calorie consumption based on country
+
+```{r}
+top_10_countries_calorie <- cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_calories = mean(calories, na.rm = TRUE),
+  ) %>%
+  slice_max(n=10, order_by = avg_calories) %>% 
+  slice_head(n = 10)
+top_10_countries_calorie %>%
+  gf_col(reorder(country, avg_calories)~avg_calories, fill = "steelblue") %>%
+  gf_labs(
+    title = "Top 10 Countries by Average Calories",
+    x = "Average Calories",
+    y = "Country"
+  )
+```
+
+```{r}
+top_10_continent_calorie <- cuisines_continent %>%
+  group_by(continent) %>%
+  summarise(
+    avg_calories = mean(calories, na.rm = TRUE),
+  ) %>%
+  slice_max(n=10, order_by = avg_calories) %>% 
+  slice_head(n = 10)
+top_10_continent_calorie %>%
+  gf_col(reorder(continent, avg_calories)~avg_calories, fill = "steelblue2") %>%
+  gf_labs(
+    title = "Top 10 Continents by Average Calories",
+    x = "Average Calories",
+    y = "Continent"
+  )
+```
+
+### 2. Protein consumption based on country
+
+```{r}
+top_10_countries_protein <- cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_protein = mean(protein, na.rm = TRUE),
+  ) %>%
+  slice_max(n=10, order_by = avg_protein)
+top_10_countries_protein %>%
+  gf_col(reorder(country, avg_protein)~avg_protein, fill = "darkorchid3") %>%
+  gf_labs(
+    title = "Top Countries by Average protein",
+    x = "Average Protein",
+    y = "Country"
+  )
+```
+
+```{r}
+top_10_continent_protein <- cuisines_continent %>%
+  group_by(continent) %>%
+  summarise(
+    avg_protein = mean(protein, na.rm = TRUE),
+  ) %>%
+  slice_max(n=10, order_by = avg_protein)
+top_10_continent_protein %>%
+  gf_col(reorder(continent, avg_protein)~avg_protein, fill = "darkorchid4") %>%
+  gf_labs(
+    title = "Top Continent by Average protein",
+    x = "Average Protein",
+    y = "Country"
+  )
+```
+
+### 3. Carbs consumption based on country
+
+```{r}
+top_15_countries_carbs <- cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_carbs = mean(carbs, na.rm = TRUE),
+  ) %>%
+   slice_max(n=20, order_by = avg_carbs)
+top_15_countries_carbs %>%
+  gf_col(reorder(country, avg_carbs)~avg_carbs, fill = "rosybrown") %>%
+  gf_labs(
+    title = "Top 20 Countries by Average Carbs",
+    x = "Average Carbs",
+    y = "Country"
+  )
+```
+
+```{r}
+top_15_continent_carbs <- cuisines_continent %>%
+  group_by(continent) %>%
+  summarise(
+    avg_carbs = mean(carbs, na.rm = TRUE),
+  ) %>%
+   slice_max(n=20, order_by = avg_carbs)
+top_15_continent_carbs %>%
+  gf_col(reorder(continent, avg_carbs)~avg_carbs, fill = "rosybrown4") %>%
+  gf_labs(
+    title = "Top 20 Continent by Average Carbs",
+    x = "Average Carbs",
+    y = "Continent"
+  )
+```
+
+### 4. Fat consumption based on country
+
+```{r}
+top_5_countries_fat <- cuisines_factor %>%
+  group_by(country) %>%
+  summarise(
+    avg_fat = mean(fat, na.rm = TRUE),
+  ) %>%
+   slice_max(n=10, order_by = avg_fat)
+top_5_countries_fat %>% 
+  gf_col(reorder(country, avg_fat)~avg_fat, fill = "royalblue3") %>%
+  gf_labs(
+    title = "Top Countries by Average Fat",
+    x = "Average Fat",
+    y = "Country"
+  )
+```
+
+```{r}
+top_5_continent_fat <- cuisines_continent %>%
+  group_by(continent) %>%
+  summarise(
+    avg_fat = mean(fat, na.rm = TRUE),
+  ) %>%
+   slice_max(n=10, order_by = avg_fat)
+top_5_continent_fat %>% 
+  gf_col(reorder(continent, avg_fat)~avg_fat, fill = "royalblue4") %>%
+  gf_labs(
+    title = "Top Continents by Average Fat",
+    x = "Average Fat",
+    y = "Continent"
+  )
+```
+
+## Case Study: Italian Food
+
+After viewing the carbs, protein, fat content by countries- it is seen that Italian food have higher average nutrient content than other countries.
+
+#### 1. Calories Comparison
+
+```{r}
+cuisines_factor %>%
+  mutate(is_italian = ifelse(country == "Italian","Italian", "Other")) %>%
+  gf_boxplot(calories ~ is_italian, fill = c("paleturquoise3", "paleturquoise4"), orientation = "x") %>%
+  gf_labs(
+    title = "Calories: Italian vs. Other Cuisines",
+    x = "Cuisine Category",
+    y = "Calories"
+  )
+```
+
+#### 2. Protein Comparison
+
+```{r}
+cuisines_factor %>%
+  mutate(is_italian = ifelse(country == "Italian","Italian", "Other")) %>%
+  gf_boxplot(protein ~ is_italian, fill = c("palegreen3", "palegreen4"), orientation = "x") %>%
+  gf_labs(
+    title = "Protein: Italian vs. Other Cuisines",
+    x = "Cuisine Category",
+    y = "Protein"
+  )
+```
+
+#### 3. Fat Comparison
+
+```{r}
+cuisines_factor %>%
+  mutate(is_italian = ifelse(country == "Italian","Italian", "Other")) %>%
+  gf_boxplot(fat ~ is_italian, fill = c("royalblue", "royalblue4"), orientation = "x") %>%
+  gf_labs(
+    title = "Fat Content: Italian vs. Other Cuisines",
+    x = "Cuisine Category",
+    y = "Fat"
+  )
+```
+
+**We seen there's an higher median for Italian food nutrients - does having higher calories, fat and protein make it unhealthy?**
+
+Italian cooking is deeply rooted in the Mediterranean diet, which is widely recognized by nutritionists and health experts for its numerous benefits. A common *misconception is having high number of calories, protein and fats - makes food unhealthy*. However, not all high-calorie or high-fat foods are unhealthy. Italian diet uses whole grains, fruits, vegetables, legumes and olive oil as the primary sources of fat. Therefore, many traditional Italian dishes naturally incorporate these healthy elements.
+
+-   **Olive Oil**: Rich in monounsaturated fats, known for their heart-healthy properties. Tomatoes: Packed with antioxidants like lycopene.
+-   **Garlic and Onions**: Offer various health benefits and add flavor without excessive calories.
+
+## Correlation between Variables
+
+```{r}
+GGally::ggpairs(
+  cuisines_factor %>% drop_na(),
+  columns = c(
+    "fat", "calories", "protein", "servings"
+  ),
+  switch = "both",
+  progress = FALSE,
+
+  diag = list(continuous = "barDiag"),
+  lower = list(continuous = wrap("smooth", alpha = 0.3, se = FALSE)),
+
+  title = "Cuisine Data Correlations Plot"
+)
+```
+
+-   Fat & Protein have a high +ve correlation.
+-   Calories & Fat have a high +ve correlation which shows that fat is a major contributor to calories.
+-   Calories & Protein have a high +ve correlation which shows that protein is a major contributor to calories.
+-   Number of servings, calories, fat and protein have a very low correlation.
+
+```{r}
+GGally::ggpairs(
+  cuisine_correct_time %>% drop_na(),
+  columns = c(
+    "servings", "sum_time", "cook_time", "prep_time", "total_ratings","reviews","avg_rating"
+  ),
+  switch = "both",
+  progress = FALSE,
+
+  diag = list(continuous = "barDiag"),
+  lower = list(continuous = wrap("smooth", alpha = 0.3, se = FALSE)),
+
+  title = "Cuisine Data Correlations Plot"
+)
+```
+
+-   From the above plot, it is seen that Reviews and Total Rating have a high +ve correlation.Which means the number of Reviews is an important factor for a recipe to get a high rating.
+
+#### Hypothesis: Dishes that have more number of servings will have more total time.
+
+```{r}
+cuisine_correct_time %>%
+  gf_point(sum_time ~ servings, alpha = 0.5, color = "darkblue") %>%
+  gf_labs(
+    title = "Total Time vs. Number of Servings",
+    x = "Servings",
+    y = "Total Time"
+  ) %>%
+  gf_lm(color="black")
+```
+
+-   The trend is not that significant - not a strong correlation between the 2 variables.
+
+#### Hypothesis: The more number of reviews, the higher the rating
+
+```{r}
+cuisines_factor %>%
+  gf_point(reviews~total_ratings, alpha = 0.5, color = "darkviolet") %>%
+  gf_labs(
+    title = "Scatter Plot of Total Ratings vs. Reviews",
+    x = "Total Reviews",
+    y = "Total Ratings"
+  ) %>%
+  gf_lm(color = "black")
+```
+
+The scatterplot shows a high +ve relation - which proves the hypothesis that total reviews and total ratings are +vely correlated.
+
+#### Hypothesis: Food with more calories have higher ratings
+
+```{r}
+cuisines_factor %>% 
+  gf_point(total_ratings~calories, alpha = 0.5, color = "seagreen") %>% 
+  gf_lm(color = "black") %>% 
+  gf_labs(title ="Calories vs Total Ratings",
+          x = "Calories",
+          y ="Total Ratings")
+```
+
+The scatterplot shows that Calories and Total Ratings have no correlation - which disproves the hypothesis.
+
+#### Hypothesis: Recipes with a longer preparation time will have fewer total reviews since preparation is not that easy
+
+```{r}
+cuisine_correct_time %>% 
+  gf_point(sum_time~total_ratings, alpha = 0.5, color = "royalblue") %>% 
+  gf_labs(title="Time vs Reviews",
+          x = "Total Time",
+          y = "Total Ratings") %>% 
+  gf_lm(color = "black")
+```
+
+Here it is seen that, the *r value is -0.02 which is a very low relation*. Therefore, having a longer or shorter preparation time is not a strong determining factor in how many people review a recipe.
+
+```{r}
+cuisines_factor %>%
+  gf_point(calories ~ servings, alpha = 0.5, color = "darkred") %>%
+  gf_labs(
+    title = "Calories vs. Servings",
+    x = "Servings",
+    y = "Calories"
+  ) %>%
+  gf_lm(color = "black")
+```
+
+```{r}
+mosaic::cor_test(calories ~ servings, data = cuisines_factor) %>%
+  broom::tidy() %>%
+  knitr::kable(
+    digits = 2,
+    caption = "Total Time vs Total Ratings"
+  )
+```
+
+-   The correlation between Calories and Servings is present but is weak (r= -0.32)
+
+## Total Time vs Country
+
+```{r}
+top_5_countries_time<- cuisine_correct_time %>%
+  group_by(country) %>%
+  summarise(
+    avg_tt= mean(sum_time, na.rm = TRUE),
+  )
+top_5_countries_time %>% arrange(desc(avg_tt)) %>% 
+  datatable(top_5_countries_time)
+```
+
+```{r}
+top_5_countries_time<- cuisine_correct_time %>%
+  group_by(country) %>%
+  summarise(
+    avg_tt= mean(sum_time, na.rm = TRUE),
+  ) %>%
+   slice_max(n=35, order_by = avg_tt)
+top_5_countries_time %>% 
+  gf_col(reorder(country, avg_tt)~avg_tt, fill = "seagreen")%>%
+  gf_labs(
+    title = "Top Countries by Average Time",
+    x = "Average Time",
+    y = "Country"
+  )
+```
+
+#### Observations:
+
+1.  **Highest Total Time**
+
+    -   Norwegian and Portuguese have the highest average time to cook their food.
+
+    -   Cuban, Soul Food, Polish, German, Jewish, Persian also have very long total times.
+
+    -   These cuisines rely heavily on slow cooking, roasting etc
+
+2.  **Moderate Total Time**
+
+    -   Brazilian, Greek, South African, Belgian, Swiss, Spanish, Indonesian, Southern Recipes, Canadian, Malaysian, Pakistani, Peruvian have moderate time of preparation
+
+3.  **Quick Cooking Cuisines**
+
+    -   Chinese, Colombian, Japanese, Thai, Swedish, Indian, Vietnamese, Dutch
+
+    -   These cuisines use fast stir-fry, steaming etc.
+
+## Dish Rating
+
+```{r}
+top_10_dishes_rating <- cuisines_factor %>%
+  group_by(name) %>%
+  summarise(
+    max_total_rating = max(total_ratings, na.rm = TRUE),
+    max_reviews = max(reviews, na.rm = TRUE)
+  ) %>%
+
+  arrange(desc(max_total_rating)) %>% 
+  slice_head(n=20)
+
+
+top_10_dishes_rating %>%
+  gf_col(reorder(name, max_total_rating) ~ max_total_rating, fill = "indianred") %>%
+  gf_labs(
+    title = "Top 20 Highest Rated Recipes",
+    x = "Total Rating",
+    y = "Dish Name"
+  )
+```
+
+```{r}
+top_10_dishes_rating %>% 
+  gf_col(reorder(name, max_reviews) ~ max_reviews, fill = "indianred") %>%
+  gf_labs(
+    title = "Top 20 Highest Reviewed Recipes",
+    x = "Max Reviews",
+    y = "Dish Name"
+  )
+```
+
+As we saw in the previous correlation graph, Reviews and Rating have a high +ve correlation.
+
+The top three recipes are the same in both charts:
+
+-   **Cheesy Amish Breakfast Casserole**
+
+-   **Blender Hollandaise Sauce**
+
+-   **Boneless Buffalo Wings**
+
+The similarity in the rankings implies that getting a **high amount of reviews** is a major factor of a **high total rating**. If a recipe is good, it gets a lot of reviews which increases the Total Rating. Whereas, a poor recipe wouldn't maintain both a high review volume or a high total rating.
+
+## Conclusion & Inferences
+
+In conclusion, we see that cuisine recipes in the Allrecipes website are:
+
+1\. Some cuisines, like Italian - have more Calories, Fat and Protein than average. This doesn't mean its unhealthy, as the ingredients used matter.
+
+2\. If a recipe is high in calories, it's usually high in Fat and Protein too. Fats and Protein are highly contribute to calories.
+
+3\. Recipes from places like Norway and Portugal take the longest to make because they rely on slow cooking. Whereas recipes from China and Japan are usually the fastest.
+
+4\. Reviews are a major contributor to the total rating on the website.
+
+5\. Russian, Fillipino, Chinese and Canadian (63 recipes each) are the highest number of recipes present on the website.
+
+6 - North America has the highest calorie, protein & fat consumption. - Oceania has the highes carbs consumption.
+
+Overall, it was interesting to analyse the understand the cuisine characteristic around the world and user preferences on the Allrecipes website.
