@@ -1,0 +1,198 @@
+---
+title: "Classwork 9"
+listings: false
+author: "Diya Bijoy"
+date: "2025-10-27"
+---
+
+```{r}
+library(tidyverse)
+library(mosaic)
+library(ggformula)
+library(infer)
+
+## Datasets from Chihara and Hesterberg's book (Second Edition)
+library(resampledata)
+
+## Datasets from Cetinkaya-Rundel and Hardin's book (First Edition)
+library(openintro)
+```
+
+```{r}
+data(yrbss, package = "openintro")
+yrbss
+```
+
+```{r}
+yrbss %>%
+  group_by(helmet_12m) %>%
+  count()
+```
+
+```{r}
+yrbss %>%
+  group_by(text_while_driving_30d) %>%
+  count()
+```
+
+```{r}
+no_helmet_text <- yrbss %>%
+  filter(helmet_12m == "never") %>%
+  mutate(text_ind = ifelse(text_while_driving_30d == "30", "yes", "no")) %>%
+  # removing most of the other variables
+  select(age, gender, text_ind)
+no_helmet_text
+```
+
+```{r}
+no_helmet_text %>%
+  drop_na() %>%
+  count(text_ind)
+```
+
+```{r}
+no_helmet_text %>%
+  drop_na() %>%
+  summarize(prop = prop(text_ind, success = "yes"), n = n())
+```
+
+```{r}
+no_helmet_text %>%
+  drop_na() %>%
+  gf_bar(~text_ind) %>%
+  gf_labs(
+    x = "texted?",
+    title = "High-Schoolers who texted every day",
+    subtitle = "While driving with no helmet on!!"
+  )
+```
+```{r}
+mosaic::binom.test(~text_ind, data = no_helmet_text, success = "yes")
+```
+```{r}
+mosaic::binom.test(~text_ind, data = no_helmet_text, success = "yes") %>%
+  broom::tidy()
+```
+----------------------------------------------------------------------------------------------------------------------
+
+# Multiple Proportions
+```{r}
+data(GSS2002, package = "resampledata")
+glimpse(GSS2002)
+```
+```{r}
+GSS2002 %>% count(Education)
+```
+
+```{r}
+GSS2002 %>% count(DeathPenalty)
+```
+
+```{r}
+GSS2002_modified <- GSS2002 %>%
+  dplyr::select(Education, DeathPenalty) %>%
+  tidyr::drop_na(., c(Education, DeathPenalty)) %>%
+  # Re-level the factors
+  mutate(
+    Education = factor(Education,
+      levels = c("Left HS", "HS", "Jr Col", "Bachelors", "Graduate"),
+      labels = c("Left HS", "HS", "Jr Col", "Bachelors", "Graduate"),
+      # ordered = TRUE # Nope can't use this. See below
+    ),
+    DeathPenalty = factor(DeathPenalty,
+      levels = c("Favor", "Oppose"),
+      labels = c("Favor", "Oppose")
+      # ordered = TRUE # Nope can't use this. See below
+    )
+  )
+glimpse(GSS2002_modified)
+```
+```{r}
+gss_vcd_table <- vcd::structable(Education ~ DeathPenalty, # cols ~ rows
+  data = GSS2002_modified
+)
+gss_vcd_table %>% addmargins()
+```
+```{r}
+# If not already installed, install the package
+# install.packages("vcdExtra")
+
+# Load the required package
+library(vcdExtra) 
+
+gss_vcd_table %>%
+  vcd::mosaic(direction = "h",
+    main = "GSS2002 Education vs Death Penalty Mosaic Chart",
+    legend = TRUE,
+    labeling = labeling_border(
+      varnames = c("F", "F"), 
+      rot_labels = c(90, 0, 0, 0), 
+      just_labels = c(
+        "left", 
+        "left", 
+        "left", 
+        "right"
+      )
+    )
+  )
+```
+```{r}
+counts_table <- vcd::structable(Education ~ DeathPenalty,
+  data = GSS2002_modified
+) # No margins added
+vcd::mosaic(counts_table,
+  gp = shading_max, legend = TRUE,
+  labeling = labeling_border(
+    varnames = c("F", "F"), # Remove variable name labels
+    rot_labels = c(90, 0, 0, 0), # t,r,b,l?
+    just_labels = c(
+      "left", # Top Side. How?
+      "left", # Right side
+      "left", # Bottom side
+      "right"
+    )
+  )
+) # Left side. How?
+vcd::mosaic(counts_table,
+  type = "expected", gp = shading_max, legend = TRUE,
+  labeling = labeling_border(
+    varnames = c("F", "F"), # Remove variable name labels
+    rot_labels = c(90, 0, 0, 0), # t,r,b,l?
+    just_labels = c(
+      "left", # Top Side. How?
+      "left", # Right side
+      "left", # Bottom side
+      "right"
+    )
+  )
+) # Left side. How?)
+vcd::assoc(counts_table,
+  gp = shading_max, legend = TRUE,
+  labeling = labeling_border(
+    varnames = c("F", "F"), # Remove variable name labels
+    rot_labels = c(90, 0, 0, 0), # t,r,b,l?
+    just_labels = c(
+      "left", # Top Side. How?
+      "left", # Right side
+      "left", # Bottom side
+      "right"
+    )
+  )
+) # Left side. How?)
+```
+
+
+```{r}
+contingency_table <- vcd::structable(Education ~ DeathPenalty,
+  data = GSS2002_modified
+)
+contingency_table
+```
+```{r}
+xq_test_object <- xchisq.test(contingency_table)
+```
+
+
+
+
+

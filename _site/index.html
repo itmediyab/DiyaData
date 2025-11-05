@@ -127,6 +127,34 @@ ul.task-list li input[type="checkbox"] {
   
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-assignment3 .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-assignment3'] = new List('listing-assignment3', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
     const listingTargetEl = window.document.querySelector('#listing-classwork .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
@@ -435,7 +463,7 @@ Diya, Ashmita, Krithika, Arnav
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="A2" data-listing-date-sort="1760898600000" data-listing-file-modified-sort="1760979506630" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3951">
+<div class="quarto-post image-right" data-index="3" data-categories="A2" data-listing-date-sort="1760898600000" data-listing-file-modified-sort="1762273972207" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="20" data-listing-word-count-sort="3951">
 <div class="thumbnail">
 <p><a href="./A2/tastyR/cuisines.html" class="no-external"></a></p><a href="./A2/tastyR/cuisines.html" class="no-external">
 <p class="card-img-top"><img src="A2\tastyR\cuisine.jpg"  class="thumbnail-image card-img"/></p>
@@ -459,6 +487,156 @@ Oct 20, 2025
 </div>
 <div class="listing-author">
 Diya, Ashmita, Krithika, Arnav
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="experiments" class="level2">
+<h2 class="anchored" data-anchor-id="experiments">Experiments</h2>
+<div id="listing-assignment3" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1762194600000" data-listing-file-modified-sort="1762355257172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1404">
+<div class="thumbnail">
+<p><a href="./A3/TV_Series/tv.html" class="no-external"></a></p><a href="./A3/TV_Series/tv.html" class="no-external">
+<p class="card-img-top"><img src="A3\TV_Series\tv_files\figure-html\unnamed-chunk-5-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./A3/TV_Series/tv.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./A3/TV_Series/tv.html" class="no-external">Is the Average Opinion Score for Modern Family, Friends &amp; Big Bang Theory equal?</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./A3/TV_Series/tv.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./A3/TV_Series/tv.html" class="no-external">From the above jitter plot, we see that there is a lot of variance within each group (height of each plot is long).</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./A3/TV_Series/tv.html" class="no-external">
+<div class="listing-date">
+Nov 4, 2025
+</div>
+<div class="listing-author">
+Diya Bijoy
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="Prop Test, Chisq Test" data-listing-date-sort="1762194600000" data-listing-file-modified-sort="1762357954111" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="849">
+<div class="thumbnail">
+<p><a href="./A3/Tattoo_Attraction/tat.html" class="no-external"></a></p><a href="./A3/Tattoo_Attraction/tat.html" class="no-external">
+<p class="card-img-top"><img src="A3\Tattoo_Attraction\tat_files\figure-html\unnamed-chunk-8-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./A3/Tattoo_Attraction/tat.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./A3/Tattoo_Attraction/tat.html" class="no-external">Do tattoos make people look attractive or not?</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./A3/Tattoo_Attraction/tat.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./A3/Tattoo_Attraction/tat.html" class="no-external"><strong>H0</strong>: p=0.5 (Half of the students think tattoos are attractive &amp; Half of the students think tattoos are not attractive)</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./A3/Tattoo_Attraction/tat.html" class="no-external">
+<div class="listing-date">
+Nov 4, 2025
+</div>
+<div class="listing-author">
+Diya Bijoy
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1762194600000" data-listing-file-modified-sort="1762355268304" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1098">
+<div class="thumbnail">
+<p><a href="./A3/Weekly_expense/expense.html" class="no-external"></a></p><a href="./A3/Weekly_expense/expense.html" class="no-external">
+<p class="card-img-top"><img src="A3\Weekly_expense\expense_files\figure-html\unnamed-chunk-6-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./A3/Weekly_expense/expense.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./A3/Weekly_expense/expense.html" class="no-external">Is the average weekly expenditure for boys equal to girls?</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./A3/Weekly_expense/expense.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./A3/Weekly_expense/expense.html" class="no-external">P value for both boys &amp; girls is less than 0.05, therefore its <strong>not normally distributed</strong>. This means that the distributions of weekly expenditure for both boys and girls…</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./A3/Weekly_expense/expense.html" class="no-external">
+<div class="listing-date">
+Nov 4, 2025
+</div>
+<div class="listing-author">
+Diya Bijoy
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1762194600000" data-listing-file-modified-sort="1762355279775" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="994">
+<div class="thumbnail">
+<p><a href="./A3/Weird_dads/dad.html" class="no-external"></a></p><a href="./A3/Weird_dads/dad.html" class="no-external">
+<p class="card-img-top"><img src="A3\Weird_dads\dad_files\figure-html\unnamed-chunk-8-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./A3/Weird_dads/dad.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./A3/Weird_dads/dad.html" class="no-external">Are Srishti Dads weird?</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./A3/Weird_dads/dad.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./A3/Weird_dads/dad.html" class="no-external">P=0.06 which is &gt;0.05, we fail to reject the Null Hypothesis.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./A3/Weird_dads/dad.html" class="no-external">
+<div class="listing-date">
+Nov 4, 2025
+</div>
+<div class="listing-author">
+Diya Bijoy
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1762194600000" data-listing-file-modified-sort="1762314585186" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="740">
+<div class="thumbnail">
+<p><a href="./A3/belief_in_god/god.html" class="no-external"></a></p><a href="./A3/belief_in_god/god.html" class="no-external">
+<p class="card-img-top"><img src="A3\belief_in_god\god_files\figure-html\unnamed-chunk-7-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./A3/belief_in_god/god.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./A3/belief_in_god/god.html" class="no-external">What’s the proportion of people who believe in god?</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./A3/belief_in_god/god.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./A3/belief_in_god/god.html" class="no-external"><strong>H0</strong>: Half of the people believe in God (p = 0.5)</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./A3/belief_in_god/god.html" class="no-external">
+<div class="listing-date">
+Nov 4, 2025
+</div>
+<div class="listing-author">
+Diya Bijoy
 </div>
 </a>
 </div>
@@ -534,7 +712,29 @@ No matching items
 <span class="listing-author">&nbsp;</span>
 </td>
 </tr>
-<tr data-index="2" data-listing-date-sort="1759775400000" data-listing-file-modified-sort="1760022727775" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1094" data-listing-title-sort="Classwork 6" data-listing-filename-sort="index.qmd">
+<tr data-index="2" data-listing-date-sort="1761503400000" data-listing-file-modified-sort="1761544090465" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="664" data-listing-title-sort="Classwork 9" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Oct 27, 2025</span>
+</td>
+<td>
+<a href="./classwork/classwork10/index.html" class="title listing-title">Classwork 9</a>
+</td>
+<td>
+<span class="listing-author">Diya Bijoy</span>
+</td>
+</tr>
+<tr data-index="3" data-listing-date-sort="1760985000000" data-listing-file-modified-sort="1761033881664" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="207" data-listing-title-sort="Classwork 9" data-listing-filename-sort="index.qmd">
+<td>
+<span class="listing-date">Oct 21, 2025</span>
+</td>
+<td>
+<a href="./classwork/classwork9/index.html" class="title listing-title">Classwork 9</a>
+</td>
+<td>
+<span class="listing-author">Diya Bijoy</span>
+</td>
+</tr>
+<tr data-index="4" data-listing-date-sort="1759775400000" data-listing-file-modified-sort="1760022727775" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1094" data-listing-title-sort="Classwork 6" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Oct 7, 2025</span>
 </td>
@@ -545,7 +745,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="3" data-listing-date-sort="1759689000000" data-listing-file-modified-sort="1760024100820" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="346" data-listing-title-sort="Classwork 5" data-listing-filename-sort="classwork5.qmd">
+<tr data-index="5" data-listing-date-sort="1759689000000" data-listing-file-modified-sort="1760024100820" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="346" data-listing-title-sort="Classwork 5" data-listing-filename-sort="classwork5.qmd">
 <td>
 <span class="listing-date">Oct 6, 2025</span>
 </td>
@@ -556,7 +756,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="4" data-listing-date-sort="1758565800000" data-listing-file-modified-sort="1760025643584" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="726" data-listing-title-sort="Classwork 4" data-listing-filename-sort="index.qmd">
+<tr data-index="6" data-listing-date-sort="1758565800000" data-listing-file-modified-sort="1760025643584" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="726" data-listing-title-sort="Classwork 4" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Sep 23, 2025</span>
 </td>
@@ -567,7 +767,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="5" data-listing-date-sort="1758479400000" data-listing-file-modified-sort="1760025631644" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="867" data-listing-title-sort="Classwork 3" data-listing-filename-sort="index.qmd">
+<tr data-index="7" data-listing-date-sort="1758479400000" data-listing-file-modified-sort="1760025631644" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="867" data-listing-title-sort="Classwork 3" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Sep 22, 2025</span>
 </td>
@@ -578,7 +778,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="6" data-categories="Cleaning" data-listing-date-sort="1757961000000" data-listing-file-modified-sort="1760021512623" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="191" data-listing-title-sort="Classwork 2" data-listing-filename-sort="index.qmd">
+<tr data-index="8" data-categories="Cleaning" data-listing-date-sort="1757961000000" data-listing-file-modified-sort="1760021512623" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="191" data-listing-title-sort="Classwork 2" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Sep 16, 2025</span>
 </td>
@@ -589,7 +789,7 @@ No matching items
 <span class="listing-author">Diya Bijoy</span>
 </td>
 </tr>
-<tr data-index="7" data-categories="Babynames,Filtering" data-listing-date-sort="1757874600000" data-listing-file-modified-sort="1760021481362" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="281" data-listing-title-sort="Classwork 1" data-listing-filename-sort="index.qmd">
+<tr data-index="9" data-categories="Babynames,Filtering" data-listing-date-sort="1757874600000" data-listing-file-modified-sort="1760021481362" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="281" data-listing-title-sort="Classwork 1" data-listing-filename-sort="index.qmd">
 <td>
 <span class="listing-date">Sep 15, 2025</span>
 </td>

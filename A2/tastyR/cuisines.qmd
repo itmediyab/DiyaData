@@ -2,7 +2,7 @@
 title: "Cuisines Dataset"
 author: "Diya, Ashmita, Krithika, Arnav"
 date: "2025-10-20"
-categories: [A2]
+categories: "A2"
 ---
 
 # Allrecipes Cuisine Dataset

@@ -1,0 +1,228 @@
+---
+title: "What's the proportion of people who believe in god?"
+format: html
+author: "Diya Bijoy"
+date: "2025-11-04"
+category: "Prop Test, Chisq Test"
+image: false
+---
+
+## R Packages Setup
+
+```{r}
+library(ggformula)
+library(janitor)
+library(mosaic)
+library(naniar)
+library(skimr)
+library(tidyverse)
+library(tinytable)
+library(visdat)
+library(crosstable)
+library(RColorBrewer)
+library(naniar)
+library(GGally)
+library(ggplot2)
+library(correlation)
+library(dplyr)
+library(RColorBrewer)
+library(DT)
+library(infer)
+library(resampledata)
+library(openintro)
+library(vcd)
+library(visStatistics)
+```
+
+## Reading the file
+
+```{r}
+belief <- read.csv("5-believe_in_god.csv")
+glimpse(belief)
+```
+
+## Munging
+
+```{r}
+belief_modified <- belief %>%
+  mutate(across(where(is.character), as.factor))%>%
+  dplyr::relocate(where(is.factor), .after = Name)
+glimpse(belief_modified)
+```
+
+## Removing Missing Data
+
+```{r}
+belief_modified2 <- belief_modified %>% drop_na()
+belief_modified2
+```
+
+## Examining the Data
+
+```{r}
+belief_modified2 %>%
+  count(Believe_in_God)
+```
+
+```{r}
+belief_modified2 %>%
+  group_by(Gender) %>% 
+  count(Believe_in_God)
+```
+
+## Visualising Data
+
+```{r}
+belief_modified2 %>%
+  gf_bar(~Believe_in_God, fill = ~ Believe_in_God) %>%
+  gf_labs(
+    x = "Do you believe in god?",
+    y = "Count",
+    title = "Proportion of yes & no"
+  ) %>% 
+  gf_refine(scale_fill_brewer(palette = "Set2"))
+```
+
+```{r}
+belief_modified2 %>%
+  gf_bar(~Believe_in_God | Gender, fill = ~ Believe_in_God) %>%
+  gf_labs(
+    x = "Do you believe in god?",
+    y = "Count",
+    title = "Proportion of Yes or No",
+    subtitle = "Faceted by Gender"
+  ) %>% 
+  gf_refine(scale_fill_brewer(palette = "Set1"))
+```
+
+```{r}
+belief_modified2 %>%
+  gf_bar(~Gender, fill = ~ Believe_in_God, position = "stack") %>%
+  gf_labs(
+    x = "Gender",
+    y = "Count",
+    title = "Count of Belief in God"
+  ) %>%
+  gf_refine(scale_fill_brewer(palette = "Set1"))
+```
+
+```{r}
+belief_modified2 %>%
+  gf_bar(~Gender, fill = ~ Believe_in_God, position = "fill") %>%
+  gf_labs(
+    x = "Gender",
+    y = "Count",
+    title = "Count of Belief in God"
+  ) %>%
+  gf_refine(scale_fill_brewer(palette = "Set1"))
+```
+
+## Prop Test: Do a majority of the people believe in god?
+
+**H0**: Half of the people believe in God (p = 0.5)
+
+**H1**: The proportion of people who believe in God is not equal to 0.5.
+
+```{r}
+mosaic::binom.test(~Believe_in_God, data = belief_modified2, success = "Yes") %>% 
+  broom::tidy()
+```
+
+### Inference:-
+
+-   The p value \> 0.05, which means we fail to reject the Null Hypothesis.
+-   There isn’t enough evidence to say that the proportion of people who believe in God is different from 50%.
+-   Belief in God is roughly balanced - half the people believe and half don't.
+
+## Chisq.test: Is there a difference in the proportion of males and females who believe in god?
+
+**H0:** Proportion of males who believe in god is equal to the true proportion of females who believe in god.
+
+**H1:** There is a difference between the proportion of males and females who believe in god.
+
+```{r}
+contingency_table <- vcd::structable(Believe_in_God~ Gender,
+  data = belief_modified2
+)
+contingency_table
+```
+
+```{r}
+gss_vcd_table <- vcd::structable(Gender ~ Believe_in_God,
+  data = belief_modified2)
+
+gss_vcd_table %>%
+  vcd::mosaic(
+    gp = shading_max, direction = "v", # Changed shading function
+    main = "Gender vs Belief",
+    legend = TRUE,
+    labeling = labeling_border(
+      varnames = c("F", "F"),
+      rot_labels = c(90, 0, 0, 0),
+      just_labels = c("left", "left", "left", "right")
+    )
+  )
+```
+
+```{r}
+xq_test_object <- chisq.test(contingency_table)
+xq_test_object
+```
+
+```{r}
+xq_test_object %>%
+  broom::tidy() %>%
+  select(statistic) %>%
+  as.numeric() -> X_squared_observed
+X_squared_observed
+```
+
+```{r}
+X_squared_critical <- qchisq(
+  p = .05,
+  df = (2 - 1) * (2 - 1), # (nrows-1) * (ncols-1)
+  lower.tail = FALSE
+)
+X_squared_critical
+```
+
+```{r}
+mosaic::xqchisq(
+  p = 0.95, df = 1,
+  return = c("plot"), verbose = F,
+  system = "gg"
+) %>%
+  gf_labs(
+    x = "Chi-Square Value", 
+    title = "Critical and Observed Chi-Square Values"
+  ) %>%
+  gf_vline(
+    xintercept = X_squared_observed,
+    color = "red", linewidth = 1
+  ) %>%
+  gf_vline(
+    xintercept = X_squared_critical,
+    color = "dodgerblue", linewidth = 1
+  ) %>%
+  gf_annotate(
+    x = X_squared_observed + 0.2, y = 0.05,
+    geom = "label", label = "Observed\nChi-Square",
+    fill = "red", alpha = 0.3
+  ) %>%
+  gf_annotate(
+    x = X_squared_critical - 0.5, y = 0.05,
+    geom = "label", label = "Critical\nChi-Square",
+    fill = "lightblue"
+  )
+```
+
+### Inference:
+
+-   The p value = 0.056, so we fail to reject the Null Hypothesis.
+-   This means belief in God does not differ between males and females — both genders showed similar levels of belief.
+
+## Conclusion:
+
+To sum up, there is an equal proportion of people who believe in god. A chi-square test was conducted to see if opinions differ from men to women. The test showed no significant difference as both males and females. Overall, we see that belief in god between males and females does not differ significantly, both genders show similar levels of belief.
+
+------------------------------------------------------------------------

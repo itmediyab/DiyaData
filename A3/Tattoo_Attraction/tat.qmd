@@ -1,0 +1,243 @@
+---
+title: "Do tattoos make people look attractive or not?"
+format: html
+author: "Diya Bijoy"
+date: "2025-11-04"
+categories: "Prop Test, Chisq Test"
+image: false
+---
+
+## R Packages Setup
+
+```{r}
+library(ggformula)
+library(janitor)
+library(mosaic)
+library(naniar)
+library(skimr)
+library(tidyverse)
+library(tinytable)
+library(visdat)
+library(crosstable)
+library(RColorBrewer)
+library(naniar)
+library(GGally)
+library(ggplot2)
+library(correlation)
+library(dplyr)
+library(RColorBrewer)
+library(DT)
+library(infer)
+library(resampledata)
+library(openintro)
+library(vcd)
+library(visStatistics)
+```
+
+## Reading the file
+
+```{r}
+tat <- read.csv("tattoo_attraction.csv")
+glimpse(tat)
+```
+
+## Munging Data
+
+```{r}
+tat_modified <- tat %>%
+  mutate(across(where(is.character), as.factor))%>%
+  dplyr::relocate(where(is.factor), .after = Name)
+glimpse(tat_modified)
+```
+
+## Examining the Data
+
+```{r}
+tat_modified %>%
+  group_by(Gender) %>%
+  count()
+```
+
+```{r}
+tat_modified %>%
+  group_by(Tattoo_Attractive) %>%
+  count()
+```
+
+```{r}
+tat_modified %>%
+  group_by(Gender) %>%
+  count(Tattoo_Attractive)
+```
+
+```{r}
+tat_modified %>%
+  summarize(prop = prop(Tattoo_Attractive, success = "Yes"), n = n())
+```
+
+## Visualising the Data
+
+```{r}
+tat_modified %>%
+  gf_bar(~Tattoo_Attractive, fill = ~ Tattoo_Attractive) %>%
+  gf_labs(
+    x = "Attractive?",
+    y = "Count",
+    title = "Do tattoos make people look attractive or not?",
+    subtitle = "Proportion of yes & no"
+  ) 
+```
+
+```{r}
+tat_modified %>%
+  gf_bar(~Tattoo_Attractive | Gender, fill = ~ Tattoo_Attractive) %>%
+  gf_labs(
+    x = "Attractive?",
+    y = "Count",
+    title = "Do tattoos make people look attractive or not?",
+    subtitle = "Proportion of yes & no"
+  ) %>% 
+  gf_refine(scale_fill_brewer(palette = "Set1"))
+```
+
+```{r}
+tat_modified %>%
+  gf_bar(~Tattoo_Attractive, fill = ~ Gender, position = "fill") %>%
+  gf_labs(
+    x = "Attractive?",
+    y = "Count",
+    title = "Do tattoos make people look attractive or not?",
+    subtitle = "Proportion of yes & no"
+  ) %>% 
+  gf_refine(scale_fill_brewer(palette = "Set2"))
+```
+
+```{r}
+tat_modified %>%
+  gf_bar(~Gender, fill = ~ Tattoo_Attractive, position = "stack") %>%
+  gf_labs(
+    x = "Gender",
+    y = "Count",
+    title = "Count of Belief in God, Stacked by Gender"
+  ) %>%
+  gf_refine(scale_fill_brewer(palette = "Set1"))
+```
+
+## Prop Test: Does a majority of the population find tattoos attractive?
+
+**H0**: p=0.5 (Half of the students think tattoos are attractive & Half of the students think tattoos are not attractive)
+
+**H1**: p≠0.5
+
+```{r}
+mosaic::binom.test(~Tattoo_Attractive, data = tat_modified, success = "Yes") %>% 
+  broom::tidy()
+```
+
+### Inference:-
+
+Since the p value \<0.05, we reject the Null Hypothesis. Therefore, **a high number of people find tattoos attractive (75%)**
+
+------------------------------------------------------------------------
+
+## Chisq.test: Is there a difference in the proportion of males and females who find tattoos attractive?
+
+**H0:** Proportion of males who find tattoos attractive is equal to the true proportion of females who find tattoos attractive.
+
+**H1:** There is a difference between the proportion of males & females who find tattoos attractive.
+
+```{r}
+contingency_table <- vcd::structable(Tattoo_Attractive~ Gender,
+  data = tat_modified
+)
+contingency_table
+```
+
+```{r}
+gss_vcd_table <- vcd::structable(Tattoo_Attractive ~ Gender, data = tat_modified)
+gss_vcd_table %>%
+  vcd::mosaic(
+    gp = shading_hsv, direction = "v",
+    main = "Gender vs Tattoo Attractiveness",
+    legend = TRUE,
+    labeling = labeling_border(
+      varnames = c("F", "F"), # Remove variable name labels
+      rot_labels = c(90, 0, 0, 0), # t,r,b,l?
+      just_labels = c(
+        "left", # Top Side. How?
+        "left", # Right side
+        "left", # Bottom side
+        "right"
+      )
+    )
+  ) 
+```
+
+### Insight:
+
+We see that from the plot above - all residuals are zero which confirms the null hypothesis that there isn't a difference between both the groups.
+
+```{r}
+xq_test_object <- chisq.test(contingency_table)
+xq_test_object
+```
+
+```{r}
+xq_test_object %>%
+  broom::tidy() %>%
+  select(statistic) %>%
+  as.numeric() -> X_squared_observed
+X_squared_observed
+```
+
+```{r}
+# Determine the Chi-Square critical value
+X_squared_critical <- qchisq(
+  p = .05,
+  df = (2 - 1) * (2 - 1), # (nrows-1) * (ncols-1)
+  lower.tail = FALSE
+)
+X_squared_critical
+```
+
+```{r}
+mosaic::xqchisq(
+  p = 0.95, df = 1,
+  return = c("plot"), verbose = F,
+  system = "gg"
+) %>%
+  gf_labs(
+    x = "Chi-Square Value", 
+    title = "Critical and Observed Chi-Square Values"
+  ) %>%
+  gf_vline(
+    xintercept = X_squared_observed,
+    color = "red", linewidth = 1
+  ) %>%
+  gf_vline(
+    xintercept = X_squared_critical,
+    color = "dodgerblue", linewidth = 1
+  ) %>%
+  gf_annotate(
+    x = X_squared_observed + 0.2, y = 0.05,
+    geom = "label", label = "Observed\nChi-Square",
+    fill = "red", alpha = 0.3
+  ) %>%
+  gf_annotate(
+    x = X_squared_critical - 0.5, y = 0.05,
+    geom = "label", label = "Critical\nChi-Square",
+    fill = "lightblue"
+  )
+```
+
+### Inference:-
+
+Since the observed value is less than the critical value and the p-value is greater than 0.05, we fail to reject the null hypothesis.
+
+There is no significant difference between male and female respondents in how they perceive tattoos. Both genders gave almost identical responses which suggests that gender does not play a major role in determining whether tattoos are attractive or not.
+
+## Conclusion
+
+To sum up, most of the people found tattoos attractive (75%). The proportion test confirmed that it is statistically significant. A chi-square test was conducted to see if opinions differ from men to women. The test showed no significant difference as both males and females gave the same responses. Overall, we see that tattoos are found attractive and gender doesn't play a role in how it's perceived.
+
+------------------------------------------------------------------------

@@ -13,6 +13,12 @@ listing:
     sort: "date desc"
     sort-ui: false
     filter-ui: false
+  - id: assignment3
+    contents: "A3/*/*.qmd"
+    type: default
+    sort: "date desc"
+    sort-ui: false
+    filter-ui: false
   - id: classwork
     contents: "classwork/*/*.qmd"
     type: table
@@ -29,6 +35,11 @@ title-block-banner: true
 ## A2: Basics of EDA #2
 
 ::: {#assignment2}
+:::
+
+## Experiments
+
+::: {#assignment3}
 :::
 
 ## Classwork

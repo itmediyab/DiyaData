@@ -1,0 +1,299 @@
+---
+title: "Is the average weekly expenditure for boys equal to girls?"
+format: html
+author: "Diya Bijoy"
+date: "2025-11-04"
+category: "T-Test"
+image: false
+---
+
+## R Packages Setup
+
+```{r}
+library(tidyverse)
+library(mosaic)
+library(ggformula)
+library(infer)
+library(broom) # Clean test results in tibble form
+library(resampledata) # Datasets from Chihara and Hesterberg's book
+library(openintro) # More datasets
+library(visStatistics) # One package to rule them all
+library(ggstatsplot)
+```
+
+## Reading file
+
+```{r}
+exp <- read.csv("4-weekly_expenditure.csv")
+glimpse(exp)
+```
+
+## Munging
+
+```{r}
+exp_modified <- exp %>%
+  select(c("Name","Gender","Total_Expenditure_Last_Week")) %>% 
+  mutate(across(where(is.character), as.factor))%>%
+  dplyr::relocate(where(is.factor), .before = Total_Expenditure_Last_Week)
+glimpse(exp_modified)
+```
+
+## Examining the Data
+
+```{r}
+exp_modified %>% 
+  count(Gender)
+```
+
+```{r}
+exp_modified %>% 
+  group_by(Gender) %>% 
+  summarise(
+    avg_exp = mean(Total_Expenditure_Last_Week, narm = TRUE),
+     sd_exp = sd(Total_Expenditure_Last_Week, na.rm = TRUE),
+  )
+```
+
+## Visualising the Data
+
+```{r}
+exp_modified %>% 
+  gf_boxplot(Gender~Total_Expenditure_Last_Week, fill =~ Gender,orientation = "y") %>% 
+  gf_labs(
+    title="Last Week Expenditure Girls vs Guys",
+    x ="Expense Last Week",
+    y = "Gender") %>% 
+  gf_theme(theme_minimal())
+```
+
+```{r}
+exp_mod2 <-exp_modified %>% 
+  slice_max(n = 15, order_by = Total_Expenditure_Last_Week)
+  
+exp_mod2 %>%  
+  gf_col(reorder(Name, Total_Expenditure_Last_Week)~Total_Expenditure_Last_Week, fill = "steelblue") %>% 
+  gf_labs(
+    title = "Top 15 highest expenses",
+    x="Expenses",
+    y = "Names"
+  ) %>% 
+  gf_theme(theme_minimal)
+```
+
+```{r}
+avg <- exp_mod2 %>% 
+  group_by(Gender) %>% 
+  summarise(
+    avg_expense = mean(Total_Expenditure_Last_Week)
+  )
+
+avg %>% 
+  gf_col(avg_expense~Gender, fill = ~ Gender) %>% 
+  gf_labs(
+    title = "Average expense of Girls & Boys",
+    x = "Gender",
+    y = "Average Expense"
+  ) %>% 
+  gf_refine(scale_fill_brewer(palette = "Set1")) %>% 
+  gf_theme(theme_minimal)
+```
+
+```{r}
+exp_modified %>%
+  gf_density(
+    ~Total_Expenditure_Last_Week,
+    fill = ~Gender, colour = ~Gender,
+    alpha = 0.5,
+    title = "Expenditure Last Week Densities",
+    subtitle = "Boys vs Girls"
+  ) %>% 
+  gf_theme(theme_minimal)
+```
+
+## Null Hypothesis & Alternative Hypothesis
+
+-   **H0:** Weekly expenditure is independent of gender (There is no difference between girls expenditure & boys expenditure)
+-   **H1:** Weekly expenditure is dependent on gender.
+
+## 1. Check for Normality
+
+```{r}
+exp_modified %>%
+    gf_density(~Total_Expenditure_Last_Week,
+    fill = ~Gender,
+    alpha = 0.5,
+    title = "Weekly Expenditure for boys and girls"
+  ) %>%
+  gf_facet_grid(~Gender) %>%
+  gf_fitdistr(dist = "dnorm") %>%
+  gf_theme(theme(legend.position = "none")) 
+exp_modified %>%
+  gf_qqline(~Total_Expenditure_Last_Week,
+    color = ~Gender,
+    title = "Weekly Expenditure",
+    subtitle = "Are they Normally Distributed?"
+  ) %>%
+  gf_qq() %>%
+  gf_facet_wrap(~Gender) %>% 
+
+  gf_theme(theme(legend.position = "none")) 
+```
+
+```{r}
+boys_expense <- exp_modified %>%
+  filter(Gender == "Male") %>%
+  select(Total_Expenditure_Last_Week)
+
+girls_expense <- exp_modified %>%
+  filter(Gender == "Female") %>%
+  select(Total_Expenditure_Last_Week)
+```
+
+```{r}
+shapiro.test(boys_expense$Total_Expenditure_Last_Week)
+shapiro.test(girls_expense$Total_Expenditure_Last_Week)
+```
+
+P value for both boys & girls is less than 0.05, therefore its **not normally distributed**. This means that the distributions of weekly expenditure for both boys and girls deviate significantly from a normal distribution.
+
+## 2. Check for Variances
+
+```{r}
+exp_modified %>%
+  dplyr::select(Total_Expenditure_Last_Week, Gender) %>%
+  dplyr::group_by(Gender) %>%
+  dplyr::summarize(variance = var(Total_Expenditure_Last_Week), n = n())
+
+var.test(Total_Expenditure_Last_Week ~ Gender,
+  data = exp_modified,
+  conf.int = TRUE, conf.level = 0.95
+) %>%
+  broom::tidy()
+##
+qf(0.975, 275, 322)
+```
+
+The variance is way off with a p value 8.53 \* 10\^-9 which is much less than 0.05, so therefore **the variance for the variables is significantly different.**
+
+### Inference
+
+1.  The two variables are not normally distributed.
+2.  The two variances are also significantly different.
+
+This means that its Non-Parametric so the **Mann-Whitney Test** & **Permutation Test** must be done since its not normally distributed and the variances is different.
+
+## 1. Mann-Whitney Test
+
+-   H0: The rank sums for girls and boys do not differ significantly.
+-   H1: The rank sums for girls and boys do differ significantly.
+
+```{r}
+library(ggprism)
+library(ggtext)
+library(glue)
+library(latex2exp)
+
+exp_modified %>%
+  gf_jitter(rank(Total_Expenditure_Last_Week) ~ Gender,
+    color = ~Gender,
+    show.legend = FALSE,
+    width = 0.05, alpha = 0.25,
+    ylab = "Ranks of Total Expenditure",
+    title = "Ranked Expenditure for Boys and Girls"
+  ) %>%
+  gf_summary(
+    group = ~1, 
+    fun = "mean", geom = "line", colour = "lightblue",
+    lty = 1, linewidth = 2
+  ) %>%
+  gf_summary(fun = "mean", colour = "firebrick", size = 4, geom = "point") %>%
+  gf_refine(scale_x_discrete(
+    breaks = c("Male", "Female"),
+    labels = c("Male", "Female"),
+    guide = "prism_bracket"
+  )) %>%
+  gf_annotate("label",
+    label = "Mean Rank \nBoys Scores",
+    y = 300, x = 0.75, inherit = FALSE
+  ) %>%
+  gf_annotate("label",
+    label = "Mean Rank \nGirls Scores",
+    y = 320, x = 2.25, inherit = FALSE
+  )
+```
+
+```{r}
+wilcox.test(Total_Expenditure_Last_Week ~ Gender,
+  data = exp_modified,
+  conf.int = TRUE
+) %>%
+  broom::tidy()
+```
+
+Here, we see that the **p value = 0.06** which is \>0.05, so we fail to reject the Null Hypothesis. This means there is **no statistically significant difference in weekly expenditure between boys and girls.**
+
+```{r}
+mosaic::t_test(Total_Expenditure_Last_Week ~ Gender,
+  var.equal = FALSE, # Welch Correction
+  data = exp_modified
+) %>%
+  broom::tidy()
+```
+
+### Inferences:-
+
+-   The **p-value was 0.06**, which is slightly greater than the 0.05 threshold.
+
+-   We **fail to reject the null hypothesis**, which means that there is **no statistically significant difference** in the distribution of weekly expenditure between boys and girls.
+
+## 2. Permutations Test
+
+```{r}
+obs_diff_infer <- exp_modified %>% 
+  infer::specify(Total_Expenditure_Last_Week ~ Gender) %>%
+  infer::calculate(
+    stat = "diff in means",
+    order = c("Male", "Female")
+  )
+obs_diff_infer
+```
+
+On average, males spent Rs. 4502.75 more than females last week. *Is this difference due to random chance or is it statistically significant?*
+
+```{r}
+null_dist_infer <- exp_modified %>% 
+  specify(Total_Expenditure_Last_Week ~ Gender) %>%
+  hypothesize(null = "independence") %>%
+  generate(reps = 4999, type = "permute") %>% 
+  calculate(
+    stat = "diff in means",
+    order = c("Male", "Female") 
+  )
+null_dist_infer
+```
+
+```{r}
+null_dist_infer %>%
+  visualise() + 
+  shade_p_value(obs_diff_infer,
+    direction = "two-sided"
+  ) +
+  scale_y_continuous(expand = c(0, 0))
+```
+
+```{r}
+null_dist_infer %>%
+  get_p_value(obs_stat = obs_diff_infer, direction = "two-sided")
+```
+
+### Inferences:-
+
+-   The p value = 0.059 (5.9%), which is greater than the 0.05 threshold.
+
+-   So we fail to reject the Null Hypothesis that weekly expenditure is independent of gender. So the observed difference of Rs. 4502.75 has occurred due to random chance.
+
+## Conclusion
+
+To conclude, while boys appear to have spent a bit more on average than girls, statistical tests show that this difference is **not significant**. Both the Mann Whitney and permutation tests indicate that **gender does not play a major role** in determining weekly spending. Overall, **weekly expenditure patterns are fairly similar** between boys and girls.
+
+------------------------------------------------------------------------

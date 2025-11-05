@@ -1,0 +1,86 @@
+---
+title: "Classwork 9"
+listings: false
+author: "Diya Bijoy"
+date: "2025-10-21"
+---
+
+```{r}
+library(tidyverse)
+library(mosaic)
+library(ggformula)
+library(infer)
+library(broom) # Clean test results in tibble form
+library(resampledata) # Datasets from Chihara and Hesterberg's book
+library(openintro) # More datasets
+library(visStatistics) # One package to rule them all
+library(ggstatsplot)
+```
+
+```{r}
+data("exam_grades", package = "openintro")
+exam_grades
+```
+
+```{r}
+library(nortest)
+# Especially when we have >= 5000 observations
+nortest::ad.test(x = exam_grades$course_grade) %>%
+  broom::tidy()
+```
+
+```{r}
+# t-test
+t4 <- mosaic::t_test(
+  exam_grades$course_grade, # Name of variable
+  mu = 80, # belief
+  alternative = "two.sided"
+) %>% # Check both sides
+  broom::tidy()
+t4
+```
+
+# ANOVA
+```{r}
+frogs_orig <- read_csv("frogs.csv")
+frogs_orig
+```
+
+CONVERTING TO LONG FROM FROM LONG FORM
+```{r}
+frogs_orig %>%
+  pivot_longer(
+    .,
+    cols = starts_with("Temperature"),
+    cols_vary = "fastest",
+    # new in pivot_longer
+    names_to = "Temp",
+    values_to = "Time"
+  ) %>%
+  drop_na() %>%
+  ##
+  separate_wider_regex(
+    cols = Temp,
+    # knock off the unnecessary "Temperature" word
+    # Just keep the digits thereafter
+    patterns = c("Temperature", TempFac = "\\d+"),
+    cols_remove = TRUE
+  ) %>%
+  # Convert Temp into TempFac, a 3-level factor
+  mutate(TempFac = factor(
+    x = TempFac,
+    levels = c(13, 18, 25),
+    labels = c("13", "18", "25")
+  )) %>%
+  rename("Id" = `Frogspawn sample id`) -> frogs_long
+frogs_long
+##
+frogs_long %>% count(TempFac)
+```
+
+
+
+
+
+
+

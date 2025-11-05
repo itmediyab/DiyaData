@@ -1,0 +1,344 @@
+---
+title: "Is the Average Opinion Score for Modern Family, Friends & Big Bang Theory equal?"
+format: html
+author: "Diya Bijoy"
+date: "2025-11-04"
+category: "ANOVA"
+image: false
+---
+
+## R Packages Setup
+
+```{r}
+library(tidyverse) # Tidy data processing
+library(ggformula) # Formula based plots
+library(mosaic) # Data inspection and Statistical Inference
+library(broom) # Tidy outputs from Statistical Analyses
+library(infer) # Statistical Inference, Permutation/Bootstrap
+library(supernova) # Beginner-Friendly ANOVA Tables
+library(ggstatsplot) # Statistical Plots
+library(ggcompare) # Improved p.value brackets on graphs
+library(patchwork) # Arranging Plots
+library(ggprism) # Interesting Categorical Axes
+library(paletteer) # Color Palettes
+```
+
+## Reading the file
+
+```{r}
+tvshows <- read.csv("2-tv_series.csv")
+glimpse(tvshows)
+```
+
+## Cleaning the Data
+
+```{r}
+tvshows_modified <- tvshows %>% drop_na()
+tvshows_modified
+```
+
+```{r}
+tvshows_pivot <- tvshows_modified %>%
+  pivot_longer(
+    cols = c(Friends, Modern.Family, Big.Bang.Theory),
+    names_to = "Series",
+    values_to = "Opinion_Score"
+  ) %>%
+  drop_na() %>%
+  mutate(
+    Series = factor(
+      Series,
+      levels = c("Friends", "Modern.Family", "Big.Bang.Theory"),
+      labels = c("Friends", "Modern Family", "Big Bang Theory")
+    )
+  ) %>%
+  rename("Id" = 1) -> tv_long
+
+tv_long
+```
+
+## Visualising the Data
+
+```{r}
+tv_long %>% gf_boxplot(Opinion_Score~Series, orientation = "x", fill = ~ Series) %>% 
+  gf_labs(
+    title = "Opinion Score vs Series",
+    x = "TV shows",
+    y = "Opinion Scores"
+  ) %>% 
+  gf_hline(yintercept = ~ mean(Opinion_Score), color = "grey") %>% 
+  gf_annotate(geom = "text", label = "Overall Mean", x = 2, y = mean(tv_long$Opinion_Score) + -0.5, size = 4)
+  gf_theme(theme_minimal)
+```
+
+-   Between the three groups, we see a lot of variance from the overall mean.
+-   Friends & Big Bang Theory are closer while Modern Family has a lot of variance.
+
+```{r}
+gf_jitter(Opinion_Score ~ Series,
+  color = ~Series, width = 0.2,
+  data = tv_long, size = 3, alpha = 0.5
+) %>%
+  gf_labs(
+    title = "Opinion Scores across TV Series",
+    x = "TV Series", y = "Opinion Score"
+  ) %>%
+  gf_hline(yintercept = ~ mean(Opinion_Score), color = "grey") %>%
+  gf_annotate(
+    geom = "text",
+    label = "Overall Mean",
+    x = 2,
+    y = mean(tv_long$Opinion_Score) + 0.5,
+    size = 4
+  ) 
+```
+
+From the above jitter plot, we see that there is a lot of variance within each group (height of each plot is long).
+
+## ANOVA
+
+-   **H0:** All three series have equal mean opinion scores
+-   **H1:** All three series have different mean opinion scores
+
+```{r}
+tvshows_anova <- aov(Opinion_Score~Series, data = tv_long)
+tvshows_anova
+```
+
+```{r}
+tvshows_supernova <-
+  supernova::pairwise(tvshows_anova,
+    correction = "Bonferroni", # Try "Tukey"
+    alpha = 0.05, # 95% CI calculation
+    var_equal = TRUE, # We'll see
+    plot = T
+  )
+```
+
+```{r}
+tvshows_supernova$Series
+```
+
+```{r}
+supernova::supernova(tvshows_anova)
+```
+
+```{r}
+supernova::equation(tvshows_anova)
+```
+
+```{r}
+tv_long %>%
+  mutate(fitted = fitted(tvshows_anova)) %>%
+  gf_jitter(Opinion_Score ~ Series,
+    width = 0.2, alpha = 0.6,
+    color = ~Series,
+    data = .
+  ) %>%
+  gf_summary(
+    group = ~1, 
+    fun = "mean", geom = "line", colour = "lightblue",
+    lty = 1, linewidth = 2
+  ) %>%
+  gf_point(fitted ~ Series,
+    color = ~Series,
+    shape = 2,
+    size = 6
+  ) %>%
+  gf_segment(fitted + fitted ~ 0 + Series, linetype = 2, color = ~Series) %>%
+  gf_labs(
+    title = "Fitted ANOVA Model Equation",
+    x = "Series", y = "Opinion Score"
+  ) %>%
+  gf_refine(
+    scale_x_discrete(guide = "prism_bracket"),
+    scale_y_continuous(breaks = c(10, 15, (26.3 - 10.1), 20, (26.3 - 5.3), 25, 26.3, 30, 35))
+  )
+```
+
+### Inference:-
+
+-   The test gave an **F-value of 14.24** and a **p-value \< 0.001** which means the result is **statistically significant**. This suggests that **at least one show’s average opinion score is different** from the others.
+
+-   We **reject the null hypothesis** that all three shows have the same average opinion score. At least one show’s rating differs significantly from the others.
+
+## 1. Check for Normality
+
+```{r}
+shapiro.test(x = tv_long$Opinion_Score)
+```
+
+```{r}
+tv_long %>%
+  group_by(Series) %>%
+  group_modify(~ .x %>%
+    select(Opinion_Score) %>%
+    as_vector() %>%
+    shapiro.test() %>%
+    broom::tidy())
+```
+
+The p value at each level is very low so we reject the Null Hypothesis that its normally distributed.
+
+```{r}
+tvshows_anova$residuals %>%
+  as_tibble() %>%
+  gf_dhistogram(~value, data = .) %>%
+  gf_labs(
+    title = "Residuals Histogram",
+    x = "Residuals", y = "Count"
+  ) %>%
+  gf_fitdistr()
+##
+tvshows_anova$residuals %>%
+  as_tibble() %>%
+  gf_qq(~value, data = .) %>%
+  gf_qqstep() %>%
+  gf_labs(
+    title = "Residuals Q-Q Plot",
+    x = "Theoretical Quantiles", y = "Sample Quantiles"
+  ) %>%
+  gf_qqline()
+```
+
+```{r}
+shapiro.test(tvshows_anova$residuals)
+```
+
+The residual p value is also very small.
+
+## 2. Check for Similar Variance
+
+```{r}
+tv_long %>%
+  group_by(Series) %>%
+  summarise(variance = var(Opinion_Score))
+```
+
+```{r}
+DescTools::LeveneTest(Opinion_Score ~ Series, data = tv_long)
+```
+
+```{r}
+fligner.test(Opinion_Score ~ Series, data = tv_long)
+```
+
+From both tests, we see that p\>0.05. Therefore, variances are not significantly different.
+
+### Inference:-
+
+1.  The Variables are not normally distributed
+2.  The Variables are not significantly different
+
+## Effect Size
+
+To see how how strong or big the difference is.
+
+```{r}
+tvshows_supernova <-
+  supernova::pairwise(tvshows_anova,
+    plot = TRUE,
+    alpha = 0.05,
+    correction = "Bonferroni"
+  )
+```
+
+```{r}
+tvshows_supernova$Series
+```
+
+-   Modern Family has the highest on average.
+-   Friends was rated moderately.
+-   Big Bang Theory received the lowest scores.
+-   There is no significant difference between Friends and Big Bang Theory.
+
+### Visualizing ANOVA using ggstatsplot
+
+```{r}
+library(ggstatsplot)
+tv_long %>%
+  ggstatsplot::ggbetweenstats(
+    x = Series, y = Opinion_Score,
+    colour = Series, alpha = 0.8,
+    type = "parametric",
+    p.adjust.method = "bonferroni",
+    conf.level = 0.95,
+
+    violin.args = list(width = 0.0)
+  ) +
+
+  scale_colour_paletteer_d("ggthemes::colorblind") +
+  labs(
+    title = "ANOVA : Series vs Opinion Scores",
+    x = "Series", y = "Opinion Score"
+  )
+```
+
+-   F stat value is 14.24 - which is a very large variance.
+
+-   P value is 4.32 \* 10\^-06 is really small, and such a large F value is very unlikely to happen by chance.
+
+-   So we reject the Null Hypothesis that all three means are equal.
+
+-   The graph shows the means for each series:
+
+    -   Friends: 6.89
+    -   Modern Family: 8.30
+    -   Big Bang Theory: 6.45
+
+-   Modern Family was rated significantly higher than both Friends and Big Bang Theory.
+
+## Permutation Test
+
+```{r}
+observed_infer <-
+  tv_long %>%
+  specify(Opinion_Score ~ Series) %>%
+  hypothesise(null = "independence") %>%
+  calculate(stat = "F")
+observed_infer
+```
+
+```{r}
+null_dist_infer <- tv_long %>%
+  specify(Opinion_Score ~ Series) %>%
+  hypothesise(null = "independence") %>%
+  generate(reps = 4999, type = "permute") %>%
+  calculate(stat = "F")
+null_dist_infer
+```
+
+```{r}
+null_dist_infer %>%
+  visualize() +
+  shade_p_value(observed_infer, direction = "greater") +
+  labs(
+    title = "Permutation Test: Distribution of F-statistic",
+    x = "F-statistic",
+    y = "Count"
+  )
+```
+
+```{r}
+null_dist_infer %>%
+  get_p_value(obs_stat = observed_infer, direction = "two-sided")
+```
+
+### Inference:-
+
+-   The **observed F-statistic was 12.37**, shown by the red line on the graph. The red line lies far to the right of the null distribution which represents what we would expect if there were no real differences between shows.
+
+-   The **p-value = 0** which indicates none of the 4,999 random permutations produced an F value as large as the observed one.
+
+-   We reject the null hypothesis which confirms that **at least one show’s average opinion score is significantly different** from the others.
+
+## Conclusion
+
+The **ANOVA test** showed a significant difference in average opinion scores (**F = 12.37, p \< 0.001**), indicating that not all shows were rated the same.\
+Because the data was not perfectly normal, a **permutation test** was also conducted. The observed F-statistic lay far beyond the null distribution with a **p-value of 0**, confirming that the differences are statistically significant and not due to random variation.
+
+Among the three shows, **Modern Family** received the **highest average rating (8.3)**, followed by **Friends (6.9)** and **The Big Bang Theory (6.4)**. This shows that viewers clearly **preferred Modern Family**, while Friends and The Big Bang Theory received comparatively lower and similar scores.
+
+Overall, both tests lead to the same conclusion - **there is a real and significant difference in how audiences rated the three shows**, with Modern Family being the most favorite.
+
+------------------------------------------------------------------------

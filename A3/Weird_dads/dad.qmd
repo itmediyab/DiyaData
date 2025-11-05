@@ -1,0 +1,301 @@
+---
+title: "Are Srishti Dads weird?"
+format: html
+author: "Diya Bijoy"
+date: "2025-11-04"
+category: "Chisq Test"
+image: false
+---
+
+## R Packages Setup
+
+```{r}
+library(ggformula)
+library(janitor)
+library(mosaic)
+library(naniar)
+library(skimr)
+library(tidyverse)
+library(tinytable)
+library(visdat)
+library(crosstable)
+library(RColorBrewer)
+library(naniar)
+library(GGally)
+library(ggplot2)
+library(correlation)
+library(dplyr)
+library(RColorBrewer)
+library(DT)
+library(infer)
+library(resampledata)
+library(openintro)
+library(vcd)
+library(visStatistics)
+```
+
+## Reading the file
+
+```{r}
+weird_dads <- read.csv("3-weird_dads.csv")
+glimpse(weird_dads)
+```
+
+## Munging
+
+```{r}
+weird_dads_modified <- weird_dads %>% 
+  mutate(across(where(is.character), as.factor))%>%
+  dplyr::relocate("gender", "college", "is_dad_weird", .after = name)
+glimpse(weird_dads_modified)
+```
+
+## Removing NA Values
+
+```{r}
+weird_dads_modified2 <- weird_dads_modified %>% drop_na()
+```
+
+## Examining the Data
+
+```{r}
+weird_dads_modified2 %>% 
+  group_by(college) %>% 
+  count(is_dad_weird)
+```
+
+```{r}
+weird_dads_modified2 %>% 
+  count(is_dad_weird)
+```
+
+```{r}
+weird_dads_modified2 %>% 
+  group_by(gender) %>% 
+  count(is_dad_weird)
+```
+
+## Visualising the Data
+
+```{r}
+weird_dads_modified2 %>% 
+  gf_bar(~is_dad_weird | college, fill = ~ is_dad_weird) %>% 
+  gf_labs(
+    title = "Count of Yes or No to whether dad is weird or not",
+    subtitle = "Faceted by College",
+    x = "Is your dad weird?",
+    y = "Count"
+  ) %>% 
+  gf_refine(scale_fill_brewer(palette = "Set2")) %>% 
+  gf_theme(theme_minimal)
+```
+
+```{r}
+weird_dads_modified2 %>% 
+  gf_bar(~is_dad_weird, fill = ~ college, position = "fill") %>% 
+  gf_labs(
+    title = "Count of Yes or No to whether dad is weird or not",
+    subtitle = "Filled by college",
+    x = "Is your dad weird?",
+    y = "Proportion"
+  ) %>% 
+  gf_refine(scale_fill_brewer(palette = "Set1")) %>% 
+  gf_theme(theme_minimal)
+```
+
+```{r}
+weird_dads_modified2 %>% 
+  gf_bar(~is_dad_weird | college, fill = ~ gender, position = "dodge") %>% 
+  gf_labs(
+    title = "Count of Yes or No to whether dad is weird or not",
+    subtitle = "Faceted by college",
+    x = "Is your dad weird?",
+    y = "Count"
+  ) %>% 
+  gf_refine(scale_fill_brewer(palette = "Set1")) %>% 
+  gf_theme(theme_minimal)
+```
+
+## Chisq.test:
+
+#### **Hunch: Are Srishti Dads weird?**
+
+#### Test 1: Dad Weirdness & College
+
+-   **H0:** Weirdness of dads does not depend on college
+-   **H1:** Weirdness of dads depends on college
+
+```{r}
+contingency_table_college <- vcd::structable(is_dad_weird~ college,
+  data = weird_dads_modified2
+)
+contingency_table_college
+```
+
+```{r}
+gss_vcd_table_college <- vcd::structable(college~is_dad_weird,
+  data = weird_dads_modified2)
+
+gss_vcd_table_college %>%
+  vcd::mosaic(
+    gp = shading_max, direction = "v", # Changed shading function
+    main = "Dad Weirdness vs College",
+    legend = TRUE,
+    labeling = labeling_border(
+      varnames = c("F", "F"),
+      rot_labels = c(90, 0, 0, 0),
+      just_labels = c("left", "left", "left", "right")
+    )
+  )
+```
+
+```{r}
+xq_test_object_college <- chisq.test(contingency_table_college)
+xq_test_object_college
+```
+
+-   P=0.06 which is \>0.05, we fail to reject the Null Hypothesis.
+
+-   Therefore, weirdness of dads do not depend on college. Srishti dads are not significantly weirder or less weird than dads from other colleges
+
+```{r}
+xq_test_object_college %>%
+  broom::tidy() %>%
+  select(statistic) %>%
+  as.numeric() -> X_squared_observed_college
+X_squared_observed_college
+```
+
+```{r}
+# Determine the Chi-Square critical value
+X_squared_critical_college <- qchisq(
+  p = .05,
+  df = (2 - 1) * (2 - 1), # (nrows-1) * (ncols-1)
+  lower.tail = FALSE
+)
+X_squared_critical_college
+```
+
+```{r}
+mosaic::xqchisq(
+  p = 0.95, df = 1,
+  return = c("plot"), verbose = F,
+  system = "gg"
+) %>%
+  gf_labs(
+    x = "Chi-Square Value", 
+    title = "Critical and Observed Chi-Square Values"
+  ) %>%
+  gf_vline(
+    xintercept = X_squared_observed_college,
+    color = "red", linewidth = 1
+  ) %>%
+  gf_vline(
+    xintercept = X_squared_critical_college,
+    color = "dodgerblue", linewidth = 1
+  ) %>%
+  gf_annotate(
+    x = X_squared_observed_college + 0.2, y = 0.05,
+    geom = "label", label = "Observed\nChi-Square",
+    fill = "red", alpha = 0.3
+  ) %>%
+  gf_annotate(
+    x = X_squared_critical_college - 0.5, y = 0.05,
+    geom = "label", label = "Critical\nChi-Square",
+    fill = "lightblue"
+  )
+```
+
+#### Test 2: Dad Weirdness & Gender
+
+-   **H0:** Perception of dad weirdness is the same for all genders
+-   **H1:** Perception of dad weirdness differs by gender.
+
+```{r}
+contingency_table_gender<- vcd::structable(is_dad_weird~ gender,
+  data = weird_dads_modified2
+)
+contingency_table_gender
+```
+
+```{r}
+gss_vcd_table_gender <- vcd::structable(gender~is_dad_weird,
+  data = weird_dads_modified2)
+
+gss_vcd_table_gender %>%
+  vcd::mosaic(
+    gp = shading_max, direction = "v", # Changed shading function
+    main = "Dad Weirdness vs Gender",
+    legend = TRUE,
+    labeling = labeling_border(
+      varnames = c("F", "F"),
+      rot_labels = c(90, 0, 0, 0),
+      just_labels = c("left", "left", "left", "right")
+    )
+  )
+```
+
+```{r}
+xq_test_object_gender<- chisq.test(contingency_table_gender)
+xq_test_object_gender
+```
+
+### Inference
+
+-   P=0.21 which is \>0.05, we fail to reject the Null Hypothesis. Therefore, weirdness of dads do not depend on gender.
+
+-   This shows that **gender does not influence** perceptions of dad weirdness, both males and females responded similarly when asked if their dads are weird.
+
+```{r}
+xq_test_object_gender %>%
+  broom::tidy() %>%
+  select(statistic) %>%
+  as.numeric() -> X_squared_observed_gender
+X_squared_observed_gender
+```
+
+```{r}
+# Determine the Chi-Square critical value
+X_squared_critical_gender <- qchisq(
+  p = .05,
+  df = (2 - 1) * (2 - 1), # (nrows-1) * (ncols-1)
+  lower.tail = FALSE
+)
+X_squared_critical_gender
+```
+
+```{r}
+mosaic::xqchisq(
+  p = 0.95, df = 1,
+  return = c("plot"), verbose = F,
+  system = "gg"
+) %>%
+  gf_labs(
+    x = "Chi-Square Value", 
+    title = "Critical and Observed Chi-Square Values"
+  ) %>%
+  gf_vline(
+    xintercept = X_squared_observed_gender,
+    color = "red", linewidth = 1
+  ) %>%
+  gf_vline(
+    xintercept = X_squared_critical_gender,
+    color = "dodgerblue", linewidth = 1
+  ) %>%
+  gf_annotate(
+    x = X_squared_observed_gender + 0.2, y = 0.05,
+    geom = "label", label = "Observed\nChi-Square",
+    fill = "red", alpha = 0.3
+  ) %>%
+  gf_annotate(
+    x = X_squared_critical_gender - 0.5, y = 0.05,
+    geom = "label", label = "Critical\nChi-Square",
+    fill = "lightblue"
+  )
+```
+
+## Conclusion:
+
+To conclude, chi-square tests indicate that neither **college** nor **gender** significantly affect perceptions of dad weirdness. Overall, the hunch that **“Srishti dads are weird”** is not statistically supported - dads in MIT & SMI seem to have a similar level of weirdness.
+
+------------------------------------------------------------------------
